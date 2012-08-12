@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">This is the Interstitial Ads Example</string>
+    <string name="app_name">Interstitial Ads Example</string>
+    <string name="loadAds">Load Interstitial</string>
+</resources>
