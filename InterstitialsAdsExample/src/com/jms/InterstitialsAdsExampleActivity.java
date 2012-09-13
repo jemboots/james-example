@@ -13,7 +13,8 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdRequest.ErrorCode;
 import com.google.ads.InterstitialAd;
 
-public class InterstitialsAdsExampleActivity extends Activity implements AdListener{
+public class InterstitialsAdsExampleActivity extends Activity implements
+		AdListener {
 	/** Called when the activity is first created. */
 	private InterstitialAd interstitialAds = null;
 	private TextView textView = null;
@@ -26,10 +27,10 @@ public class InterstitialsAdsExampleActivity extends Activity implements AdListe
 		this.interstitialAds = new InterstitialAd(this, "a150272e162142c");
 		this.interstitialAds.setAdListener(this);
 
-		Button loadButton = (Button)this.findViewById(R.id.loadButton);
+		Button loadButton = (Button) this.findViewById(R.id.loadButton);
 		loadButton.setOnClickListener(loadButtonOnClick);
 
-		this.textView = (TextView)this.findViewById(R.id.stateTextView);
+		this.textView = (TextView) this.findViewById(R.id.stateTextView);
 	}
 
 	private OnClickListener loadButtonOnClick = new OnClickListener() {
@@ -40,6 +41,8 @@ public class InterstitialsAdsExampleActivity extends Activity implements AdListe
 			textView.setText("Loading Intertitial Ads");
 
 			AdRequest adr = new AdRequest();
+			// add your test device here
+			//adr.addTestDevice("8E452640BC83C672B070CDCA8AB9B06B");
 			interstitialAds.loadAd(adr);
 		}
 	};
@@ -51,22 +54,14 @@ public class InterstitialsAdsExampleActivity extends Activity implements AdListe
 	}
 
 	@Override
-	public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {
-//			    String message = "onFailedToReceiveAd (" + error + ")";
-//			    Log.d(LOG_TAG, message);
-//			    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-//		
-//			    // Change the button text and disable the button.
-//			    if (ad == interstitialAd) {
-//			      showButton.setText("Failed to Receive Ad");
-//			      showButton.setEnabled(false);
-//			    }
+	public void onFailedToReceiveAd(Ad ad, ErrorCode error) {
+		String message = "Load Ads Failed: (" + error + ")";
+		textView.setText(message);
 	}
 
 	@Override
 	public void onLeaveApplication(Ad arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -76,25 +71,14 @@ public class InterstitialsAdsExampleActivity extends Activity implements AdListe
 	@Override
 	public void onPresentScreen(Ad arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void onReceiveAd(Ad arg0) {
-		//	    Log.d(LOG_TAG, "onReceiveAd");
-		//	    Toast.makeText(this, "onReceiveAd", Toast.LENGTH_SHORT).show();
-		//
-		//	    // Change the button text and enable the button.
-		//	    if (ad == interstitialAd) {
-		//	      showButton.setText("Show Interstitial");
-		//	      showButton.setEnabled(true);
-		//	    }
-		
-		interstitialAds.show();
-//	      if (interstitialAd.isReady()) {
-//	          interstitialAd.show();
-//	        } else {
-//	          Log.d(LOG_TAG, "Interstitial ad was not ready to be shown.");
-//	        }
+		if (interstitialAds.isReady()) {
+			interstitialAds.show();
+		} else {
+			textView.setText("Interstitial ad was not ready to be shown.");
+		}
 	}
 }
