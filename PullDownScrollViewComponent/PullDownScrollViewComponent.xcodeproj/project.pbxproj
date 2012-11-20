@@ -1,0 +1,317 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1AC658A7165B259000A37705 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC658A6165B259000A37705 /* UIKit.framework */; };
+		1AC658A9165B259000A37705 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC658A8165B259000A37705 /* Foundation.framework */; };
+		1AC658AB165B259000A37705 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC658AA165B259000A37705 /* CoreGraphics.framework */; };
+		1AC658B1165B259000A37705 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1AC658AF165B259000A37705 /* InfoPlist.strings */; };
+		1AC658B3165B259000A37705 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC658B2165B259000A37705 /* main.m */; };
+		1AC658B7165B259000A37705 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC658B6165B259000A37705 /* AppDelegate.m */; };
+		1AC658BA165B259000A37705 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AC658B8165B259000A37705 /* MainStoryboard_iPhone.storyboard */; };
+		1AC658BD165B259000A37705 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AC658BB165B259000A37705 /* MainStoryboard_iPad.storyboard */; };
+		1AC658C0165B259000A37705 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC658BF165B259000A37705 /* ViewController.m */; };
+		1AC658C9165B25B800A37705 /* PullDownRefreshScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC658C8165B25B800A37705 /* PullDownRefreshScrollView.m */; };
+		1AC658CB165B25BE00A37705 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AC658CA165B25BE00A37705 /* arrow.png */; };
+		1AC658CD165B279700A37705 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC658CC165B279700A37705 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1AC658A2165B259000A37705 /* PullDownScrollViewComponent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PullDownScrollViewComponent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AC658A6165B259000A37705 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1AC658A8165B259000A37705 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1AC658AA165B259000A37705 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1AC658AE165B259000A37705 /* PullDownScrollViewComponent-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PullDownScrollViewComponent-Info.plist"; sourceTree = "<group>"; };
+		1AC658B0165B259000A37705 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1AC658B2165B259000A37705 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1AC658B4165B259000A37705 /* PullDownScrollViewComponent-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PullDownScrollViewComponent-Prefix.pch"; sourceTree = "<group>"; };
+		1AC658B5165B259000A37705 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1AC658B6165B259000A37705 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1AC658B9165B259000A37705 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		1AC658BC165B259000A37705 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		1AC658BE165B259000A37705 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1AC658BF165B259000A37705 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1AC658C7165B25B800A37705 /* PullDownRefreshScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullDownRefreshScrollView.h; sourceTree = "<group>"; };
+		1AC658C8165B25B800A37705 /* PullDownRefreshScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullDownRefreshScrollView.m; sourceTree = "<group>"; };
+		1AC658CA165B25BE00A37705 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		1AC658CC165B279700A37705 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1AC6589F165B259000A37705 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AC658CD165B279700A37705 /* QuartzCore.framework in Frameworks */,
+				1AC658A7165B259000A37705 /* UIKit.framework in Frameworks */,
+				1AC658A9165B259000A37705 /* Foundation.framework in Frameworks */,
+				1AC658AB165B259000A37705 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1AC65897165B259000A37705 = {
+			isa = PBXGroup;
+			children = (
+				1AC658CC165B279700A37705 /* QuartzCore.framework */,
+				1AC658AC165B259000A37705 /* PullDownScrollViewComponent */,
+				1AC658A5165B259000A37705 /* Frameworks */,
+				1AC658A3165B259000A37705 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1AC658A3165B259000A37705 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1AC658A2165B259000A37705 /* PullDownScrollViewComponent.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1AC658A5165B259000A37705 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1AC658A6165B259000A37705 /* UIKit.framework */,
+				1AC658A8165B259000A37705 /* Foundation.framework */,
+				1AC658AA165B259000A37705 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1AC658AC165B259000A37705 /* PullDownScrollViewComponent */ = {
+			isa = PBXGroup;
+			children = (
+				1AC658C6165B259900A37705 /* component */,
+				1AC658B5165B259000A37705 /* AppDelegate.h */,
+				1AC658B6165B259000A37705 /* AppDelegate.m */,
+				1AC658B8165B259000A37705 /* MainStoryboard_iPhone.storyboard */,
+				1AC658BB165B259000A37705 /* MainStoryboard_iPad.storyboard */,
+				1AC658BE165B259000A37705 /* ViewController.h */,
+				1AC658BF165B259000A37705 /* ViewController.m */,
+				1AC658AD165B259000A37705 /* Supporting Files */,
+			);
+			path = PullDownScrollViewComponent;
+			sourceTree = "<group>";
+		};
+		1AC658AD165B259000A37705 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1AC658AE165B259000A37705 /* PullDownScrollViewComponent-Info.plist */,
+				1AC658AF165B259000A37705 /* InfoPlist.strings */,
+				1AC658B2165B259000A37705 /* main.m */,
+				1AC658B4165B259000A37705 /* PullDownScrollViewComponent-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1AC658C6165B259900A37705 /* component */ = {
+			isa = PBXGroup;
+			children = (
+				1AC658CA165B25BE00A37705 /* arrow.png */,
+				1AC658C7165B25B800A37705 /* PullDownRefreshScrollView.h */,
+				1AC658C8165B25B800A37705 /* PullDownRefreshScrollView.m */,
+			);
+			name = component;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1AC658A1165B259000A37705 /* PullDownScrollViewComponent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1AC658C3165B259000A37705 /* Build configuration list for PBXNativeTarget "PullDownScrollViewComponent" */;
+			buildPhases = (
+				1AC6589E165B259000A37705 /* Sources */,
+				1AC6589F165B259000A37705 /* Frameworks */,
+				1AC658A0165B259000A37705 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PullDownScrollViewComponent;
+			productName = PullDownScrollViewComponent;
+			productReference = 1AC658A2165B259000A37705 /* PullDownScrollViewComponent.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1AC65899165B259000A37705 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 1AC6589C165B259000A37705 /* Build configuration list for PBXProject "PullDownScrollViewComponent" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1AC65897165B259000A37705;
+			productRefGroup = 1AC658A3165B259000A37705 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1AC658A1165B259000A37705 /* PullDownScrollViewComponent */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1AC658A0165B259000A37705 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AC658B1165B259000A37705 /* InfoPlist.strings in Resources */,
+				1AC658BA165B259000A37705 /* MainStoryboard_iPhone.storyboard in Resources */,
+				1AC658BD165B259000A37705 /* MainStoryboard_iPad.storyboard in Resources */,
+				1AC658CB165B25BE00A37705 /* arrow.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1AC6589E165B259000A37705 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AC658B3165B259000A37705 /* main.m in Sources */,
+				1AC658B7165B259000A37705 /* AppDelegate.m in Sources */,
+				1AC658C0165B259000A37705 /* ViewController.m in Sources */,
+				1AC658C9165B25B800A37705 /* PullDownRefreshScrollView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1AC658AF165B259000A37705 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1AC658B0165B259000A37705 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1AC658B8165B259000A37705 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1AC658B9165B259000A37705 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		1AC658BB165B259000A37705 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1AC658BC165B259000A37705 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1AC658C1165B259000A37705 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1AC658C2165B259000A37705 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1AC658C4165B259000A37705 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PullDownScrollViewComponent/PullDownScrollViewComponent-Prefix.pch";
+				INFOPLIST_FILE = "PullDownScrollViewComponent/PullDownScrollViewComponent-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1AC658C5165B259000A37705 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PullDownScrollViewComponent/PullDownScrollViewComponent-Prefix.pch";
+				INFOPLIST_FILE = "PullDownScrollViewComponent/PullDownScrollViewComponent-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1AC6589C165B259000A37705 /* Build configuration list for PBXProject "PullDownScrollViewComponent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AC658C1165B259000A37705 /* Debug */,
+				1AC658C2165B259000A37705 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1AC658C3165B259000A37705 /* Build configuration list for PBXNativeTarget "PullDownScrollViewComponent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AC658C4165B259000A37705 /* Debug */,
+				1AC658C5165B259000A37705 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1AC65899165B259000A37705 /* Project object */;
+}
