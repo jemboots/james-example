@@ -20,10 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A05460616840A5E002D7017 /* RssXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssXMLParser.h; path = "../../../../../../Users/james/Project/Koobits Hub/iPhoneRssReader/iPhoneRssReader/RssXMLParser.h"; sourceTree = "<group>"; };
-		1A05460716840A5E002D7017 /* RssXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssXMLParser.m; path = "../../../../../../Users/james/Project/Koobits Hub/iPhoneRssReader/iPhoneRssReader/RssXMLParser.m"; sourceTree = "<group>"; };
-		1A0A15CB167C69DA001DDE67 /* RssHttpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssHttpController.h; path = "../../../../../../Users/james/Project/Koobits Hub/iPhoneRssReader/iPhoneRssReader/RssHttpController.h"; sourceTree = "<group>"; };
-		1A0A15CC167C69DA001DDE67 /* RssHttpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssHttpController.m; path = "../../../../../../Users/james/Project/Koobits Hub/iPhoneRssReader/iPhoneRssReader/RssHttpController.m"; sourceTree = "<group>"; };
+		1A05460616840A5E002D7017 /* RssXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssXMLParser.h; sourceTree = "<group>"; };
+		1A05460716840A5E002D7017 /* RssXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssXMLParser.m; sourceTree = "<group>"; };
+		1A0A15CB167C69DA001DDE67 /* RssHttpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssHttpController.h; sourceTree = "<group>"; };
+		1A0A15CC167C69DA001DDE67 /* RssHttpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssHttpController.m; sourceTree = "<group>"; };
 		1A32D6D516730CBB00F77EF8 /* iPhoneRssReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneRssReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A32D6D916730CBB00F77EF8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1A32D6DB16730CBB00F77EF8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
