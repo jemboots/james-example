@@ -9,6 +9,7 @@
 #import "RssTableViewController.h"
 #import "RssHttpController.h"
 #import "RssXMLParser.h"
+#import "GADBannerView.h"
 
 @implementation RssTableViewController
 @synthesize rssData;
@@ -158,6 +159,30 @@
     return YES;
 }
 */
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    // Create a view of the standard size at the top of the screen.
+    // Available AdSize constants are explained in GADAdSize.h.
+    GADBannerView *bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    
+    // Specify the ad's "unit identifier." This is your AdMob Publisher ID.
+    bannerView_.adUnitID = @"a15120dbc353a5f";
+    
+    // Let the runtime know which UIViewController to restore after taking
+    // the user wherever the ad goes and add it to the view hierarchy.
+    bannerView_.rootViewController = self;
+    
+    // Initiate a generic request to load it with an ad.
+    [bannerView_ loadRequest:[GADRequest request]];
+    
+    return bannerView_;
+    
+}
+
+-(float)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    // admob ad size height
+    return 50.0;
+}
 
 #pragma mark - Table view delegate
 
