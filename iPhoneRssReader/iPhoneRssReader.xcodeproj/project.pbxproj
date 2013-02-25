@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A04B4C316DB131500C2ECAE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A04B4C216DB131500C2ECAE /* AdSupport.framework */; };
 		1A05460816840A5E002D7017 /* RssXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A05460716840A5E002D7017 /* RssXMLParser.m */; };
 		1A0A15CD167C69DA001DDE67 /* RssHttpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0A15CC167C69DA001DDE67 /* RssHttpController.m */; };
 		1A32D6DA16730CBB00F77EF8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A32D6D916730CBB00F77EF8 /* UIKit.framework */; };
@@ -22,11 +23,11 @@
 		1A9F3E6116D11A2A000907FD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6016D11A2A000907FD /* StoreKit.framework */; };
 		1A9F3E6316D11A76000907FD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6216D11A76000907FD /* SystemConfiguration.framework */; };
 		1A9F3E6516D11AC4000907FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6416D11AC4000907FD /* MessageUI.framework */; };
-		1A9F3E6716D11B09000907FD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6616D11B09000907FD /* AdSupport.framework */; };
 		1A9F3E6916D11B5D000907FD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6816D11B5D000907FD /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A04B4C216DB131500C2ECAE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		1A05460616840A5E002D7017 /* RssXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssXMLParser.h; sourceTree = "<group>"; };
 		1A05460716840A5E002D7017 /* RssXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssXMLParser.m; sourceTree = "<group>"; };
 		1A0A15CB167C69DA001DDE67 /* RssHttpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssHttpController.h; sourceTree = "<group>"; };
@@ -58,7 +59,6 @@
 		1A9F3E6016D11A2A000907FD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1A9F3E6216D11A76000907FD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1A9F3E6416D11AC4000907FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		1A9F3E6616D11B09000907FD /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		1A9F3E6816D11B5D000907FD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -67,8 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A04B4C316DB131500C2ECAE /* AdSupport.framework in Frameworks */,
 				1A9F3E6916D11B5D000907FD /* AudioToolbox.framework in Frameworks */,
-				1A9F3E6716D11B09000907FD /* AdSupport.framework in Frameworks */,
 				1A9F3E6516D11AC4000907FD /* MessageUI.framework in Frameworks */,
 				1A9F3E6316D11A76000907FD /* SystemConfiguration.framework in Frameworks */,
 				1A9F3E6116D11A2A000907FD /* StoreKit.framework in Frameworks */,
@@ -103,8 +103,8 @@
 		1A32D6CA16730CBB00F77EF8 = {
 			isa = PBXGroup;
 			children = (
+				1A04B4C216DB131500C2ECAE /* AdSupport.framework */,
 				1A9F3E6816D11B5D000907FD /* AudioToolbox.framework */,
-				1A9F3E6616D11B09000907FD /* AdSupport.framework */,
 				1A9F3E6416D11AC4000907FD /* MessageUI.framework */,
 				1A9F3E6216D11A76000907FD /* SystemConfiguration.framework */,
 				1A9F3E6016D11A2A000907FD /* StoreKit.framework */,
@@ -321,7 +321,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iPhoneRssReader/iPhoneRssReader-Prefix.pch";
 				INFOPLIST_FILE = "iPhoneRssReader/iPhoneRssReader-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/iPhoneRssReader/GoogleAdMobAdsSdkiOS-6.3.0/Add-ons/GoogleAnalyticsiOS_2.0beta4/Library\"",
@@ -339,7 +339,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iPhoneRssReader/iPhoneRssReader-Prefix.pch";
 				INFOPLIST_FILE = "iPhoneRssReader/iPhoneRssReader-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/iPhoneRssReader/GoogleAdMobAdsSdkiOS-6.3.0/Add-ons/GoogleAnalyticsiOS_2.0beta4/Library\"",
