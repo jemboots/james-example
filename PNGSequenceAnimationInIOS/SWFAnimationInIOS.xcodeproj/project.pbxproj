@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1A329D191731127A00F6935D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A329D181731127A00F6935D /* UIKit.framework */; };
+		1A329D1B1731127A00F6935D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A329D1A1731127A00F6935D /* Foundation.framework */; };
+		1A329D1D1731127A00F6935D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A329D1C1731127A00F6935D /* CoreGraphics.framework */; };
+		1A329D231731127A00F6935D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D211731127A00F6935D /* InfoPlist.strings */; };
+		1A329D251731127A00F6935D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A329D241731127A00F6935D /* main.m */; };
+		1A329D291731127A00F6935D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A329D281731127A00F6935D /* AppDelegate.m */; };
+		1A329D2F1731127A00F6935D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A329D2E1731127A00F6935D /* ViewController.m */; };
+		1A329D3617311BB900F6935D /* animation.swf in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D3517311BB900F6935D /* animation.swf */; };
+		1A329D3817311C1100F6935D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D3717311C1100F6935D /* MainStoryboard.storyboard */; };
+		1A329D4F17312A4A00F6935D /* PlatypusIdle0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D3A17312A4A00F6935D /* PlatypusIdle0001.png */; };
+		1A329D5017312A4A00F6935D /* PlatypusIdle0002.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D3B17312A4A00F6935D /* PlatypusIdle0002.png */; };
+		1A329D5117312A4A00F6935D /* PlatypusIdle0003.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D3C17312A4A00F6935D /* PlatypusIdle0003.png */; };
+		1A329D5217312A4A00F6935D /* PlatypusIdle0004.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D3D17312A4A00F6935D /* PlatypusIdle0004.png */; };
+		1A329D5317312A4A00F6935D /* PlatypusIdle0005.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D3E17312A4A00F6935D /* PlatypusIdle0005.png */; };
+		1A329D5417312A4A00F6935D /* PlatypusIdle0006.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D3F17312A4A00F6935D /* PlatypusIdle0006.png */; };
+		1A329D5517312A4A00F6935D /* PlatypusIdle0007.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4017312A4A00F6935D /* PlatypusIdle0007.png */; };
+		1A329D5617312A4A00F6935D /* PlatypusIdle0008.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4117312A4A00F6935D /* PlatypusIdle0008.png */; };
+		1A329D5717312A4A00F6935D /* PlatypusIdle0009.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4217312A4A00F6935D /* PlatypusIdle0009.png */; };
+		1A329D5817312A4A00F6935D /* PlatypusIdle0010.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4317312A4A00F6935D /* PlatypusIdle0010.png */; };
+		1A329D5917312A4A00F6935D /* PlatypusIdle0011.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4417312A4A00F6935D /* PlatypusIdle0011.png */; };
+		1A329D5A17312A4A00F6935D /* PlatypusIdle0012.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4517312A4A00F6935D /* PlatypusIdle0012.png */; };
+		1A329D5B17312A4A00F6935D /* PlatypusIdle0013.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4617312A4A00F6935D /* PlatypusIdle0013.png */; };
+		1A329D5C17312A4A00F6935D /* PlatypusIdle0014.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4717312A4A00F6935D /* PlatypusIdle0014.png */; };
+		1A329D5D17312A4A00F6935D /* PlatypusIdle0015.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4817312A4A00F6935D /* PlatypusIdle0015.png */; };
+		1A329D5E17312A4A00F6935D /* PlatypusIdle0016.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4917312A4A00F6935D /* PlatypusIdle0016.png */; };
+		1A329D5F17312A4A00F6935D /* PlatypusIdle0017.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4A17312A4A00F6935D /* PlatypusIdle0017.png */; };
+		1A329D6017312A4A00F6935D /* PlatypusIdle0018.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4B17312A4A00F6935D /* PlatypusIdle0018.png */; };
+		1A329D6117312A4A00F6935D /* PlatypusIdle0019.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4C17312A4A00F6935D /* PlatypusIdle0019.png */; };
+		1A329D6217312A4A00F6935D /* PlatypusIdle0020.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A329D4D17312A4A00F6935D /* PlatypusIdle0020.png */; };
+		1A329D6A17312CA900F6935D /* PNGAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A329D6917312CA900F6935D /* PNGAnimationView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A329D141731127A00F6935D /* SWFAnimationInIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWFAnimationInIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A329D181731127A00F6935D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1A329D1A1731127A00F6935D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1A329D1C1731127A00F6935D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1A329D201731127A00F6935D /* SWFAnimationInIOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SWFAnimationInIOS-Info.plist"; sourceTree = "<group>"; };
+		1A329D221731127A00F6935D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1A329D241731127A00F6935D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1A329D261731127A00F6935D /* SWFAnimationInIOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SWFAnimationInIOS-Prefix.pch"; sourceTree = "<group>"; };
+		1A329D271731127A00F6935D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1A329D281731127A00F6935D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1A329D2D1731127A00F6935D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1A329D2E1731127A00F6935D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1A329D3517311BB900F6935D /* animation.swf */ = {isa = PBXFileReference; lastKnownFileType = file; path = animation.swf; sourceTree = "<group>"; };
+		1A329D3717311C1100F6935D /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		1A329D3A17312A4A00F6935D /* PlatypusIdle0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0001.png; sourceTree = "<group>"; };
+		1A329D3B17312A4A00F6935D /* PlatypusIdle0002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0002.png; sourceTree = "<group>"; };
+		1A329D3C17312A4A00F6935D /* PlatypusIdle0003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0003.png; sourceTree = "<group>"; };
+		1A329D3D17312A4A00F6935D /* PlatypusIdle0004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0004.png; sourceTree = "<group>"; };
+		1A329D3E17312A4A00F6935D /* PlatypusIdle0005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0005.png; sourceTree = "<group>"; };
+		1A329D3F17312A4A00F6935D /* PlatypusIdle0006.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0006.png; sourceTree = "<group>"; };
+		1A329D4017312A4A00F6935D /* PlatypusIdle0007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0007.png; sourceTree = "<group>"; };
+		1A329D4117312A4A00F6935D /* PlatypusIdle0008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0008.png; sourceTree = "<group>"; };
+		1A329D4217312A4A00F6935D /* PlatypusIdle0009.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0009.png; sourceTree = "<group>"; };
+		1A329D4317312A4A00F6935D /* PlatypusIdle0010.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0010.png; sourceTree = "<group>"; };
+		1A329D4417312A4A00F6935D /* PlatypusIdle0011.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0011.png; sourceTree = "<group>"; };
+		1A329D4517312A4A00F6935D /* PlatypusIdle0012.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0012.png; sourceTree = "<group>"; };
+		1A329D4617312A4A00F6935D /* PlatypusIdle0013.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0013.png; sourceTree = "<group>"; };
+		1A329D4717312A4A00F6935D /* PlatypusIdle0014.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0014.png; sourceTree = "<group>"; };
+		1A329D4817312A4A00F6935D /* PlatypusIdle0015.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0015.png; sourceTree = "<group>"; };
+		1A329D4917312A4A00F6935D /* PlatypusIdle0016.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0016.png; sourceTree = "<group>"; };
+		1A329D4A17312A4A00F6935D /* PlatypusIdle0017.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0017.png; sourceTree = "<group>"; };
+		1A329D4B17312A4A00F6935D /* PlatypusIdle0018.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0018.png; sourceTree = "<group>"; };
+		1A329D4C17312A4A00F6935D /* PlatypusIdle0019.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0019.png; sourceTree = "<group>"; };
+		1A329D4D17312A4A00F6935D /* PlatypusIdle0020.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatypusIdle0020.png; sourceTree = "<group>"; };
+		1A329D6817312CA900F6935D /* PNGAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNGAnimationView.h; sourceTree = "<group>"; };
+		1A329D6917312CA900F6935D /* PNGAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGAnimationView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1A329D111731127A00F6935D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A329D191731127A00F6935D /* UIKit.framework in Frameworks */,
+				1A329D1B1731127A00F6935D /* Foundation.framework in Frameworks */,
+				1A329D1D1731127A00F6935D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A329D091731127A00F6935D = {
+			isa = PBXGroup;
+			children = (
+				1A329D1E1731127A00F6935D /* SWFAnimationInIOS */,
+				1A329D171731127A00F6935D /* Frameworks */,
+				1A329D151731127A00F6935D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1A329D151731127A00F6935D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A329D141731127A00F6935D /* SWFAnimationInIOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1A329D171731127A00F6935D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A329D181731127A00F6935D /* UIKit.framework */,
+				1A329D1A1731127A00F6935D /* Foundation.framework */,
+				1A329D1C1731127A00F6935D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1A329D1E1731127A00F6935D /* SWFAnimationInIOS */ = {
+			isa = PBXGroup;
+			children = (
+				1A329D3917312A4A00F6935D /* png files */,
+				1A329D3517311BB900F6935D /* animation.swf */,
+				1A329D6817312CA900F6935D /* PNGAnimationView.h */,
+				1A329D6917312CA900F6935D /* PNGAnimationView.m */,
+				1A329D271731127A00F6935D /* AppDelegate.h */,
+				1A329D281731127A00F6935D /* AppDelegate.m */,
+				1A329D2D1731127A00F6935D /* ViewController.h */,
+				1A329D2E1731127A00F6935D /* ViewController.m */,
+				1A329D1F1731127A00F6935D /* Supporting Files */,
+				1A329D3717311C1100F6935D /* MainStoryboard.storyboard */,
+			);
+			path = SWFAnimationInIOS;
+			sourceTree = "<group>";
+		};
+		1A329D1F1731127A00F6935D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1A329D201731127A00F6935D /* SWFAnimationInIOS-Info.plist */,
+				1A329D211731127A00F6935D /* InfoPlist.strings */,
+				1A329D241731127A00F6935D /* main.m */,
+				1A329D261731127A00F6935D /* SWFAnimationInIOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1A329D3917312A4A00F6935D /* png files */ = {
+			isa = PBXGroup;
+			children = (
+				1A329D3A17312A4A00F6935D /* PlatypusIdle0001.png */,
+				1A329D3B17312A4A00F6935D /* PlatypusIdle0002.png */,
+				1A329D3C17312A4A00F6935D /* PlatypusIdle0003.png */,
+				1A329D3D17312A4A00F6935D /* PlatypusIdle0004.png */,
+				1A329D3E17312A4A00F6935D /* PlatypusIdle0005.png */,
+				1A329D3F17312A4A00F6935D /* PlatypusIdle0006.png */,
+				1A329D4017312A4A00F6935D /* PlatypusIdle0007.png */,
+				1A329D4117312A4A00F6935D /* PlatypusIdle0008.png */,
+				1A329D4217312A4A00F6935D /* PlatypusIdle0009.png */,
+				1A329D4317312A4A00F6935D /* PlatypusIdle0010.png */,
+				1A329D4417312A4A00F6935D /* PlatypusIdle0011.png */,
+				1A329D4517312A4A00F6935D /* PlatypusIdle0012.png */,
+				1A329D4617312A4A00F6935D /* PlatypusIdle0013.png */,
+				1A329D4717312A4A00F6935D /* PlatypusIdle0014.png */,
+				1A329D4817312A4A00F6935D /* PlatypusIdle0015.png */,
+				1A329D4917312A4A00F6935D /* PlatypusIdle0016.png */,
+				1A329D4A17312A4A00F6935D /* PlatypusIdle0017.png */,
+				1A329D4B17312A4A00F6935D /* PlatypusIdle0018.png */,
+				1A329D4C17312A4A00F6935D /* PlatypusIdle0019.png */,
+				1A329D4D17312A4A00F6935D /* PlatypusIdle0020.png */,
+			);
+			path = "png files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1A329D131731127A00F6935D /* SWFAnimationInIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A329D321731127A00F6935D /* Build configuration list for PBXNativeTarget "SWFAnimationInIOS" */;
+			buildPhases = (
+				1A329D101731127A00F6935D /* Sources */,
+				1A329D111731127A00F6935D /* Frameworks */,
+				1A329D121731127A00F6935D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SWFAnimationInIOS;
+			productName = SWFAnimationInIOS;
+			productReference = 1A329D141731127A00F6935D /* SWFAnimationInIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1A329D0B1731127A00F6935D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 1A329D0E1731127A00F6935D /* Build configuration list for PBXProject "SWFAnimationInIOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1A329D091731127A00F6935D;
+			productRefGroup = 1A329D151731127A00F6935D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1A329D131731127A00F6935D /* SWFAnimationInIOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1A329D121731127A00F6935D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A329D231731127A00F6935D /* InfoPlist.strings in Resources */,
+				1A329D3617311BB900F6935D /* animation.swf in Resources */,
+				1A329D3817311C1100F6935D /* MainStoryboard.storyboard in Resources */,
+				1A329D4F17312A4A00F6935D /* PlatypusIdle0001.png in Resources */,
+				1A329D5017312A4A00F6935D /* PlatypusIdle0002.png in Resources */,
+				1A329D5117312A4A00F6935D /* PlatypusIdle0003.png in Resources */,
+				1A329D5217312A4A00F6935D /* PlatypusIdle0004.png in Resources */,
+				1A329D5317312A4A00F6935D /* PlatypusIdle0005.png in Resources */,
+				1A329D5417312A4A00F6935D /* PlatypusIdle0006.png in Resources */,
+				1A329D5517312A4A00F6935D /* PlatypusIdle0007.png in Resources */,
+				1A329D5617312A4A00F6935D /* PlatypusIdle0008.png in Resources */,
+				1A329D5717312A4A00F6935D /* PlatypusIdle0009.png in Resources */,
+				1A329D5817312A4A00F6935D /* PlatypusIdle0010.png in Resources */,
+				1A329D5917312A4A00F6935D /* PlatypusIdle0011.png in Resources */,
+				1A329D5A17312A4A00F6935D /* PlatypusIdle0012.png in Resources */,
+				1A329D5B17312A4A00F6935D /* PlatypusIdle0013.png in Resources */,
+				1A329D5C17312A4A00F6935D /* PlatypusIdle0014.png in Resources */,
+				1A329D5D17312A4A00F6935D /* PlatypusIdle0015.png in Resources */,
+				1A329D5E17312A4A00F6935D /* PlatypusIdle0016.png in Resources */,
+				1A329D5F17312A4A00F6935D /* PlatypusIdle0017.png in Resources */,
+				1A329D6017312A4A00F6935D /* PlatypusIdle0018.png in Resources */,
+				1A329D6117312A4A00F6935D /* PlatypusIdle0019.png in Resources */,
+				1A329D6217312A4A00F6935D /* PlatypusIdle0020.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1A329D101731127A00F6935D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A329D251731127A00F6935D /* main.m in Sources */,
+				1A329D291731127A00F6935D /* AppDelegate.m in Sources */,
+				1A329D2F1731127A00F6935D /* ViewController.m in Sources */,
+				1A329D6A17312CA900F6935D /* PNGAnimationView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1A329D211731127A00F6935D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1A329D221731127A00F6935D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1A329D301731127A00F6935D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		1A329D311731127A00F6935D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1A329D331731127A00F6935D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SWFAnimationInIOS/SWFAnimationInIOS-Prefix.pch";
+				INFOPLIST_FILE = "SWFAnimationInIOS/SWFAnimationInIOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1A329D341731127A00F6935D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SWFAnimationInIOS/SWFAnimationInIOS-Prefix.pch";
+				INFOPLIST_FILE = "SWFAnimationInIOS/SWFAnimationInIOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1A329D0E1731127A00F6935D /* Build configuration list for PBXProject "SWFAnimationInIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A329D301731127A00F6935D /* Debug */,
+				1A329D311731127A00F6935D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A329D321731127A00F6935D /* Build configuration list for PBXNativeTarget "SWFAnimationInIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A329D331731127A00F6935D /* Debug */,
+				1A329D341731127A00F6935D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1A329D0B1731127A00F6935D /* Project object */;
+}
