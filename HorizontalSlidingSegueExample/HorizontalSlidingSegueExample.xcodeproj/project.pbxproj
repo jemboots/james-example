@@ -13,7 +13,6 @@
 		1AF277F11724C93500BD27A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1AF277EF1724C93500BD27A2 /* InfoPlist.strings */; };
 		1AF277F31724C93500BD27A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF277F21724C93500BD27A2 /* main.m */; };
 		1AF277F71724C93500BD27A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF277F61724C93500BD27A2 /* AppDelegate.m */; };
-		1AF277FA1724C93500BD27A2 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF277F81724C93500BD27A2 /* MainStoryboard.storyboard */; };
 		1AF277FD1724C93500BD27A2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF277FC1724C93500BD27A2 /* ViewController.m */; };
 		1AF278041724C95300BD27A2 /* iPhoneStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AF278031724C95300BD27A2 /* iPhoneStoryboard.storyboard */; };
 		1AF278071724C96F00BD27A2 /* HorizontalSlideSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF278061724C96F00BD27A2 /* HorizontalSlideSegue.m */; };
@@ -31,7 +30,6 @@
 		1AF277F41724C93500BD27A2 /* HorizontalSlidingSegueExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HorizontalSlidingSegueExample-Prefix.pch"; sourceTree = "<group>"; };
 		1AF277F51724C93500BD27A2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1AF277F61724C93500BD27A2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1AF277F91724C93500BD27A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		1AF277FB1724C93500BD27A2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		1AF277FC1724C93500BD27A2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1AF278031724C95300BD27A2 /* iPhoneStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhoneStoryboard.storyboard; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				1AF277F51724C93500BD27A2 /* AppDelegate.h */,
 				1AF277F61724C93500BD27A2 /* AppDelegate.m */,
 				1AF278031724C95300BD27A2 /* iPhoneStoryboard.storyboard */,
-				1AF277F81724C93500BD27A2 /* MainStoryboard.storyboard */,
 				1AF277FB1724C93500BD27A2 /* ViewController.h */,
 				1AF277FC1724C93500BD27A2 /* ViewController.m */,
 				1AF278051724C96F00BD27A2 /* HorizontalSlideSegue.h */,
@@ -162,7 +159,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AF277F11724C93500BD27A2 /* InfoPlist.strings in Resources */,
-				1AF277FA1724C93500BD27A2 /* MainStoryboard.storyboard in Resources */,
 				1AF278041724C95300BD27A2 /* iPhoneStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -191,14 +187,6 @@
 				1AF277F01724C93500BD27A2 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		1AF277F81724C93500BD27A2 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1AF277F91724C93500BD27A2 /* en */,
-			);
-			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -296,6 +284,7 @@
 				1AF278021724C93500BD27A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
