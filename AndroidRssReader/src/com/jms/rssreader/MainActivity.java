@@ -7,13 +7,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
-
+	private String[] listData = new String[]{"Post 1", "Post 2"};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_postlist);
+		
+		ListView listView = (ListView)this.findViewById(R.id.postListView);
+		PostTitleItemAdapter itemAdapter = new PostTitleItemAdapter(this, R.layout.postitem, listData);
+		listView.setAdapter(itemAdapter);
 	}
 
 	@Override
@@ -24,13 +31,13 @@ public class MainActivity extends Activity {
 	}
 
 	private class PostTitleItemAdapter extends ArrayAdapter <String> {
-		private List<String> postItemList;
+
 		public PostTitleItemAdapter(Context context, int textViewResourceId,
-				List<String> objects) {
+				String[] objects) {
 			super(context, textViewResourceId, objects);
 			// TODO Auto-generated constructor stub
-			
 		}
+		
 		
 	}
 }
