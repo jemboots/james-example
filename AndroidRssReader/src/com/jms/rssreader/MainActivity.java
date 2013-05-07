@@ -1,25 +1,25 @@
 package com.jms.rssreader;
 
-import java.util.List;
-
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
+import android.os.Bundle;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.jms.rssreader.adapter.PostItemAdapter;
+import com.jms.rssreader.vo.PostData;
 
 public class MainActivity extends Activity {
-	private String[] listData = new String[]{"Post 1", "Post 2"};
-	
+	private PostData[] listData;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_postlist);
-		
-		ListView listView = (ListView)this.findViewById(R.id.postListView);
-		PostTitleItemAdapter itemAdapter = new PostTitleItemAdapter(this, R.layout.postitem, listData);
+
+		this.generateDummyData();
+		ListView listView = (ListView) this.findViewById(R.id.postListView);
+		PostItemAdapter itemAdapter = new PostItemAdapter(this,
+				R.layout.postitem, listData);
 		listView.setAdapter(itemAdapter);
 	}
 
@@ -30,14 +30,16 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	private class PostTitleItemAdapter extends ArrayAdapter <String> {
-
-		public PostTitleItemAdapter(Context context, int textViewResourceId,
-				String[] objects) {
-			super(context, textViewResourceId, objects);
-			// TODO Auto-generated constructor stub
+	private void generateDummyData() {
+		PostData data = null;
+		listData = new PostData[10];
+		for (int i = 0; i < 10; i++) {
+			data = new PostData();
+			data.postDate = "May 20, 2013";
+			data.postTitle = "Post " + (i + 1)
+					+ " Title: This is the Post Title from RSS Feed";
+			data.postThumbUrl = null;
+			listData[i] = data;
 		}
-		
-		
 	}
 }
