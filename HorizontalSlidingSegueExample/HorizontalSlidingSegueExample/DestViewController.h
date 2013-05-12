@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DestViewController : UIViewController
-- (IBAction)back:(id)sender;
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AC813A1173F830100DCC4D0 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC813A0173F830100DCC4D0 /* ThirdViewController.m */; };
 		1AF277E71724C93500BD27A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF277E61724C93500BD27A2 /* UIKit.framework */; };
 		1AF277E91724C93500BD27A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF277E81724C93500BD27A2 /* Foundation.framework */; };
 		1AF277EB1724C93500BD27A2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF277EA1724C93500BD27A2 /* CoreGraphics.framework */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1AC8139F173F830100DCC4D0 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThirdViewController.h; path = ../../../../../../Users/james/Documents/eclipse_workspace/HorizontalSlidingSegueExample/HorizontalSlidingSegueExample/ThirdViewController.h; sourceTree = "<group>"; };
+		1AC813A0173F830100DCC4D0 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThirdViewController.m; path = ../../../../../../Users/james/Documents/eclipse_workspace/HorizontalSlidingSegueExample/HorizontalSlidingSegueExample/ThirdViewController.m; sourceTree = "<group>"; };
 		1AF277E21724C93500BD27A2 /* HorizontalSlidingSegueExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HorizontalSlidingSegueExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF277E61724C93500BD27A2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1AF277E81724C93500BD27A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -92,6 +95,8 @@
 				1AF278061724C96F00BD27A2 /* HorizontalSlideSegue.m */,
 				1AF278081724C97E00BD27A2 /* DestViewController.h */,
 				1AF278091724C97E00BD27A2 /* DestViewController.m */,
+				1AC8139F173F830100DCC4D0 /* ThirdViewController.h */,
+				1AC813A0173F830100DCC4D0 /* ThirdViewController.m */,
 				1AF277ED1724C93500BD27A2 /* Supporting Files */,
 			);
 			path = HorizontalSlidingSegueExample;
@@ -175,6 +180,7 @@
 				1AF277FD1724C93500BD27A2 /* ViewController.m in Sources */,
 				1AF278071724C96F00BD27A2 /* HorizontalSlideSegue.m in Sources */,
 				1AF2780A1724C97E00BD27A2 /* DestViewController.m in Sources */,
+				1AC813A1173F830100DCC4D0 /* ThirdViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

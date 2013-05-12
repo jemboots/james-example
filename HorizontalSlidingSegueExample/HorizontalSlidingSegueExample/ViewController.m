@@ -61,7 +61,14 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     HorizontalSlideSegue *s = (HorizontalSlideSegue *)segue;
-    s.isDismiss = NO;
+    if([segue.identifier isEqualToString:@"forwardSegue"])
+    {
+        s.isDismiss = NO;
+    }
+    else if([segue.identifier isEqualToString:@"backwardSegue"])
+    {
+        s.isDismiss = YES;
+    }
     
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
@@ -71,13 +78,6 @@
     {
         s.isLandscapeOrientation = NO;
     }
-    
-    /*
-    if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
-    {
-        // code for Portrait orientation       
-    }
-     */
 }
 
 @end
