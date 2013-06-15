@@ -1,17 +1,13 @@
 package com.jms.loadimagewithasynctask;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +29,9 @@ public class ImageAdapter extends ArrayAdapter<String> {
 	}
 
 	private static class ViewHolder {
+		String imageURL;
 		ImageView imageView;
+		Bitmap bitmap;
 	}
 
 	@Override
@@ -49,71 +47,38 @@ public class ImageAdapter extends ArrayAdapter<String> {
 		}
 
 		viewHolder = (ViewHolder)convertView.getTag();
-		
-		//load image directly
-		Bitmap imageBitmap = null;
-		try {
-			URL imageURL = new URL(imageURLArray[position]);
-            imageBitmap = BitmapFactory.decodeStream(imageURL.openStream());
-			viewHolder.imageView.setImageBitmap(imageBitmap);
-			
-			BufferedInputStream inputStream;
-			BufferedOutputStream outputStream;
-			ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
-			inputStream = new BufferedInputStream(imageURL.openStream(), 16*1024);
-			outputStream = new BufferedOutputStream(dataStream, 16*1024);
-
-			//copy from input to output
-			CopyStream(inputStream, outputStream);
-			outputStream.flush();
-			
-			byte[] bitmapData = dataStream.toByteArray();
-
-			/*
-			//resize image to avoid out of memory problem for bitmapfactory decode
-            BitmapFactory.Options o = new BitmapFactory.Options();
-            o.inJustDecodeBounds = true;
-            BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length, o);
-            
-            //Find the correct scale value. It should be the power of 2.
-            final int REQUIRED_SIZE = 70;
-            int width_tmp=o.outWidth, height_tmp=o.outHeight;
-            int scale = 1;
-            if(width_tmp > height_tmp && width_tmp > REQUIRED_SIZE) {
-            	scale = width_tmp / REQUIRED_SIZE;
-            } else if(width_tmp < height_tmp && height_tmp > REQUIRED_SIZE) {
-				scale = height_tmp / REQUIRED_SIZE;
-			}
-            
-            //decode with inSampleSize
-            BitmapFactory.Options o2 = new BitmapFactory.Options();
-            o2.inSampleSize = scale;*/
-            //imageBitmap = BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length, o2);
-            imageBitmap = BitmapFactory.decodeStream(imageURL.openStream());
-			viewHolder.imageView.setImageBitmap(imageBitmap);
-			//viewHolder.imageView.setImageResource(R.drawable.postthumb_loading);
-			
-			inputStream.close();
-			outputStream.close();
-		} catch (IOException e) {
-			// TODO: handle exception
-			Log.e("error", "Downloading Image Failed");
-			viewHolder.imageView.setImageResource(R.drawable.postthumb_loading);
-		}
-		
+		viewHolder.imageURL = imageURLArray[position];
+		new DownloadAsyncTask().execute(viewHolder);
 		return convertView;
 	}
 	
-    private void CopyStream(InputStream is, OutputStream os) throws IOException
-    {
-        final int buffer_size=1024;
-        byte[] bytes=new byte[buffer_size];
-        for(;;)
-        {
-          int count=is.read(bytes, 0, buffer_size);
-          if(count==-1)
-              break;
-          os.write(bytes, 0, count);
-        }
-    }
+	private class DownloadAsyncTask extends AsyncTask<ViewHolder, Void, ViewHolder> {
+
+		@Override
+		protected ViewHolder doInBackground(ViewHolder... params) {
+			// TODO Auto-generated method stub
+			//load image directly
+			ViewHolder viewHolder = params[0];
+			try {
+				URL imageURL = new URL(viewHolder.imageURL);
+				viewHolder.bitmap = BitmapFactory.decodeStream(imageURL.openStream());
+			} catch (IOException e) {
+				// TODO: handle exception
+				Log.e("error", "Downloading Image Failed");
+				viewHolder.bitmap = null;
+			}
+			
+			return viewHolder;
+		}
+		
+		@Override
+		protected void onPostExecute(ViewHolder result) {
+			// TODO Auto-generated method stub
+			if (result.bitmap == null) {
+				result.imageView.setImageResource(R.drawable.postthumb_loading);
+			} else {
+				result.imageView.setImageBitmap(result.bitmap);
+			}
+		}
+	}
 }
