@@ -6,6 +6,8 @@
  */
 package com.jms.rssreader.adapter;
 
+import java.util.ArrayList;
+
 import com.jms.rssreader.R;
 import com.jms.rssreader.vo.PostData;
 
@@ -20,10 +22,10 @@ import android.widget.TextView;
 
 public class PostItemAdapter extends ArrayAdapter<PostData> {
 	private LayoutInflater inflater;
-	private PostData[] datas;
+	private ArrayList<PostData> datas;
 
 	public PostItemAdapter(Context context, int textViewResourceId,
-			PostData[] objects) {
+			ArrayList<PostData> objects) {
 		super(context, textViewResourceId, objects);
 		// TODO Auto-generated constructor stub
 		inflater = ((Activity) context).getLayoutInflater();
@@ -54,13 +56,13 @@ public class PostItemAdapter extends ArrayAdapter<PostData> {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		if (datas[position].postThumbUrl == null) {
+		if (datas.get(position).postThumbUrl == null) {
 			viewHolder.postThumbView
 					.setImageResource(R.drawable.postthumb_loading);
 		}
 
-		viewHolder.postTitleView.setText(datas[position].postTitle);
-		viewHolder.postDateView.setText(datas[position].postDate);
+		viewHolder.postTitleView.setText(datas.get(position).postTitle);
+		viewHolder.postDateView.setText(datas.get(position).postDate);
 
 		return convertView;
 	}
