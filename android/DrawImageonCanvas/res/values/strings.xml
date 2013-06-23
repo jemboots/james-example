@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DrawImage</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="showsupport">↑↑↑Please support me.↑↑↑</string>
+    <string name="buttonLabel">Click to draw image on canvas</string>
+</resources>
