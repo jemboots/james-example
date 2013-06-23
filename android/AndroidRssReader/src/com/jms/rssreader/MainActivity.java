@@ -49,9 +49,7 @@ public class MainActivity extends Activity {
 		if (ni != null && ni.isConnected()) {
 			new RssDataController().execute(urlString);
 		} else {
-			TextView textView = (TextView) this
-					.findViewById(R.id.loadingProgress);
-			textView.setText("Network Connection Error");
+			
 		}
 
 		listData = new ArrayList<PostData>();
