@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.jms.rssreader.adapter.PostItemAdapter;
 import com.jms.rssreader.vo.PostData;
