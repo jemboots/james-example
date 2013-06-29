@@ -15,13 +15,14 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.jms.dragtorefresh.RefreshableInterface;
 import com.jms.dragtorefresh.RefreshableListView;
@@ -65,7 +66,25 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		postListView.setAdapter(postAdapter);
 		postListView.setOnRefresh(this);
 		postListView.onRefreshStart();
+		postListView.setOnItemClickListener(onItemClickListener);
 	}
+	
+	private OnItemClickListener onItemClickListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			// TODO Auto-generated method stub
+			PostData data = listData.get(arg2 - 1);
+			
+			Bundle postInfo = new Bundle();
+			postInfo.putString("content", data.postContent);
+			
+			Intent postviewIntent = new Intent(MainActivity.this, PostViewActivity.class);
+			postviewIntent.putExtras(postInfo);
+			startActivity(postviewIntent);
+		}
+	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
