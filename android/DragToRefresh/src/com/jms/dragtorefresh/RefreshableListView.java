@@ -153,6 +153,14 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 
 		this.addHeaderView(headerRelativeLayout, null, false);
 
+		TextView textView = new TextView(context);
+		textView.setHeight(60);
+		textView.setText("More...");
+		textView.setGravity(0x11);
+		textView.setTextSize(26f);
+		textView.setOnClickListener(loadMoreClickListener);
+		this.addFooterView(textView, null, false);
+		
 		//isDragging = false;
 		currentState = STATE_PULL_TO_REFRESH;
 		this.setOnScrollListener(this);
@@ -171,6 +179,15 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 		reverseRotateAnimation.setDuration(1);
 		reverseRotateAnimation.setFillAfter(true);
 	}
+	
+	private OnClickListener loadMoreClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Log.w("www", "load more");
+		}
+	};
 
 	public void onRefreshComplete() {
 		progressBar.setVisibility(View.GONE);
