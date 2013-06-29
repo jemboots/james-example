@@ -22,20 +22,25 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.ListView;
 
+import com.jms.dragtorefresh.RefreshableInterface;
+import com.jms.dragtorefresh.RefreshableListView;
 import com.jms.rssreader.adapter.PostItemAdapter;
 import com.jms.rssreader.vo.PostData;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements RefreshableInterface {
 	private enum RSSXMLTag {
-		TITLE, DATE, LINK, IGNORETAG;
+		TITLE, DATE, LINK, CONTENT, GUID, IGNORETAG;
 	}
 
 	private ArrayList<PostData> listData;
 	private String urlString = "http://jmsliu.com/feed?paged=";
-	private ListView postListView;
+	private RefreshableListView postListView;
 	private PostItemAdapter postAdapter;
+	private int pagnation = 1; //start from 1
+	private boolean isRefreshLoading = true;
+	private boolean isLoading = false;
+	private ArrayList<String> guidList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +48,23 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_postlist);
 
 		// check connectivity state
+		/*
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo ni = cm.getActiveNetworkInfo();
 		if (ni != null && ni.isConnected()) {
-			new RssDataController().execute(urlString);
+			new RssDataController().execute(urlString + 0);
 		} else {
 			
 		}
+		*/
 
+		guidList = new ArrayList<String>();
 		listData = new ArrayList<PostData>();
-		postListView = (ListView) this.findViewById(R.id.postListView);
+		postListView = (RefreshableListView) this.findViewById(R.id.postListView);
 		postAdapter = new PostItemAdapter(this, R.layout.postitem, listData);
 		postListView.setAdapter(postAdapter);
+		postListView.setOnRefresh(this);
+		postListView.onRefreshStart();
 	}
 
 	@Override
@@ -102,6 +112,7 @@ public class MainActivity extends Activity {
 					if (eventType == XmlPullParser.START_DOCUMENT) {
 
 					} else if (eventType == XmlPullParser.START_TAG) {
+						Log.w("warming", xpp.getName());
 						if (xpp.getName().equals("item")) {
 							pdData = new PostData();
 							currentTag = RSSXMLTag.IGNORETAG;
@@ -111,6 +122,10 @@ public class MainActivity extends Activity {
 							currentTag = RSSXMLTag.LINK;
 						} else if (xpp.getName().equals("pubDate")) {
 							currentTag = RSSXMLTag.DATE;
+						} else if (xpp.getName().equals("encoded")) {
+							currentTag = RSSXMLTag.CONTENT;
+						} else if (xpp.getName().equals("guid")) {
+							currentTag = RSSXMLTag.GUID;
 						}
 					} else if (eventType == XmlPullParser.END_TAG) {
 						if (xpp.getName().equals("item")) {
@@ -155,6 +170,24 @@ public class MainActivity extends Activity {
 									}
 								}
 								break;
+							case CONTENT:
+								if (content.length() != 0) {
+									if (pdData.postContent != null) {
+										pdData.postContent += content;
+									} else {
+										pdData.postContent = content;
+									}
+								}
+								break;
+							case GUID:
+								if (content.length() != 0) {
+									if (pdData.postGuid != null) {
+										pdData.postGuid += content;
+									} else {
+										pdData.postGuid = content;
+									}
+								}
+								break;
 							default:
 								break;
 							}
@@ -184,11 +217,60 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onPostExecute(ArrayList<PostData> result) {
 			// TODO Auto-generated method stub
+			boolean isupdated = false;
 			for (int i = 0; i < result.size(); i++) {
-				listData.add(result.get(i));
+				//check if the post is already in the list
+				if (guidList.contains(result.get(i).postGuid)) {
+					continue;
+				} else {
+					isupdated = true;
+					guidList.add(result.get(i).postGuid);
+				}
+				
+				if (isRefreshLoading) {
+					listData.add(i, result.get(i));
+				} else {
+					listData.add(result.get(i));
+				}
 			}
 
-			postAdapter.notifyDataSetChanged();
+			if (isupdated) {
+				postAdapter.notifyDataSetChanged();
+			}
+			
+			isLoading = false;
+			
+			if (isRefreshLoading) {
+				postListView.onRefreshComplete();
+			} else {
+				postListView.onLoadingMoreComplete();
+			}
+			
+			super.onPostExecute(result);
+		}
+	}
+
+	@Override
+	public void startFresh() {
+		// TODO Auto-generated method stub
+		if (!isLoading) {
+			isRefreshLoading = true;
+			isLoading = true;
+			new RssDataController().execute(urlString + 1);
+		} else {
+			postListView.onRefreshComplete();
+		}
+	}
+
+	@Override
+	public void startLoadMore() {
+		// TODO Auto-generated method stub
+		if (!isLoading) {
+			isRefreshLoading = false;
+			isLoading = true;
+			new RssDataController().execute(urlString + (++pagnation));
+		} else {
+			postListView.onLoadingMoreComplete();
 		}
 	}
 }
