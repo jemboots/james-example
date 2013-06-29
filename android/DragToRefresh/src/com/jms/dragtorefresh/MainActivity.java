@@ -45,7 +45,12 @@ public class MainActivity extends Activity implements RefreshableInterface{
 		}
 	}
 	
-	private class GetDataTask extends AsyncTask<Void, Void, String[]> {
+	/**
+	 * GetNewDataTask will get the latest post and add the data on the top of the list
+	 * @author James
+	 *
+	 */
+	private class GetNewDataTask extends AsyncTask<Void, Void, String[]> {
 
 		@Override
 		protected String[] doInBackground(Void... params) {
@@ -63,13 +68,48 @@ public class MainActivity extends Activity implements RefreshableInterface{
 			for (int i = 0; i < 5; i++) {
 				PostData data = new PostData();
 				data.postDate = "May 20, 2013";
-				data.postTitle = "Post " + (i + 1 + listData.size())
+				data.postTitle = "New Post"
+						+ " Title: This is the Post Title from RSS Feed";
+				data.postThumbUrl = null;
+				listData.add(i, data);
+			}
+			
+			listView.onRefreshComplete();
+			itemAdapter.notifyDataSetChanged();
+			super.onPostExecute(result);
+		}
+	}
+	
+	/**
+	 * GetOldDataTask will get the old posts and append the data in the end of the list
+	 * @author James
+	 *
+	 */
+	private class GetOldDataTask extends AsyncTask<Void, Void, String[]> {
+
+		@Override
+		protected String[] doInBackground(Void... params) {
+			// Simulates a background job.
+			try {
+				Thread.sleep(1500);
+			} catch (InterruptedException e) {
+			}
+			return new String[10];
+		}
+
+		@Override
+		protected void onPostExecute(String[] result) {
+			// Call onRefreshComplete when the list has been refreshed.
+			for (int i = 0; i < 5; i++) {
+				PostData data = new PostData();
+				data.postDate = "May 20, 2013";
+				data.postTitle = "Post " + (1 + listData.size())
 						+ " Title: This is the Post Title from RSS Feed";
 				data.postThumbUrl = null;
 				listData.add(data);
 			}
 			
-			listView.onRefreshComplete();
+			listView.onLoadingMoreComplete();
 			itemAdapter.notifyDataSetChanged();
 			super.onPostExecute(result);
 		}
@@ -78,6 +118,12 @@ public class MainActivity extends Activity implements RefreshableInterface{
 	@Override
 	public void startFresh() {
 		// TODO Auto-generated method stub
-		new GetDataTask().execute();
+		new GetNewDataTask().execute();
+	}
+
+	@Override
+	public void startLoadMore() {
+		// TODO Auto-generated method stub
+		new GetOldDataTask().execute();
 	}
 }

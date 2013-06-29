@@ -3,6 +3,7 @@ package com.jms.dragtorefresh;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.R.bool;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class RefreshableListView extends ListView implements OnScrollListener {
@@ -34,6 +36,10 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 	private RotateAnimation reverseRotateAnimation;
 	private RefreshableInterface refreshDelegate;
 
+	private RelativeLayout footerLayout;
+	private ProgressBar footerProgressBar;
+	private boolean isLoadingMore;
+	
 	private boolean isLoading;
 	//private boolean isDragging;
 	private float startY;
@@ -145,21 +151,15 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 		lastUpdateDateTextView = (TextView) headerRelativeLayout
 				.findViewById(R.id.head_lastUpdatedDateTextView);
 		lastUpdateDateTextView.setText("");
-
-		Log.d("222", String.valueOf(headerRelativeLayout.getPaddingLeft()));
-
 		headerRelativeLayout.setPadding(headerRelativeLayout.getPaddingLeft(),
 				-1 * HEADER_HEIGHT, 0, headerRelativeLayout.getPaddingBottom());
-
 		this.addHeaderView(headerRelativeLayout, null, false);
 
-		TextView textView = new TextView(context);
-		textView.setHeight(60);
-		textView.setText("More...");
-		textView.setGravity(0x11);
-		textView.setTextSize(26f);
-		textView.setOnClickListener(loadMoreClickListener);
-		this.addFooterView(textView, null, false);
+		footerLayout = (RelativeLayout) inflate(context, R.layout.refresh_footer_view, null);
+		footerProgressBar = (ProgressBar)footerLayout.findViewById(R.id.footer_progressBar);
+		footerLayout.setOnClickListener(loadMoreClickListener);
+		this.addFooterView(footerLayout, null, false);
+		isLoadingMore = false;
 		
 		//isDragging = false;
 		currentState = STATE_PULL_TO_REFRESH;
@@ -185,7 +185,11 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			Log.w("www", "load more");
+			if (!isLoadingMore) {
+				isLoadingMore = true;
+				footerProgressBar.setVisibility(View.VISIBLE);
+				refreshDelegate.startLoadMore();
+			}
 		}
 	};
 
@@ -220,5 +224,10 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 	
 	public void setOnRefresh(RefreshableInterface d){
 		refreshDelegate = d;
+	}
+	
+	public void onLoadingMoreComplete() {
+		footerProgressBar.setVisibility(View.GONE);
+		isLoadingMore = false;
 	}
 }
