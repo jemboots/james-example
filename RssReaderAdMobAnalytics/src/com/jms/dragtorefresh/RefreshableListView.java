@@ -119,6 +119,7 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 					headerRelativeLayout.setPadding(
 							headerRelativeLayout.getPaddingLeft(), HEADER_TOP, 0,
 							headerRelativeLayout.getPaddingBottom());
+					
 					headerTextView.setText(R.string.loading);
 					progressBar.setVisibility(View.VISIBLE);
 					arrowImage.clearAnimation();
@@ -213,7 +214,7 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 	public void onRefreshStart() {
 		headerRelativeLayout.setPadding(headerRelativeLayout.getPaddingLeft(),
 				HEADER_TOP, 0, headerRelativeLayout.getPaddingBottom());
-		
+		headerTextView.setText(R.string.loading);
 		progressBar.setVisibility(View.VISIBLE);
 		arrowImage.setVisibility(View.GONE);
 		isLoading = true;

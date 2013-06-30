@@ -6,6 +6,11 @@
     tools:context=".MainActivity"
     android:orientation="vertical" >
     
+    <LinearLayout android:id="@+id/adsContainer"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+    
     <com.jms.dragtorefresh.RefreshableListView
         android:id="@+id/postListView"
     	android:layout_width="fill_parent"

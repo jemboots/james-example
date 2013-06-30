@@ -9,6 +9,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -16,6 +18,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +26,13 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
 import com.jms.dragtorefresh.RefreshableInterface;
 import com.jms.dragtorefresh.RefreshableListView;
 import com.jms.rssreader.adapter.PostItemAdapter;
@@ -38,10 +47,16 @@ public class MainActivity extends Activity implements RefreshableInterface {
 	private String urlString = "http://jmsliu.com/feed?paged=";
 	private RefreshableListView postListView;
 	private PostItemAdapter postAdapter;
-	private int pagnation = 1; //start from 1
+	private int pagnation = 1; // start from 1
 	private boolean isRefreshLoading = true;
 	private boolean isLoading = false;
 	private ArrayList<String> guidList;
+
+	private AdView adView;
+	private Tracker googleTracker;
+	private GoogleAnalytics googleAnalytics;
+	private final static String PREFERENCE_FILENAME = "JMSRssReader";
+	private Intent postviewIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,25 +65,58 @@ public class MainActivity extends Activity implements RefreshableInterface {
 
 		// check connectivity state
 		/*
-		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo ni = cm.getActiveNetworkInfo();
-		if (ni != null && ni.isConnected()) {
-			new RssDataController().execute(urlString + 0);
-		} else {
-			
+		 * ConnectivityManager cm = (ConnectivityManager)
+		 * getSystemService(Context.CONNECTIVITY_SERVICE); NetworkInfo ni =
+		 * cm.getActiveNetworkInfo(); if (ni != null && ni.isConnected()) { new
+		 * RssDataController().execute(urlString + 0); } else {
+		 * 
+		 * }
+		 */
+		googleAnalytics = GoogleAnalytics.getInstance(this);
+		googleTracker = googleAnalytics.getTracker("UA-23293636-5");
+
+		// check installation
+		SharedPreferences settings = getSharedPreferences(PREFERENCE_FILENAME,
+				0);
+		boolean isFirstRun = settings.getBoolean("isFirstRun", false);
+		if (!isFirstRun) {
+			// google analytics
+			googleTracker.sendEvent("installation", "install", null, null);
+
+			isFirstRun = true;
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putBoolean("isFirstRun", isFirstRun);
+
+			// Commit the edits!
+			editor.commit();
 		}
-		*/
+
+		// add google admob
+		adView = new AdView(this, AdSize.SMART_BANNER, "a151cfacdc9a91e");
+		LinearLayout adContainer = (LinearLayout) this
+				.findViewById(R.id.adsContainer);
+		adContainer.addView(adView);
+
+		AdRequest adRequest = new AdRequest();
+		Set<String> keywordsSet = new HashSet<String>();
+		keywordsSet.add("game");
+		keywordsSet.add("dating");
+		keywordsSet.add("money");
+		keywordsSet.add("girl");
+		adRequest.addKeywords(keywordsSet);
+		adView.loadAd(adRequest);
 
 		guidList = new ArrayList<String>();
 		listData = new ArrayList<PostData>();
-		postListView = (RefreshableListView) this.findViewById(R.id.postListView);
+		postListView = (RefreshableListView) this
+				.findViewById(R.id.postListView);
 		postAdapter = new PostItemAdapter(this, R.layout.postitem, listData);
 		postListView.setAdapter(postAdapter);
 		postListView.setOnRefresh(this);
 		postListView.onRefreshStart();
 		postListView.setOnItemClickListener(onItemClickListener);
 	}
-	
+
 	private OnItemClickListener onItemClickListener = new OnItemClickListener() {
 
 		@Override
@@ -76,11 +124,15 @@ public class MainActivity extends Activity implements RefreshableInterface {
 				long arg3) {
 			// TODO Auto-generated method stub
 			PostData data = listData.get(arg2 - 1);
-			
+
 			Bundle postInfo = new Bundle();
 			postInfo.putString("content", data.postContent);
-			
-			Intent postviewIntent = new Intent(MainActivity.this, PostViewActivity.class);
+
+			if (postviewIntent == null) {
+				postviewIntent = new Intent(MainActivity.this,
+						PostViewActivity.class);
+			}
+
 			postviewIntent.putExtras(postInfo);
 			startActivity(postviewIntent);
 		}
@@ -238,14 +290,14 @@ public class MainActivity extends Activity implements RefreshableInterface {
 			// TODO Auto-generated method stub
 			boolean isupdated = false;
 			for (int i = 0; i < result.size(); i++) {
-				//check if the post is already in the list
+				// check if the post is already in the list
 				if (guidList.contains(result.get(i).postGuid)) {
 					continue;
 				} else {
 					isupdated = true;
 					guidList.add(result.get(i).postGuid);
 				}
-				
+
 				if (isRefreshLoading) {
 					listData.add(i, result.get(i));
 				} else {
@@ -256,15 +308,15 @@ public class MainActivity extends Activity implements RefreshableInterface {
 			if (isupdated) {
 				postAdapter.notifyDataSetChanged();
 			}
-			
+
 			isLoading = false;
-			
+
 			if (isRefreshLoading) {
 				postListView.onRefreshComplete();
 			} else {
 				postListView.onLoadingMoreComplete();
 			}
-			
+
 			super.onPostExecute(result);
 		}
 	}
@@ -291,5 +343,15 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		} else {
 			postListView.onLoadingMoreComplete();
 		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		if (adView != null) {
+			adView.destroy();
+		}
+
+		super.onDestroy();
 	}
 }
