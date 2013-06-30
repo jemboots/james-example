@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1A04B4C316DB131500C2ECAE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A04B4C216DB131500C2ECAE /* AdSupport.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		1A05460816840A5E002D7017 /* RssXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A05460716840A5E002D7017 /* RssXMLParser.m */; };
+		1A0A15CD167C69DA001DDE67 /* RssHttpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0A15CC167C69DA001DDE67 /* RssHttpController.m */; };
+		1A32D6DA16730CBB00F77EF8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A32D6D916730CBB00F77EF8 /* UIKit.framework */; };
+		1A32D6DC16730CBB00F77EF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A32D6DB16730CBB00F77EF8 /* Foundation.framework */; };
+		1A32D6DE16730CBB00F77EF8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A32D6DD16730CBB00F77EF8 /* CoreGraphics.framework */; };
+		1A32D6E416730CBB00F77EF8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A32D6E216730CBB00F77EF8 /* InfoPlist.strings */; };
+		1A32D6E616730CBB00F77EF8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A32D6E516730CBB00F77EF8 /* main.m */; };
+		1A32D6EA16730CBB00F77EF8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A32D6E916730CBB00F77EF8 /* AppDelegate.m */; };
+		1A32D6ED16730CBB00F77EF8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A32D6EB16730CBB00F77EF8 /* MainStoryboard.storyboard */; };
+		1A32D6FB167316CE00F77EF8 /* RssTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A32D6FA167316CE00F77EF8 /* RssTableViewController.m */; };
+		1A9F3E5716D10960000907FD /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E2616D10960000907FD /* libGoogleAdMobAds.a */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1A9F3E5816D10960000907FD /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1A9F3E2716D10960000907FD /* README.txt */; };
+		1A9F3E6116D11A2A000907FD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6016D11A2A000907FD /* StoreKit.framework */; };
+		1A9F3E6316D11A76000907FD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6216D11A76000907FD /* SystemConfiguration.framework */; };
+		1A9F3E6516D11AC4000907FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6416D11AC4000907FD /* MessageUI.framework */; };
+		1A9F3E6916D11B5D000907FD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6816D11B5D000907FD /* AudioToolbox.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A04B4C216DB131500C2ECAE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		1A05460616840A5E002D7017 /* RssXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssXMLParser.h; sourceTree = "<group>"; };
+		1A05460716840A5E002D7017 /* RssXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssXMLParser.m; sourceTree = "<group>"; };
+		1A0A15CB167C69DA001DDE67 /* RssHttpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssHttpController.h; sourceTree = "<group>"; };
+		1A0A15CC167C69DA001DDE67 /* RssHttpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssHttpController.m; sourceTree = "<group>"; };
+		1A32D6D516730CBB00F77EF8 /* iPhoneRssReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneRssReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A32D6D916730CBB00F77EF8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1A32D6DB16730CBB00F77EF8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1A32D6DD16730CBB00F77EF8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1A32D6E116730CBB00F77EF8 /* iPhoneRssReader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iPhoneRssReader-Info.plist"; sourceTree = "<group>"; };
+		1A32D6E316730CBB00F77EF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1A32D6E516730CBB00F77EF8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1A32D6E716730CBB00F77EF8 /* iPhoneRssReader-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iPhoneRssReader-Prefix.pch"; sourceTree = "<group>"; };
+		1A32D6E816730CBB00F77EF8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1A32D6E916730CBB00F77EF8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1A32D6EC16730CBB00F77EF8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		1A32D6F9167316CE00F77EF8 /* RssTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssTableViewController.h; sourceTree = "<group>"; };
+		1A32D6FA167316CE00F77EF8 /* RssTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssTableViewController.m; sourceTree = "<group>"; };
+		1A9F3E1D16D10960000907FD /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		1A9F3E1E16D10960000907FD /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		1A9F3E1F16D10960000907FD /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		1A9F3E2016D10960000907FD /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		1A9F3E2116D10960000907FD /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		1A9F3E2216D10960000907FD /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		1A9F3E2316D10960000907FD /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		1A9F3E2416D10960000907FD /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		1A9F3E2516D10960000907FD /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		1A9F3E2616D10960000907FD /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		1A9F3E2716D10960000907FD /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		1A9F3E6016D11A2A000907FD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		1A9F3E6216D11A76000907FD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1A9F3E6416D11AC4000907FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		1A9F3E6816D11B5D000907FD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1A32D6D216730CBB00F77EF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A04B4C316DB131500C2ECAE /* AdSupport.framework in Frameworks */,
+				1A9F3E6916D11B5D000907FD /* AudioToolbox.framework in Frameworks */,
+				1A9F3E6516D11AC4000907FD /* MessageUI.framework in Frameworks */,
+				1A9F3E6316D11A76000907FD /* SystemConfiguration.framework in Frameworks */,
+				1A9F3E6116D11A2A000907FD /* StoreKit.framework in Frameworks */,
+				1A32D6DA16730CBB00F77EF8 /* UIKit.framework in Frameworks */,
+				1A32D6DC16730CBB00F77EF8 /* Foundation.framework in Frameworks */,
+				1A32D6DE16730CBB00F77EF8 /* CoreGraphics.framework in Frameworks */,
+				1A9F3E5716D10960000907FD /* libGoogleAdMobAds.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A05460416840A1D002D7017 /* DataXMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				1A05460616840A5E002D7017 /* RssXMLParser.h */,
+				1A05460716840A5E002D7017 /* RssXMLParser.m */,
+			);
+			name = DataXMLParser;
+			sourceTree = "<group>";
+		};
+		1A0A15C9167C6729001DDE67 /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				1A0A15CB167C69DA001DDE67 /* RssHttpController.h */,
+				1A0A15CC167C69DA001DDE67 /* RssHttpController.m */,
+			);
+			name = DataController;
+			sourceTree = "<group>";
+		};
+		1A32D6CA16730CBB00F77EF8 = {
+			isa = PBXGroup;
+			children = (
+				1A04B4C216DB131500C2ECAE /* AdSupport.framework */,
+				1A9F3E6816D11B5D000907FD /* AudioToolbox.framework */,
+				1A9F3E6416D11AC4000907FD /* MessageUI.framework */,
+				1A9F3E6216D11A76000907FD /* SystemConfiguration.framework */,
+				1A9F3E6016D11A2A000907FD /* StoreKit.framework */,
+				1A32D6DF16730CBB00F77EF8 /* iPhoneRssReader */,
+				1A32D6D816730CBB00F77EF8 /* Frameworks */,
+				1A32D6D616730CBB00F77EF8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1A32D6D616730CBB00F77EF8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A32D6D516730CBB00F77EF8 /* iPhoneRssReader.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1A32D6D816730CBB00F77EF8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A32D6D916730CBB00F77EF8 /* UIKit.framework */,
+				1A32D6DB16730CBB00F77EF8 /* Foundation.framework */,
+				1A32D6DD16730CBB00F77EF8 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1A32D6DF16730CBB00F77EF8 /* iPhoneRssReader */ = {
+			isa = PBXGroup;
+			children = (
+				1A9F3DC116D10960000907FD /* GoogleAdMobAdsSdkiOS-6.3.0 */,
+				1A05460416840A1D002D7017 /* DataXMLParser */,
+				1A0A15C9167C6729001DDE67 /* DataController */,
+				1A32D6E816730CBB00F77EF8 /* AppDelegate.h */,
+				1A32D6E916730CBB00F77EF8 /* AppDelegate.m */,
+				1A32D6EB16730CBB00F77EF8 /* MainStoryboard.storyboard */,
+				1A32D6F9167316CE00F77EF8 /* RssTableViewController.h */,
+				1A32D6FA167316CE00F77EF8 /* RssTableViewController.m */,
+				1A32D6E016730CBB00F77EF8 /* Supporting Files */,
+			);
+			path = iPhoneRssReader;
+			sourceTree = "<group>";
+		};
+		1A32D6E016730CBB00F77EF8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1A32D6E116730CBB00F77EF8 /* iPhoneRssReader-Info.plist */,
+				1A32D6E216730CBB00F77EF8 /* InfoPlist.strings */,
+				1A32D6E516730CBB00F77EF8 /* main.m */,
+				1A32D6E716730CBB00F77EF8 /* iPhoneRssReader-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1A9F3DC116D10960000907FD /* GoogleAdMobAdsSdkiOS-6.3.0 */ = {
+			isa = PBXGroup;
+			children = (
+				1A9F3E1D16D10960000907FD /* GADAdMobExtras.h */,
+				1A9F3E1E16D10960000907FD /* GADAdNetworkExtras.h */,
+				1A9F3E1F16D10960000907FD /* GADAdSize.h */,
+				1A9F3E2016D10960000907FD /* GADBannerView.h */,
+				1A9F3E2116D10960000907FD /* GADBannerViewDelegate.h */,
+				1A9F3E2216D10960000907FD /* GADInterstitial.h */,
+				1A9F3E2316D10960000907FD /* GADInterstitialDelegate.h */,
+				1A9F3E2416D10960000907FD /* GADRequest.h */,
+				1A9F3E2516D10960000907FD /* GADRequestError.h */,
+				1A9F3E2616D10960000907FD /* libGoogleAdMobAds.a */,
+				1A9F3E2716D10960000907FD /* README.txt */,
+			);
+			path = "GoogleAdMobAdsSdkiOS-6.3.0";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1A32D6D416730CBB00F77EF8 /* iPhoneRssReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A32D6F316730CBB00F77EF8 /* Build configuration list for PBXNativeTarget "iPhoneRssReader" */;
+			buildPhases = (
+				1A32D6D116730CBB00F77EF8 /* Sources */,
+				1A32D6D216730CBB00F77EF8 /* Frameworks */,
+				1A32D6D316730CBB00F77EF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iPhoneRssReader;
+			productName = iPhoneRssReader;
+			productReference = 1A32D6D516730CBB00F77EF8 /* iPhoneRssReader.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1A32D6CC16730CBB00F77EF8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 1A32D6CF16730CBB00F77EF8 /* Build configuration list for PBXProject "iPhoneRssReader" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1A32D6CA16730CBB00F77EF8;
+			productRefGroup = 1A32D6D616730CBB00F77EF8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1A32D6D416730CBB00F77EF8 /* iPhoneRssReader */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1A32D6D316730CBB00F77EF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A32D6E416730CBB00F77EF8 /* InfoPlist.strings in Resources */,
+				1A32D6ED16730CBB00F77EF8 /* MainStoryboard.storyboard in Resources */,
+				1A9F3E5816D10960000907FD /* README.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1A32D6D116730CBB00F77EF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A32D6E616730CBB00F77EF8 /* main.m in Sources */,
+				1A32D6EA16730CBB00F77EF8 /* AppDelegate.m in Sources */,
+				1A32D6FB167316CE00F77EF8 /* RssTableViewController.m in Sources */,
+				1A0A15CD167C69DA001DDE67 /* RssHttpController.m in Sources */,
+				1A05460816840A5E002D7017 /* RssXMLParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1A32D6E216730CBB00F77EF8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1A32D6E316730CBB00F77EF8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1A32D6EB16730CBB00F77EF8 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1A32D6EC16730CBB00F77EF8 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1A32D6F116730CBB00F77EF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1A32D6F216730CBB00F77EF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1A32D6F416730CBB00F77EF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iPhoneRssReader/iPhoneRssReader-Prefix.pch";
+				INFOPLIST_FILE = "iPhoneRssReader/iPhoneRssReader-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/iPhoneRssReader/GoogleAdMobAdsSdkiOS-6.3.0/Add-ons/GoogleAnalyticsiOS_2.0beta4/Library\"",
+					"\"$(SRCROOT)/iPhoneRssReader/GoogleAdMobAdsSdkiOS-6.3.0\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1A32D6F516730CBB00F77EF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iPhoneRssReader/iPhoneRssReader-Prefix.pch";
+				INFOPLIST_FILE = "iPhoneRssReader/iPhoneRssReader-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/iPhoneRssReader/GoogleAdMobAdsSdkiOS-6.3.0/Add-ons/GoogleAnalyticsiOS_2.0beta4/Library\"",
+					"\"$(SRCROOT)/iPhoneRssReader/GoogleAdMobAdsSdkiOS-6.3.0\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1A32D6CF16730CBB00F77EF8 /* Build configuration list for PBXProject "iPhoneRssReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A32D6F116730CBB00F77EF8 /* Debug */,
+				1A32D6F216730CBB00F77EF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A32D6F316730CBB00F77EF8 /* Build configuration list for PBXNativeTarget "iPhoneRssReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A32D6F416730CBB00F77EF8 /* Debug */,
+				1A32D6F516730CBB00F77EF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1A32D6CC16730CBB00F77EF8 /* Project object */;
+}

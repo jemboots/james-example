@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<set xmlns:android="http://schemas.android.com/apk/res/android" android:shareInterpolator="false">
- 	<rotate android:toDegrees="360"
-		android:duration="700" 
-		android:pivotX="205"
-		android:pivotY="180"
-		android:interpolator="@android:anim/linear_interpolator"/>
-</set>
