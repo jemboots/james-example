@@ -183,7 +183,6 @@ public class MainActivity extends Activity implements RefreshableInterface {
 					if (eventType == XmlPullParser.START_DOCUMENT) {
 
 					} else if (eventType == XmlPullParser.START_TAG) {
-						Log.w("warming", xpp.getName());
 						if (xpp.getName().equals("item")) {
 							pdData = new PostData();
 							currentTag = RSSXMLTag.IGNORETAG;

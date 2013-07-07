@@ -3,14 +3,14 @@ package com.jms.rssreader;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 public class PostViewActivity extends Activity {
 
@@ -25,7 +25,11 @@ public class PostViewActivity extends Activity {
 		this.setContentView(R.layout.postview);
 		Bundle bundle = this.getIntent().getExtras();
 		String postContent = bundle.getString("content");
-
+		//webview bug, need to convert this special character
+		postContent = postContent.replace("%", "%25");
+		postContent = postContent.replace("'", "%27");
+		postContent = postContent.replace("#", "%23");
+		
 		webView = (WebView) this.findViewById(R.id.webview);
 		webView.loadData(postContent, "text/html; charset=utf-8", "utf-8");
 
