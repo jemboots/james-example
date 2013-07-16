@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,14 +20,17 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -145,6 +149,26 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.actionAbout:
+			String appString = null;
+			try {
+				appString = this.getPackageManager().getPackageInfo(
+						this.getPackageName(), 0).versionName;
+				appString = "JMS Rss Reader Version " + appString;
+			} catch (NameNotFoundException e) {
+				Toast.makeText(this, "Get Version Name Error", Toast.LENGTH_SHORT).show();
+			}
+			Toast.makeText(this, appString, Toast.LENGTH_SHORT).show();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
 	private class RssDataController extends
 			AsyncTask<String, Integer, ArrayList<PostData>> {
 		private RSSXMLTag currentTag;
@@ -155,12 +179,15 @@ public class MainActivity extends Activity implements RefreshableInterface {
 			String urlStr = params[0];
 			InputStream is = null;
 			ArrayList<PostData> postDataList = new ArrayList<PostData>();
+
+			URL url;
 			try {
-				URL url = new URL(urlStr);
+				url = new URL(urlStr);
+
 				HttpURLConnection connection = (HttpURLConnection) url
 						.openConnection();
-				connection.setReadTimeout(10 * 1000);
-				connection.setConnectTimeout(10 * 1000);
+				//connection.setReadTimeout(10 * 1000);
+				//connection.setConnectTimeout(10 * 1000);
 				connection.setRequestMethod("GET");
 				connection.setDoInput(true);
 				connection.connect();
@@ -266,21 +293,42 @@ public class MainActivity extends Activity implements RefreshableInterface {
 
 					eventType = xpp.next();
 				}
-				Log.v("tst", String.valueOf((postDataList.size())));
+				Log.v("tst", String.valueOf(postDataList.size()));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
+				// new URL exception
+				googleTracker.sendEvent("debug", "MalformedURLException",
+						e.toString(), null);
 				e.printStackTrace();
-			} catch (IOException e) {
+			} catch (ProtocolException e) {
 				// TODO Auto-generated catch block
+				// setRequestMethod exception
+				googleTracker.sendEvent("debug", "ProtocolException",
+						e.toString(), null);
 				e.printStackTrace();
 			} catch (XmlPullParserException e) {
 				// TODO Auto-generated catch block
+				// XmlPullParserFactory.newInstance()
+				googleTracker.sendEvent("debug", "XmlPullParserException",
+						e.toString(), null);
 				e.printStackTrace();
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
+				// dateFormat.parse(pdData.postDate);
+				googleTracker.sendEvent("debug", "ParseException",
+						e.toString(), null);
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				// openConnection()
+				// connection.getResponseCode()
+				// connection.connect();
+				// connection.getInputStream()
+				// xpp.next()
+				googleTracker.sendEvent("debug", "IOException", e.toString(),
+						null);
 				e.printStackTrace();
 			}
-
 			return postDataList;
 		}
 
