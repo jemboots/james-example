@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Locale;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -205,7 +206,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 				int eventType = xpp.getEventType();
 				PostData pdData = null;
 				SimpleDateFormat dateFormat = new SimpleDateFormat(
-						"EEE, DD MMM yyyy HH:mm:ss");
+						"EEE, DD MMM yyyy HH:mm:ss", Locale.US);
 				while (eventType != XmlPullParser.END_DOCUMENT) {
 					if (eventType == XmlPullParser.START_DOCUMENT) {
 
@@ -237,7 +238,6 @@ public class MainActivity extends Activity implements RefreshableInterface {
 					} else if (eventType == XmlPullParser.TEXT) {
 						String content = xpp.getText();
 						content = content.trim();
-						Log.d("debug", content);
 						if (pdData != null) {
 							switch (currentTag) {
 							case TITLE:
