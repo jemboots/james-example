@@ -12,8 +12,7 @@
 @interface RssTableViewController : UITableViewController <NSURLConnectionDataDelegate, XMLParserDelegate>
 {
     NSMutableData *httpReceivedData;
-    NSMutableDictionary *articlesList;
+    NSMutableArray *articlesList;
 }
 
-@property (retain, nonatomic) NSMutableArray *rssData;
 @end

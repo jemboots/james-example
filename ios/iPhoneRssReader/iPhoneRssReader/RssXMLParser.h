@@ -13,11 +13,11 @@
 @interface RssXMLParser : NSObject <NSXMLParserDelegate>
 {
     //for switch and case
-    enum nodes {title = 1, postlink = 2, pubDate = 3, invalidNode = -1};
+    enum nodes {title = 1, postlink = 2, pubDate = 3, content = 4, invalidNode = -1};
     enum nodes aNode;
 
     //for holding the parsing result
-    NSMutableDictionary *articles;
+    NSMutableArray *articles;
     
     //for matching the article title and link
     NSString *lastTitle;

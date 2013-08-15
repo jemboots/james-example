@@ -10,9 +10,10 @@
 #import "RssHttpController.h"
 #import "RssXMLParser.h"
 #import "GADBannerView.h"
+#import "RssData.h"
+#import "RssViewController.h"
 
 @implementation RssTableViewController
-@synthesize rssData;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,7 +38,7 @@
 {
     [super viewDidLoad];
     
-    rssData = [NSMutableArray array];
+    articlesList = [NSMutableArray array];
     
     RssHttpController *httpController = [[RssHttpController alloc] init];
     [httpController getRSSContent:[[NSNumber numberWithInt:1] stringValue] rssurl:@"http://jmsliu.com/feed?paged=" delegate:self];
@@ -86,7 +87,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return rssData.count;
+    return articlesList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -99,7 +100,8 @@
     }
     
     // Configure the cell...
-    [cell.textLabel setText:[rssData objectAtIndex:indexPath.row]];
+    RssData *rssData = [articlesList objectAtIndex:indexPath.row];
+    [cell.textLabel setText:rssData.title];
     [cell.imageView setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.axialis.com/tutorials/iw/star.jpg"]]]];
     
     return cell;
@@ -249,14 +251,19 @@
 {
     [parser setDelegate:nil];
     
-    articlesList = (NSMutableDictionary *)data;
-    NSArray *keyList = [articlesList allKeys];
-    
-    for (NSString *title in keyList)
-    {
-        [rssData addObject:title];
-    }
-    
+    articlesList = (NSMutableArray *)data;
     [self.tableView reloadData];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier] isEqualToString:@"showRssSegue"])
+    {
+        int index = [self.tableView indexPathForSelectedRow].row;
+        RssData *data = [articlesList objectAtIndex:index];
+        RssViewController *rc = [segue destinationViewController];
+        [rc setRssData:data];
+        [rc.navigationItem setTitle:data.title];
+    }
 }
 @end

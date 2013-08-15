@@ -24,6 +24,8 @@
 		1A9F3E6316D11A76000907FD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6216D11A76000907FD /* SystemConfiguration.framework */; };
 		1A9F3E6516D11AC4000907FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6416D11AC4000907FD /* MessageUI.framework */; };
 		1A9F3E6916D11B5D000907FD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A9F3E6816D11B5D000907FD /* AudioToolbox.framework */; };
+		1AA58C5217BCD29300F585E5 /* RssData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA58C5117BCD29300F585E5 /* RssData.m */; };
+		1AA58C5617BCEAED00F585E5 /* RssViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA58C5517BCEAED00F585E5 /* RssViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,10 @@
 		1A9F3E6216D11A76000907FD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1A9F3E6416D11AC4000907FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1A9F3E6816D11B5D000907FD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		1AA58C5017BCD29300F585E5 /* RssData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssData.h; path = ../../../../../../Users/james/Documents/eclipse_workspace/iPhoneRssReader/iPhoneRssReader/RssData.h; sourceTree = "<group>"; };
+		1AA58C5117BCD29300F585E5 /* RssData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssData.m; path = ../../../../../../Users/james/Documents/eclipse_workspace/iPhoneRssReader/iPhoneRssReader/RssData.m; sourceTree = "<group>"; };
+		1AA58C5417BCEAED00F585E5 /* RssViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssViewController.h; path = ../../../../../../Users/james/Documents/eclipse_workspace/iPhoneRssReader/iPhoneRssReader/RssViewController.h; sourceTree = "<group>"; };
+		1AA58C5517BCEAED00F585E5 /* RssViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssViewController.m; path = ../../../../../../Users/james/Documents/eclipse_workspace/iPhoneRssReader/iPhoneRssReader/RssViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +149,11 @@
 				1A32D6EB16730CBB00F77EF8 /* MainStoryboard.storyboard */,
 				1A32D6F9167316CE00F77EF8 /* RssTableViewController.h */,
 				1A32D6FA167316CE00F77EF8 /* RssTableViewController.m */,
+				1AA58C5417BCEAED00F585E5 /* RssViewController.h */,
+				1AA58C5517BCEAED00F585E5 /* RssViewController.m */,
 				1A32D6E016730CBB00F77EF8 /* Supporting Files */,
+				1AA58C5017BCD29300F585E5 /* RssData.h */,
+				1AA58C5117BCD29300F585E5 /* RssData.m */,
 			);
 			path = iPhoneRssReader;
 			sourceTree = "<group>";
@@ -245,6 +255,8 @@
 				1A32D6FB167316CE00F77EF8 /* RssTableViewController.m in Sources */,
 				1A0A15CD167C69DA001DDE67 /* RssHttpController.m in Sources */,
 				1A05460816840A5E002D7017 /* RssXMLParser.m in Sources */,
+				1AA58C5217BCD29300F585E5 /* RssData.m in Sources */,
+				1AA58C5617BCEAED00F585E5 /* RssViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +333,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iPhoneRssReader/iPhoneRssReader-Prefix.pch";
 				INFOPLIST_FILE = "iPhoneRssReader/iPhoneRssReader-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/iPhoneRssReader/GoogleAdMobAdsSdkiOS-6.3.0/Add-ons/GoogleAnalyticsiOS_2.0beta4/Library\"",
@@ -339,7 +351,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iPhoneRssReader/iPhoneRssReader-Prefix.pch";
 				INFOPLIST_FILE = "iPhoneRssReader/iPhoneRssReader-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/iPhoneRssReader/GoogleAdMobAdsSdkiOS-6.3.0/Add-ons/GoogleAnalyticsiOS_2.0beta4/Library\"",

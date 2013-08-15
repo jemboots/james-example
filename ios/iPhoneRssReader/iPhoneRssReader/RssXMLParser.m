@@ -7,12 +7,14 @@
 //
 
 #import "RssXMLParser.h"
+#import "RssData.h"
 
 @implementation RssXMLParser
 @synthesize delegate;
 
 - (void) parseRssXML:(NSData *)xmldata
 {
+    articles = [[NSMutableArray alloc] init];
     NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:xmldata];
     [xmlParser setDelegate:self];
     [xmlParser setShouldResolveExternalEntities:NO];
@@ -24,10 +26,8 @@
     if([elementName isEqualToString:@"item"])
     {
         aNode = invalidNode;
-        if(articles == nil)
-        {
-            articles = [[NSMutableDictionary alloc] init];
-        }
+        RssData *rssdata = [[RssData alloc] init];
+        [articles addObject:rssdata];
     }
     else if([elementName isEqualToString:@"title"])
     {
@@ -37,11 +37,20 @@
     {
         aNode = postlink;
     }
+    else if([elementName isEqualToString:@"content:encoded"])
+    {
+        aNode = content;
+    }
+    else if([elementName isEqualToString:@"pubDate"])
+    {
+        aNode = pubDate;
+    }
     else
     {
         aNode = invalidNode;
     }
 }
+
 
 - (void) parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
@@ -51,6 +60,7 @@
     }
 }
 
+
 - (void) parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
     switch (aNode) {
@@ -58,9 +68,17 @@
         {
             string = [string stringByTrimmingCharactersInSet:[NSCharacterSet nonBaseCharacterSet]];
             string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            if(string.length != 0)
+            if([string length] != 0)
             {
-                lastTitle = string;
+                RssData *rss = [articles lastObject];
+                if( rss.title )
+                {
+                    [rss setTitle:[NSString stringWithFormat:@"%@%@", rss.title, string]]; 
+                }
+                else
+                {
+                    [rss setTitle:string]; 
+                }
             }
         }
         
@@ -69,15 +87,49 @@
         {
             string = [string stringByTrimmingCharactersInSet:[NSCharacterSet nonBaseCharacterSet]];
             string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            if(string.length != 0 && articles != nil)
+            if([string length] != 0)
             {
-                [articles setObject:string forKey:lastTitle];
+                RssData *rss = [articles lastObject];
+                if( rss.link )
+                {
+                    [rss setLink:[NSString stringWithFormat:@"%@%@", rss.link, string]]; 
+                }
+                else
+                {
+                    [rss setLink:string]; 
+                }
             }
         }
         break;
-            
+        case pubDate:
+        {
+            string = [string stringByTrimmingCharactersInSet:[NSCharacterSet nonBaseCharacterSet]];
+            string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            if([string length] != 0)
+            {
+                RssData *rss = [articles lastObject];
+                if( rss.publishDate )
+                {
+                    [rss setPublishDate:[NSString stringWithFormat:@"%@%@", rss.publishDate, string]]; 
+                }
+                else
+                {
+                    [rss setPublishDate:string]; 
+                }
+            }
+        }
+            break;
         default:
             break;
+    }
+}
+
+-(void) parser:(NSXMLParser *)parser foundCDATA:(NSData *)CDATABlock
+{
+    if (aNode == content)
+    {
+        RssData *rss = [articles lastObject];
+        rss.content = [[NSString alloc] initWithData:CDATABlock encoding:NSUTF8StringEncoding];
     }
 }
 
