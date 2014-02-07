@@ -32,6 +32,7 @@ public class PostViewActivity extends Activity {
 		
 		webView = (WebView) this.findViewById(R.id.webview);
 		webView.loadData(postContent, "text/html; charset=utf-8", "utf-8");
+		//webView.loadUrl(bundle.getString("link")); //for website don't provide content in rss, using this to load the website link
 
 		// google analytics
 		adView = new AdView(this, AdSize.SMART_BANNER, "a151cfacdc9a91e");

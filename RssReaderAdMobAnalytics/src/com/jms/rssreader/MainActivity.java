@@ -49,7 +49,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 	}
 
 	private ArrayList<PostData> listData;
-	private String urlString = "http://jmsliu.com/feed?paged=";
+	private String urlString = "http://www.trentino5stelle.it/feed/";
 	private RefreshableListView postListView;
 	private PostItemAdapter postAdapter;
 	private int pagnation = 1; // start from 1
@@ -132,6 +132,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 
 			Bundle postInfo = new Bundle();
 			postInfo.putString("content", data.postContent);
+			postInfo.putString("link", data.postLink);
 
 			if (postviewIntent == null) {
 				postviewIntent = new Intent(MainActivity.this,
@@ -374,7 +375,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		if (!isLoading) {
 			isRefreshLoading = true;
 			isLoading = true;
-			new RssDataController().execute(urlString + 1);
+			new RssDataController().execute(urlString);
 		} else {
 			postListView.onRefreshComplete();
 		}
@@ -386,7 +387,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		if (!isLoading) {
 			isRefreshLoading = false;
 			isLoading = true;
-			new RssDataController().execute(urlString + (++pagnation));
+			new RssDataController().execute(urlString);
 		} else {
 			postListView.onLoadingMoreComplete();
 		}
