@@ -1,14 +1,25 @@
 package com.jms.wallpapergridviewexample;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashSet;
 import java.util.Set;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -27,6 +38,7 @@ public class MainActivity extends Activity {
 			R.drawable.thumb7, R.drawable.thumb8
 	};
 	
+	private ProgressDialog downloadProgressDialog;
 	private AdView adView;
 	
 	@Override
@@ -34,6 +46,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
+		// admob
 		adView = new AdView(this, AdSize.SMART_BANNER, "a152f84b0f4f9ed");
 		LinearLayout adContainer = (LinearLayout)this.findViewById(R.id.adsContainer);
 		adContainer.addView(adView);
@@ -48,8 +61,85 @@ public class MainActivity extends Activity {
 		adRequest.addTestDevice("1B91DF7A13E674202332C251084C3ADA");
 		adView.loadAd(adRequest);
 		
+		//grid view
 		GridView gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setAdapter(new ImageAdapter(this));
+		gridView.setOnItemClickListener(gridViewImageClickListener);
+		
+		//progress bar
+		downloadProgressDialog = new ProgressDialog(MainActivity.this);
+		downloadProgressDialog.setTitle("Downloading Wallpaper");
+		downloadProgressDialog.setMessage("Downloading in progress...");
+		downloadProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		downloadProgressDialog.setProgress(0);
+		//downloadProgressDialog.setMax(20);
+		//downloadProgressDialog.show();
+	}
+	
+	private OnItemClickListener gridViewImageClickListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			// TODO Auto-generated method stub
+			downloadProgressDialog.show();
+			new DownloadWallpaperTask().execute("http://www.hdwallpapers.org/wallpapers/white-winter-snow-leopard-1920x1200.jpg");
+		}
+	};
+	
+	private class DownloadWallpaperTask extends AsyncTask<String, Integer, String> {
+
+		@Override
+		protected String doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				URL wallpaperURL = new URL(params[0]);
+				URLConnection connection = wallpaperURL.openConnection();
+				
+				//get file length
+				int filesize = connection.getContentLength();
+				if(filesize < 0) {
+					downloadProgressDialog.setMax(1000000);
+				} else {
+					downloadProgressDialog.setMax(filesize);
+				}
+				
+				InputStream inputStream = new BufferedInputStream(wallpaperURL.openStream(), 10240);
+				String appName = getResources().getString(R.string.app_name);
+				OutputStream outputStream = openFileOutput(appName, Context.MODE_PRIVATE);
+				byte buffer[] = new byte[1024];
+				int dataSize;
+				int loadedSize = 0;
+	            while ((dataSize = inputStream.read(buffer)) != -1) {
+	            	loadedSize += dataSize;
+	                //total += count;
+	                // publishing the progress....
+	                // After this onProgressUpdate will be called
+	                //publishProgress(""+(int)((total*100)/lenghtOfFile));
+	            	publishProgress(loadedSize);
+	                // writing data to file
+	            	outputStream.write(buffer, 0, dataSize);
+	            }
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			
+			
+			return params[0];
+		}
+		
+		
+		protected void onProgressUpdate(Integer... progress) {
+			downloadProgressDialog.setProgress(progress[0]);
+		}
+		
+		protected void onPostExecute(String result) {
+			downloadProgressDialog.hide();
+		}
 	}
 
 	@Override
