@@ -13,8 +13,13 @@ import java.util.Set;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +45,7 @@ public class MainActivity extends Activity {
 	
 	private ProgressDialog downloadProgressDialog;
 	private AdView adView;
+	private Intent previewPanelIntent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +98,10 @@ public class MainActivity extends Activity {
 		@Override
 		protected String doInBackground(String... params) {
 			// TODO Auto-generated method stub
+			String wallpaperURLStr = params[0];
+			String localPath = Integer.toString(wallpaperURLStr.hashCode());
 			try {
-				URL wallpaperURL = new URL(params[0]);
+				URL wallpaperURL = new URL(wallpaperURLStr);
 				URLConnection connection = wallpaperURL.openConnection();
 				
 				//get file length
@@ -106,18 +114,13 @@ public class MainActivity extends Activity {
 				
 				InputStream inputStream = new BufferedInputStream(wallpaperURL.openStream(), 10240);
 				String appName = getResources().getString(R.string.app_name);
-				OutputStream outputStream = openFileOutput(appName, Context.MODE_PRIVATE);
+				OutputStream outputStream = openFileOutput(localPath, Context.MODE_PRIVATE);
 				byte buffer[] = new byte[1024];
 				int dataSize;
 				int loadedSize = 0;
 	            while ((dataSize = inputStream.read(buffer)) != -1) {
 	            	loadedSize += dataSize;
-	                //total += count;
-	                // publishing the progress....
-	                // After this onProgressUpdate will be called
-	                //publishProgress(""+(int)((total*100)/lenghtOfFile));
 	            	publishProgress(loadedSize);
-	                // writing data to file
 	            	outputStream.write(buffer, 0, dataSize);
 	            }
 			} catch (MalformedURLException e) {
@@ -126,10 +129,8 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 			
-			
-			return params[0];
+			return localPath;
 		}
 		
 		
@@ -139,6 +140,18 @@ public class MainActivity extends Activity {
 		
 		protected void onPostExecute(String result) {
 			downloadProgressDialog.hide();
+			
+			//open preview activity
+			Bundle postInfo = new Bundle();
+			postInfo.putString("localpath", result);
+
+			if (previewPanelIntent == null) {
+				previewPanelIntent = new Intent(MainActivity.this,
+						PreviewPanel.class);
+			}
+
+			previewPanelIntent.putExtras(postInfo);
+			startActivity(previewPanelIntent);
 		}
 	}
 
