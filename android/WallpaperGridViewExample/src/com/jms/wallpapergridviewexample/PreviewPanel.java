@@ -3,6 +3,12 @@ package com.jms.wallpapergridviewexample;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -11,15 +17,34 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class PreviewPanel extends Activity {
-
+	private AdView adView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
 		this.setContentView(R.layout.previewpanel);
+		
+		//admob
+		adView = new AdView(this, AdSize.SMART_BANNER, "a152f84b0f4f9ed");
+		LinearLayout adContainer = (LinearLayout)this.findViewById(R.id.adsContainerInPreview);
+		adContainer.addView(adView);
+		
+		AdRequest adRequest = new AdRequest();
+		Set<String> keywordsSet = new HashSet<String>();
+		keywordsSet.add("game");
+		keywordsSet.add("dating");
+		keywordsSet.add("money");
+		keywordsSet.add("girl");
+		adRequest.addKeywords(keywordsSet);
+		adRequest.addTestDevice("1B91DF7A13E674202332C251084C3ADA");
+		adView.loadAd(adRequest);
+		
+		
 		Bundle bundle = this.getIntent().getExtras();
 		String wallpaperFilePath = bundle.getString("localpath");
 

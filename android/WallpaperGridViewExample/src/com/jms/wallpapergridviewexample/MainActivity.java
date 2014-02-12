@@ -14,12 +14,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +36,24 @@ public class MainActivity extends Activity {
 			R.drawable.thumb1, R.drawable.thumb2,
 			R.drawable.thumb3, R.drawable.thumb4,
 			R.drawable.thumb5, R.drawable.thumb6,
-			R.drawable.thumb7, R.drawable.thumb8
+			R.drawable.thumb7, R.drawable.thumb8,
+			R.drawable.thumb9, R.drawable.thumb10,
+			R.drawable.thumb11, R.drawable.thumb12
 	};
+	
+	private String[] imageURLArray = {
+			"http://farm8.staticflickr.com/7315/9046944633_881f24c4fa.jpg",
+			"http://farm4.staticflickr.com/3777/9049174610_bf51be8a07.jpg",
+			"http://farm8.staticflickr.com/7324/9046946887_d96a28376c.jpg",
+			"http://farm3.staticflickr.com/2828/9046946983_923887b17d.jpg",
+			"http://farm4.staticflickr.com/3810/9046947167_3a51fffa0b.jpg",
+			"http://farm4.staticflickr.com/3773/9049175264_b0ea30fa75.jpg",
+			"http://farm4.staticflickr.com/3781/9046945893_f27db35c7e.jpg",
+			"http://farm6.staticflickr.com/5344/9049177018_4621cb63db.jpg",
+			"http://farm8.staticflickr.com/7307/9046947621_67e0394f7b.jpg",
+			"http://farm6.staticflickr.com/5457/9046948185_3be564ac10.jpg",
+			"http://farm4.staticflickr.com/3752/9046946459_a41fbfe614.jpg",
+			"http://farm8.staticflickr.com/7403/9046946715_85f13b91e5.jpg"};
 	
 	private ProgressDialog downloadProgressDialog;
 	private AdView adView;
@@ -88,8 +100,10 @@ public class MainActivity extends Activity {
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			// TODO Auto-generated method stub
+			downloadProgressDialog.setProgress(0);
+			downloadProgressDialog.setMax(100);
 			downloadProgressDialog.show();
-			new DownloadWallpaperTask().execute("http://www.hdwallpapers.org/wallpapers/white-winter-snow-leopard-1920x1200.jpg");
+			new DownloadWallpaperTask().execute(imageURLArray[arg2]);
 		}
 	};
 	
@@ -113,7 +127,6 @@ public class MainActivity extends Activity {
 				}
 				
 				InputStream inputStream = new BufferedInputStream(wallpaperURL.openStream(), 10240);
-				String appName = getResources().getString(R.string.app_name);
 				OutputStream outputStream = openFileOutput(localPath, Context.MODE_PRIVATE);
 				byte buffer[] = new byte[1024];
 				int dataSize;
@@ -194,7 +207,7 @@ public class MainActivity extends Activity {
 			
 			if(convertView == null) {
 				imageView = new ImageView(mContext);
-				imageView.setLayoutParams(new GridView.LayoutParams(216, 162));
+				imageView.setLayoutParams(new GridView.LayoutParams(150, 150));
 				imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			} else {
 				imageView = (ImageView) convertView;
