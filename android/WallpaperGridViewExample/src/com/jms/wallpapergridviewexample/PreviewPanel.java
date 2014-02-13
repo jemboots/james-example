@@ -29,7 +29,6 @@ public class PreviewPanel extends Activity {
 		
 		this.setContentView(R.layout.previewpanel);
 		
-		//admob
 		adView = new AdView(this, AdSize.SMART_BANNER, "a152f84b0f4f9ed");
 		LinearLayout adContainer = (LinearLayout)this.findViewById(R.id.adsContainerInPreview);
 		adContainer.addView(adView);
@@ -91,9 +90,6 @@ public class PreviewPanel extends Activity {
 			ImageView imageView = (ImageView)this.findViewById(R.id.preview);
 			imageView.setImageBitmap(wallpaperBitmap);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
