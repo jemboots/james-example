@@ -1,14 +1,11 @@
 package com.jms.wallpapergridviewexample;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -18,6 +15,10 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 public class PreviewPanel extends Activity {
 	private AdView adView;
@@ -67,7 +68,9 @@ public class PreviewPanel extends Activity {
 		//read file from local
 		InputStream fileInputStream;
 		try {
-			fileInputStream = openFileInput(wallpaperFilePath);
+			File cacheDir = GlobalClass.instance().getCacheFolder(this);
+			File cacheFile = new File(cacheDir, wallpaperFilePath);
+			fileInputStream = new FileInputStream(cacheFile);
 			BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
 			bitmapOptions.inJustDecodeBounds = true;
 			BitmapFactory.decodeStream(fileInputStream, null, bitmapOptions);
@@ -83,7 +86,7 @@ public class PreviewPanel extends Activity {
 			}
 			
 			//decode the image with necessary size
-			fileInputStream = openFileInput(wallpaperFilePath); //reset the file input
+			fileInputStream = new FileInputStream(cacheFile);
 			bitmapOptions.inSampleSize = scale;
 			bitmapOptions.inJustDecodeBounds = false;
 			Bitmap wallpaperBitmap = BitmapFactory.decodeStream(fileInputStream, null, bitmapOptions);

@@ -1,9 +1,10 @@
 package com.jms.wallpapergridviewexample;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -113,7 +114,7 @@ public class MainActivity extends Activity {
 		protected String doInBackground(String... params) {
 			// TODO Auto-generated method stub
 			String wallpaperURLStr = params[0];
-			String localPath = Integer.toString(wallpaperURLStr.hashCode());
+			String localFileName = Integer.toString(wallpaperURLStr.hashCode());
 			try {
 				URL wallpaperURL = new URL(wallpaperURLStr);
 				URLConnection connection = wallpaperURL.openConnection();
@@ -127,7 +128,10 @@ public class MainActivity extends Activity {
 				}
 				
 				InputStream inputStream = new BufferedInputStream(wallpaperURL.openStream(), 10240);
-				OutputStream outputStream = openFileOutput(localPath, Context.MODE_PRIVATE);
+				File cacheDir = GlobalClass.instance().getCacheFolder(MainActivity.this);
+				File cacheFile = new File(cacheDir, localFileName);
+				FileOutputStream outputStream = new FileOutputStream(cacheFile);
+				
 				byte buffer[] = new byte[1024];
 				int dataSize;
 				int loadedSize = 0;
@@ -136,6 +140,8 @@ public class MainActivity extends Activity {
 	            	publishProgress(loadedSize);
 	            	outputStream.write(buffer, 0, dataSize);
 	            }
+	            
+	            outputStream.close();
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -143,9 +149,8 @@ public class MainActivity extends Activity {
 				e.printStackTrace();
 			}
 			
-			return localPath;
+			return localFileName;
 		}
-		
 		
 		protected void onProgressUpdate(Integer... progress) {
 			downloadProgressDialog.setProgress(progress[0]);
