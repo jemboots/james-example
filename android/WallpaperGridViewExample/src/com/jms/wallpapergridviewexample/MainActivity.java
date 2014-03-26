@@ -91,8 +91,6 @@ public class MainActivity extends Activity {
 		downloadProgressDialog.setMessage("Downloading in progress...");
 		downloadProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		downloadProgressDialog.setProgress(0);
-		//downloadProgressDialog.setMax(20);
-		//downloadProgressDialog.show();
 	}
 	
 	private OnItemClickListener gridViewImageClickListener = new OnItemClickListener() {
@@ -115,33 +113,37 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated method stub
 			String wallpaperURLStr = params[0];
 			String localFileName = Integer.toString(wallpaperURLStr.hashCode());
+			
 			try {
-				URL wallpaperURL = new URL(wallpaperURLStr);
-				URLConnection connection = wallpaperURL.openConnection();
-				
-				//get file length
-				int filesize = connection.getContentLength();
-				if(filesize < 0) {
-					downloadProgressDialog.setMax(1000000);
-				} else {
-					downloadProgressDialog.setMax(filesize);
-				}
-				
-				InputStream inputStream = new BufferedInputStream(wallpaperURL.openStream(), 10240);
 				File cacheDir = GlobalClass.instance().getCacheFolder(MainActivity.this);
 				File cacheFile = new File(cacheDir, localFileName);
-				FileOutputStream outputStream = new FileOutputStream(cacheFile);
-				
-				byte buffer[] = new byte[1024];
-				int dataSize;
-				int loadedSize = 0;
-	            while ((dataSize = inputStream.read(buffer)) != -1) {
-	            	loadedSize += dataSize;
-	            	publishProgress(loadedSize);
-	            	outputStream.write(buffer, 0, dataSize);
-	            }
-	            
-	            outputStream.close();
+				if(!cacheFile.exists()) {
+					URL wallpaperURL = new URL(wallpaperURLStr);
+					URLConnection connection = wallpaperURL.openConnection();
+					
+					//get file length
+					int filesize = connection.getContentLength();
+					if(filesize < 0) {
+						downloadProgressDialog.setMax(1000000);
+					} else {
+						downloadProgressDialog.setMax(filesize);
+					}
+					
+					InputStream inputStream = new BufferedInputStream(wallpaperURL.openStream(), 10240);
+
+					FileOutputStream outputStream = new FileOutputStream(cacheFile);
+					
+					byte buffer[] = new byte[1024];
+					int dataSize;
+					int loadedSize = 0;
+		            while ((dataSize = inputStream.read(buffer)) != -1) {
+		            	loadedSize += dataSize;
+		            	publishProgress(loadedSize);
+		            	outputStream.write(buffer, 0, dataSize);
+		            }
+		            
+		            outputStream.close();
+				}
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -176,7 +178,7 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		//getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 

@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">WallpaperGridViewExample</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">More</string>
     <string name="hello_world">Hello world!</string>
 	<string name="previewImageView">Wallpaper Preview</string>
+	<string name="action_setwallpaper">Set Wallpaper</string>
+	<string name="back_to_Main">Back</string>
 </resources>
