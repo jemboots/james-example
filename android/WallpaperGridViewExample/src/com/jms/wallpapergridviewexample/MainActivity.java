@@ -39,7 +39,10 @@ public class MainActivity extends Activity {
 			R.drawable.thumb5, R.drawable.thumb6,
 			R.drawable.thumb7, R.drawable.thumb8,
 			R.drawable.thumb9, R.drawable.thumb10,
-			R.drawable.thumb11, R.drawable.thumb12
+			R.drawable.thumb11, R.drawable.thumb12,
+			R.drawable.thumb13, R.drawable.thumb14,
+			R.drawable.thumb15, R.drawable.thumb16,
+			R.drawable.thumb17, R.drawable.thumb18
 	};
 	
 	private String[] imageURLArray = {
@@ -54,7 +57,14 @@ public class MainActivity extends Activity {
 			"http://farm8.staticflickr.com/7307/9046947621_67e0394f7b.jpg",
 			"http://farm6.staticflickr.com/5457/9046948185_3be564ac10.jpg",
 			"http://farm4.staticflickr.com/3752/9046946459_a41fbfe614.jpg",
-			"http://farm8.staticflickr.com/7403/9046946715_85f13b91e5.jpg"};
+			"http://farm8.staticflickr.com/7403/9046946715_85f13b91e5.jpg",
+			"http://farm8.staticflickr.com/7113/13418149285_2fbb65b16e_b.jpg",
+			"http://farm3.staticflickr.com/2900/13418266303_64cd7abf46_h.jpg",
+			"http://farm4.staticflickr.com/3766/13418516014_132cbe58a1_h.jpg",
+			"http://farm8.staticflickr.com/7273/13418516194_5f35821106_h.jpg",
+			"http://farm4.staticflickr.com/3721/13418148685_d4465746c9_h.jpg",
+			"http://farm8.staticflickr.com/7238/13418516894_b98cf789fc_h.jpg"
+			};
 	
 	private ProgressDialog downloadProgressDialog;
 	private AdView adView;
