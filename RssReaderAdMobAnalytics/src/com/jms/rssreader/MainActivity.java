@@ -49,7 +49,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 	}
 
 	private ArrayList<PostData> listData;
-	private String urlString = "http://www.trentino5stelle.it/feed/";
+	private String urlString = "http://jmsliu.com/feed?paged=";
 	private RefreshableListView postListView;
 	private PostItemAdapter postAdapter;
 	private int pagnation = 1; // start from 1
@@ -121,7 +121,14 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		postListView.onRefreshStart();
 		postListView.setOnItemClickListener(onItemClickListener);
 	}
-
+	
+	/**
+	 * ListView Item Onclick Handler
+	 * 
+	 * When user clicks on an item in LiveView, this function will be called.
+	 * It will switch to PostViewActivity with setting content and link in Bundle.
+	 * 
+	 */
 	private OnItemClickListener onItemClickListener = new OnItemClickListener() {
 
 		@Override
@@ -375,6 +382,19 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		if (!isLoading) {
 			isRefreshLoading = true;
 			isLoading = true;
+			
+			/*
+			 * Pagination: 
+			 * 
+			 * If your rss feed looks like: 
+			 * 
+			 * "http://jmsliu.com/feed?paged="
+			 * 
+			 * You can try follow code for pagination. 
+			 * 
+			 * new RssDataController().execute(urlString + 1);
+			 */
+			
 			new RssDataController().execute(urlString);
 		} else {
 			postListView.onRefreshComplete();
@@ -387,7 +407,20 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		if (!isLoading) {
 			isRefreshLoading = false;
 			isLoading = true;
-			new RssDataController().execute(urlString);
+			
+			/*
+			 * Pagination: 
+			 * 
+			 * If your rss feed source looks like "http://jmsliu.com/feed?paged=", 
+			 * you can try follow code for pagination:
+			 * 
+			 * new RssDataController().execute(urlString + (++pagnation));
+			 * 
+			 * Otherwise, please use this:
+			 * 
+			 * new RssDataController().execute(urlString);
+			 */
+			new RssDataController().execute(urlString + (++pagnation));
 		} else {
 			postListView.onLoadingMoreComplete();
 		}
