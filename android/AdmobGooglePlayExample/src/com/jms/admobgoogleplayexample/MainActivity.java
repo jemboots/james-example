@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -21,18 +21,13 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+		setContentView(R.layout.main);
 		
-		FrameLayout rootLayout = (FrameLayout) getWindow().getDecorView().findViewById(android.R.id.content);
+		LinearLayout rootLayout = (LinearLayout) findViewById(R.id.rootViewGroup);
 		adView = new AdView(this);
 		adView.setAdSize(AdSize.SMART_BANNER);
 		adView.setAdUnitId(unitid);
-		rootLayout.addView(adView);
+		rootLayout.addView(adView, 0);
 		
 		AdRequest adRequest = new AdRequest.Builder().build();
 		adView.loadAd(adRequest);
