@@ -2,3 +2,7 @@ c:\users\james\documents\visual studio 2010\Projects\PayPalExpressCheckoutCSharp
 c:\users\james\documents\visual studio 2010\Projects\PayPalExpressCheckoutCSharp\PayPalExpressCheckoutLib\bin\Debug\PayPalExpressCheckoutLib.pdb
 c:\users\james\documents\visual studio 2010\Projects\PayPalExpressCheckoutCSharp\PayPalExpressCheckoutLib\obj\Debug\PayPalExpressCheckoutLib.dll
 c:\users\james\documents\visual studio 2010\Projects\PayPalExpressCheckoutCSharp\PayPalExpressCheckoutLib\obj\Debug\PayPalExpressCheckoutLib.pdb
+E:\work resource\PayPalExpressCheckoutCSharp\PayPalExpressCheckoutLib\bin\Debug\PayPalExpressCheckoutLib.dll
+E:\work resource\PayPalExpressCheckoutCSharp\PayPalExpressCheckoutLib\bin\Debug\PayPalExpressCheckoutLib.pdb
+E:\work resource\PayPalExpressCheckoutCSharp\PayPalExpressCheckoutLib\obj\Debug\PayPalExpressCheckoutLib.dll
+E:\work resource\PayPalExpressCheckoutCSharp\PayPalExpressCheckoutLib\obj\Debug\PayPalExpressCheckoutLib.pdb

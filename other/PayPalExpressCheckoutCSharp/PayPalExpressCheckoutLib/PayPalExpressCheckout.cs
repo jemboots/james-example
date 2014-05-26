@@ -54,7 +54,7 @@ namespace PayPalExpressCheckoutLib
             public string qty {get;set;}
         }
 
-        public NameValueCollection SetExpressCheckoutDG(string paymentAmount, string currencyCodeType, string paymentType, string returnURL, string cancelURL, List<PayPalItem> items, string customField, bool payByCreditCard)
+        public NameValueCollection SetExpressCheckoutDG(string paymentAmount, string currencyCodeType, string paymentType, string returnURL, string cancelURL, List<PayPalItem> items, string customField, bool payByCreditCard, string itemCategory)
         {
             HttpServerUtility server = HttpContext.Current.Server;
             NameValueCollection nvpstr = new NameValueCollection();
@@ -78,7 +78,7 @@ namespace PayPalExpressCheckoutLib
                 nvpstr["L_PAYMENTREQUEST_0_NAME" + i.ToString()] = items[i].name;
                 nvpstr["L_PAYMENTREQUEST_0_AMT" + i.ToString()] = server.UrlEncode(items[i].amt);
                 nvpstr["L_PAYMENTREQUEST_0_QTY" + i.ToString()] = server.UrlEncode(items[i].qty);
-                nvpstr["L_PAYMENTREQUEST_0_ITEMCATEGORY" + i.ToString()] = "Physical";
+                nvpstr["L_PAYMENTREQUEST_0_ITEMCATEGORY" + i.ToString()] = itemCategory;
             }
 
             /*
@@ -119,7 +119,7 @@ namespace PayPalExpressCheckoutLib
             return result;
         }
 
-        public NameValueCollection ConfirmPayment(string token, string paymentType, string currencyCodeType, string payerID, string FinalPaymentAmt, List<PayPalItem> items, string customField, string serverName)
+        public NameValueCollection ConfirmPayment(string token, string paymentType, string currencyCodeType, string payerID, string FinalPaymentAmt, List<PayPalItem> items, string customField, string serverName, string itemCategory)
         {
             HttpServerUtility server = HttpContext.Current.Server;
             NameValueCollection nvpstr = new NameValueCollection();
@@ -135,7 +135,7 @@ namespace PayPalExpressCheckoutLib
                 nvpstr["L_PAYMENTREQUEST_0_NAME" + i.ToString()] = items[i].name;
                 nvpstr["L_PAYMENTREQUEST_0_AMT" + i.ToString()] = server.UrlEncode(items[i].amt);
                 nvpstr["L_PAYMENTREQUEST_0_QTY" + i.ToString()] = server.UrlEncode(items[i].qty);
-                nvpstr["L_PAYMENTREQUEST_0_ITEMCATEGORY" + i.ToString()] = "Physical";
+                nvpstr["L_PAYMENTREQUEST_0_ITEMCATEGORY" + i.ToString()] = itemCategory;
             }
 
             return hashCall("DoExpressCheckoutPayment", nvpstr);

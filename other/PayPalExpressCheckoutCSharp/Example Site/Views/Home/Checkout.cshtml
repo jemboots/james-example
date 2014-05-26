@@ -1,0 +1,13 @@
+﻿@using System.Collections.Specialized;
+@{
+    ViewBag.Title = "Checkout";
+    NameValueCollection nv = ViewBag.result;
+}
+
+@if (ViewBag.status == "paypal failed")
+{
+    <h2>Checkout</h2>
+    <p>Error Code: <span class="bold-word">@nv.GetValues("L_ERRORCODE0").First()</span></p>
+    <p>Short Message: <span class="bold-word">@nv.GetValues("L_SHORTMESSAGE0").First()</span></p>
+    <p>Long Message: <span class="bold-word">@nv.GetValues("L_LONGMESSAGE0").First()</span></p>
+}
