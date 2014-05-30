@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Zoom In/Out Animation</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="animationText">Zoom In and Zoom Out</string>
+    <string name="image_desc">Animation Image</string>
+</resources>
