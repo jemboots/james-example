@@ -25,6 +25,7 @@ namespace PayPalExpressCheckoutLib
         public bool USE_PROXY = false;
         public string version = "84";
         public string token = null;
+        public string pageStyle = "paypal";
 
         public PayPalExpressCheckout(string api_user, string api_password, string api_sign, bool isUsingSandbox)
         {
@@ -66,6 +67,7 @@ namespace PayPalExpressCheckoutLib
             nvpstr["REQCONFIRMSHIPPING"] = "0";
             nvpstr["NOSHIPPING"] = "1";
             nvpstr["PAYMENTREQUEST_0_CUSTOM"] = customField;
+            nvpstr["PAGESTYLE"] = pageStyle;
 
             if (payByCreditCard)
             {
