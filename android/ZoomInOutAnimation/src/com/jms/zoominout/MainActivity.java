@@ -1,5 +1,8 @@
 package com.jms.zoominout;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -9,20 +12,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
 public class MainActivity extends ActionBarActivity {
-	private Animation zoomAnimation;
+	private Animator zoomAnimation;
 	private ImageView zoomTarget;
 	private OnClickListener myClickListener = new OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			zoomTarget.startAnimation(zoomAnimation);
+			zoomAnimation.start();
+			
+			//zoomTarget.setScaleX(1f);
+			//zoomTarget.setScaleY(1f);
 		}
 	};
 	
@@ -33,8 +37,8 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.main);
 		
 		zoomTarget = (ImageView) findViewById(R.id.testImage);
-		zoomAnimation = AnimationUtils.loadAnimation(this,
-				R.anim.zoom_in_out_animation);
+		zoomAnimation = (AnimatorSet)AnimatorInflater.loadAnimator(this, R.anim.zoom_in_out_animation);
+		zoomAnimation.setTarget(zoomTarget);
 		Button testButton = (Button) findViewById(R.id.testButton);
 		testButton.setOnClickListener(myClickListener);
 	}
