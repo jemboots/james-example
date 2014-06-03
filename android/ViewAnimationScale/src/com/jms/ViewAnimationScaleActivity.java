@@ -1,22 +1,20 @@
 package com.jms;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class ViewAnimationScaleActivity extends Activity {
-	private Animation animation = null;
-	// private Animation moveAnimation = null;
-	// private RelativeLayout imageContainer = null;
+	private Animator animation = null;
 	private ImageView animationTarget = null;
 	private Button mybutton = null;
 
@@ -29,26 +27,38 @@ public class ViewAnimationScaleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        //google analytics
 		tracker = GoogleAnalyticsTracker.getInstance();
 		tracker.startNewSession("UA-23293636-5", this);
 		tracker.trackPageView("/view_animation_ratation_example");
-
+		
+		//admob ads
 		adview = (AdView) findViewById(R.id.adView);
-		AdRequest re = new AdRequest();
-		adview.loadAd(re);
+		AdRequest adRequest = new AdRequest.Builder().addTestDevice("D9B017A3983BD8CB8B38C927F7C5E330").build();
+		adview.loadAd(adRequest);
 		
 		animationTarget = (ImageView) this.findViewById(R.id.testImage);
+		animation = AnimatorInflater.loadAnimator(this, R.anim.scale_animation);
+		animation.setTarget(animationTarget);
+		
 		mybutton = (Button) this.findViewById(R.id.testButton);
-
 		mybutton.setOnClickListener(myClickListener);
-		this.animation = AnimationUtils.loadAnimation(this,
-				R.anim.scale_animation);
     }
     
 	private OnClickListener myClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			animationTarget.startAnimation(animation);
+			animation.start();
+			
+			/*
+			//animation in java code
+			ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(animationTarget, "scaleX", 0.5f);
+			scaleXAnimator.setRepeatMode(ValueAnimator.REVERSE);
+			scaleXAnimator.setRepeatCount(1);
+			scaleXAnimator.setDuration(1000);
+			scaleXAnimator.start();
+			*/
+			
 			tracker.trackEvent("Clicks", "Button", "clicked", 1);
 		}
 	};
@@ -59,7 +69,6 @@ public class ViewAnimationScaleActivity extends Activity {
 		}
 
 		tracker.stopSession();
-
 		super.onDestroy();
 	}
 }

@@ -15,9 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class MainActivity extends ActionBarActivity {
 	private Animator zoomAnimation;
 	private ImageView zoomTarget;
+	private AdView adview = null;
+	
 	private OnClickListener myClickListener = new OnClickListener() {
 		
 		@Override
@@ -25,8 +30,23 @@ public class MainActivity extends ActionBarActivity {
 			// TODO Auto-generated method stub
 			zoomAnimation.start();
 			
-			//zoomTarget.setScaleX(1f);
-			//zoomTarget.setScaleY(1f);
+			/*
+			//animation example in Java code
+			ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(zoomTarget, "scaleX", 0.5f);
+			scaleXAnimator.setRepeatMode(ValueAnimator.REVERSE);
+			scaleXAnimator.setRepeatCount(1);
+			scaleXAnimator.setDuration(1000);
+			scaleXAnimator.start();
+			
+			ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(zoomTarget, "scaleY", 0.5f);
+			scaleYAnimator.setRepeatMode(ValueAnimator.REVERSE);
+			scaleYAnimator.setRepeatCount(1);
+			scaleYAnimator.setDuration(1000);
+			
+			AnimatorSet set = new AnimatorSet();
+			set.playTogether(scaleXAnimator, scaleYAnimator);
+			set.start();
+			*/
 		}
 	};
 	
@@ -35,6 +55,11 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		//admob
+		adview = (AdView) findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().addTestDevice("D9B017A3983BD8CB8B38C927F7C5E330").build();
+		adview.loadAd(adRequest);
 		
 		zoomTarget = (ImageView) findViewById(R.id.testImage);
 		zoomAnimation = (AnimatorSet)AnimatorInflater.loadAnimator(this, R.anim.zoom_in_out_animation);
