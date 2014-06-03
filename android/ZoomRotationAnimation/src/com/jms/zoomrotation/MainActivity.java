@@ -52,6 +52,14 @@ public class MainActivity extends ActionBarActivity {
 			set.playTogether(scaleXAnimator, scaleYAnimator, rotationAnimator);
 			set.start();
 			
+			/*
+			//sequencial animation
+			AnimatorSet set = new AnimatorSet();
+			set.play(scaleXAnimator).with(scaleYAnimator);
+			set.play(scaleXAnimator).before(rotationAnimator);
+			set.start();
+			 */
+			
 		}
 	};
 	
