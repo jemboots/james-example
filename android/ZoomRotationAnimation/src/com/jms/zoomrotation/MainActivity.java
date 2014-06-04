@@ -29,9 +29,9 @@ public class MainActivity extends ActionBarActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			//zoomAnimation.start();
-			//zoomTarget.setRotation(0f);
+			zoomAnimation.start();
 			
+			/*
 			//animation example in Java code
 			ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(zoomTarget, "scaleX", 0.5f);
 			scaleXAnimator.setRepeatMode(ValueAnimator.REVERSE);
@@ -51,15 +51,35 @@ public class MainActivity extends ActionBarActivity {
 			AnimatorSet set = new AnimatorSet();
 			set.playTogether(scaleXAnimator, scaleYAnimator, rotationAnimator);
 			set.start();
+			*/
+		}
+	};
+	
+	private OnClickListener seqAnimationClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			//animation example in Java code
+			ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(zoomTarget, "scaleX", 0.5f);
+			scaleXAnimator.setRepeatMode(ValueAnimator.REVERSE);
+			scaleXAnimator.setRepeatCount(1);
+			scaleXAnimator.setDuration(1000);
 			
-			/*
+			ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(zoomTarget, "scaleY", 0.5f);
+			scaleYAnimator.setRepeatMode(ValueAnimator.REVERSE);
+			scaleYAnimator.setRepeatCount(1);
+			scaleYAnimator.setDuration(1000);
+			
+			ObjectAnimator rotationAnimator = ObjectAnimator.ofFloat(zoomTarget, "rotation", 0f, 360f);
+			rotationAnimator.setRepeatMode(ValueAnimator.RESTART);
+			rotationAnimator.setRepeatCount(1);
+			rotationAnimator.setDuration(1000);
+			
 			//sequencial animation
 			AnimatorSet set = new AnimatorSet();
 			set.play(scaleXAnimator).with(scaleYAnimator);
 			set.play(scaleXAnimator).before(rotationAnimator);
 			set.start();
-			 */
-			
 		}
 	};
 	
@@ -78,6 +98,9 @@ public class MainActivity extends ActionBarActivity {
 		zoomAnimation.setTarget(zoomTarget);
 		Button testButton = (Button) findViewById(R.id.testButton);
 		testButton.setOnClickListener(myClickListener);
+		
+		Button seqTestButton = (Button) findViewById(R.id.testButton2);
+		seqTestButton.setOnClickListener(seqAnimationClickListener);
 	}
 
 	@Override

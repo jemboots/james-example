@@ -24,6 +24,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/adView"/>
+    
+    <Button android:id="@+id/testButton2" android:text="@string/animationTextSeq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/testButton"/>
 
     <ImageView android:id="@+id/testImage" android:src="@drawable/cat2"
         android:contentDescription="@string/image_desc"
