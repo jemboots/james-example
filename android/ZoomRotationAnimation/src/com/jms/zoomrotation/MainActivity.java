@@ -60,25 +60,22 @@ public class MainActivity extends ActionBarActivity {
 		@Override
 		public void onClick(View v) {
 			//animation example in Java code
-			ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(zoomTarget, "scaleX", 0.5f);
-			scaleXAnimator.setRepeatMode(ValueAnimator.REVERSE);
-			scaleXAnimator.setRepeatCount(1);
-			scaleXAnimator.setDuration(1000);
-			
-			ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(zoomTarget, "scaleY", 0.5f);
-			scaleYAnimator.setRepeatMode(ValueAnimator.REVERSE);
-			scaleYAnimator.setRepeatCount(1);
-			scaleYAnimator.setDuration(1000);
-			
-			ObjectAnimator rotationAnimator = ObjectAnimator.ofFloat(zoomTarget, "rotation", 0f, 360f);
-			rotationAnimator.setRepeatMode(ValueAnimator.RESTART);
-			rotationAnimator.setRepeatCount(1);
-			rotationAnimator.setDuration(1000);
-			
+			ObjectAnimator animator1 = ObjectAnimator.ofFloat(zoomTarget, "translationX", -200f);
+			animator1.setRepeatCount(0);
+			animator1.setDuration(1000);
+
+			ObjectAnimator animator2 = ObjectAnimator.ofFloat(zoomTarget, "translationX", 100f);
+			animator2.setRepeatCount(0);
+			animator2.setDuration(1000);
+
+			ObjectAnimator animator3 = ObjectAnimator.ofFloat(zoomTarget, "translationX", 0f);
+			animator3.setRepeatCount(0);
+			animator3.setDuration(1000);
+
 			//sequencial animation
 			AnimatorSet set = new AnimatorSet();
-			set.play(scaleXAnimator).with(scaleYAnimator);
-			set.play(scaleXAnimator).before(rotationAnimator);
+			set.play(animator1).before(animator2);
+			set.play(animator2).before(animator3);
 			set.start();
 		}
 	};
