@@ -57,7 +57,8 @@ public class MainActivity extends ActionBarActivity {
 	 * A placeholder fragment containing a simple view.
 	 */
 	public static class PlaceholderFragment extends Fragment {
-		public ImageView bird;
+		private ImageView bird;
+		private ImageView startButton;
 		private ObjectAnimator upAnimation = null;
 		private ObjectAnimator downAnimation = null;
 		private int startPosition = 0;
@@ -73,7 +74,10 @@ public class MainActivity extends ActionBarActivity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
+			rootView.setOnClickListener(flyClickListener);
+			
 			bird = (ImageView) rootView.findViewById(R.id.birdimage);
+			startButton = (ImageView) rootView.findViewById(R.id.startButton);
 			
 			upAnimation = ObjectAnimator.ofFloat(bird, "translationY", -200);
 			upAnimation.setInterpolator(new DecelerateInterpolator());
@@ -81,7 +85,6 @@ public class MainActivity extends ActionBarActivity {
 			upAnimation.setRepeatCount(0);
 			upAnimation.setDuration(animationDuration);
 			upAnimation.addListener(upListener);
-			rootView.setOnClickListener(flyClickListener);
 			
 			downAnimation = ObjectAnimator.ofFloat(bird, "translationY", 0);
 			downAnimation.setInterpolator(new AccelerateInterpolator());
@@ -129,6 +132,11 @@ public class MainActivity extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
+				if(startButton.getVisibility() == View.VISIBLE)
+				{
+					startButton.setVisibility(View.INVISIBLE);
+				}
+				
 				if(upAnimation.isStarted())
 				{
 					upAnimation.cancel();
