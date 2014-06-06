@@ -1,9 +1,8 @@
 package com.jms.flappybirdanimation;
 
-import android.R.bool;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -18,20 +17,25 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 public class MainActivity extends ActionBarActivity {
+
+	private GameFragment gameStage;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		gameStage = new GameFragment();
+		gameStage.initAds(this);
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+					.add(R.id.container, gameStage).commit();
 		}
 	}
-	
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -52,20 +56,24 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
-	public static class PlaceholderFragment extends Fragment {
+	public static class GameFragment extends Fragment {
+		private InterstitialAd interstitialAd;
+		private AdRequest adRequest;
+		
 		private ImageView bird;
 		private ImageView startButton;
 		private ObjectAnimator upAnimation = null;
 		private ObjectAnimator downAnimation = null;
 		private int startPosition = 0;
-		private boolean isCancelled = false;
+		private boolean isUpAnimationCancelled = false;
+		private boolean isDownEndByClick = false;
 		private long animationDuration = 1000;
 		
-		public PlaceholderFragment() {
+		public GameFragment() {
 			
 		}
 
@@ -90,8 +98,34 @@ public class MainActivity extends ActionBarActivity {
 			downAnimation.setInterpolator(new AccelerateInterpolator());
 			downAnimation.setRepeatCount(0);
 			downAnimation.setDuration(animationDuration);
+			downAnimation.addListener(downListener);
+			
 			return rootView;
 		}
+		
+		public void initAds(Context c)
+		{
+			interstitialAd = new InterstitialAd(c);
+			interstitialAd.setAdUnitId("a15391920065568");
+			interstitialAd.setAdListener(adListener);
+			
+			AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+			adRequestBuilder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+			adRequestBuilder.addTestDevice("D9B017A3983BD8CB8B38C927F7C5E330");
+			adRequest = adRequestBuilder.build();
+		}
+		
+		private AdListener adListener = new AdListener() {
+	        public void onAdLoaded() {
+	        	interstitialAd.show();
+	        }
+
+	        @Override
+	        public void onAdClosed() {
+	            // Proceed to the next level.
+	        	startButton.setVisibility(View.VISIBLE);
+	        }
+		};
 		
 		private Animator.AnimatorListener upListener = new Animator.AnimatorListener() {
 			@Override
@@ -110,7 +144,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onAnimationEnd(Animator animation) {
 				// TODO Auto-generated method stub
 				Log.v("Debug", "Animation End: " + bird.getY() + ".." + bird.getTop() + ".." + bird.getTranslationY());
-				if(!isCancelled) {
+				if(!isUpAnimationCancelled) {
 					//start to drop
 					//downAnimation.setFloatValues(deltaY);
 					bird.layout(bird.getLeft(), (int)bird.getY(), bird.getRight(), (int)bird.getY() + bird.getMeasuredHeight());
@@ -124,7 +158,38 @@ public class MainActivity extends ActionBarActivity {
 			public void onAnimationCancel(Animator animation) {
 				// TODO Auto-generated method stub
 				Log.v("Debug", "Animation Cancelled: " + bird.getY() + ".." + bird.getTranslationY());
-				isCancelled = true;
+				isUpAnimationCancelled = true;
+			}
+		};
+		
+		private Animator.AnimatorListener downListener = new Animator.AnimatorListener() {
+			
+			@Override
+			public void onAnimationStart(Animator animation) {
+				// TODO Auto-generated method stub
+				isDownEndByClick = false;
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animator animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				// TODO Auto-generated method stub
+				if(!isDownEndByClick)
+				{
+					Log.v("debug", "down finished");
+					interstitialAd.loadAd(adRequest);
+				}
+			}
+			
+			@Override
+			public void onAnimationCancel(Animator animation) {
+				// TODO Auto-generated method stub
+				Log.v("debug", "down cancelled");
 			}
 		};
 		
@@ -147,7 +212,8 @@ public class MainActivity extends ActionBarActivity {
 					startPosition = bird.getTop();
 				}
 				
-				isCancelled = false;
+				isUpAnimationCancelled = false;
+				isDownEndByClick = true;
 				//bird.layout(bird.getLeft(), 228, bird.getRight(), 228 + bird.getMeasuredHeight());
 				bird.layout(bird.getLeft(), (int)bird.getY(), bird.getRight(), (int)bird.getY() + bird.getMeasuredHeight());
 				bird.setTranslationY(0);
