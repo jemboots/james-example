@@ -103,6 +103,11 @@ public class MainActivity extends ActionBarActivity {
 			return rootView;
 		}
 		
+		/**
+		 * Initialize the interstitial ads
+		 * 
+		 * @param c
+		 */
 		public void initAds(Context c)
 		{
 			interstitialAd = new InterstitialAd(c);
@@ -111,22 +116,62 @@ public class MainActivity extends ActionBarActivity {
 			
 			AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
 			adRequestBuilder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
-			adRequestBuilder.addTestDevice("D9B017A3983BD8CB8B38C927F7C5E330");
+			//adRequestBuilder.addTestDevice("D9B017A3983BD8CB8B38C927F7C5E330");
 			adRequest = adRequestBuilder.build();
+			interstitialAd.loadAd(adRequest);
 		}
 		
+		
+		/**
+		 * Interstitial ads listener
+		 * 
+		 */
 		private AdListener adListener = new AdListener() {
 	        public void onAdLoaded() {
-	        	interstitialAd.show();
+	        	Log.v("ads", "ads loaded");
+	        }
+	        
+	        public void onAdFailedToLoad(int errorCode) {
+	        	Log.v("ads", "ads failed: " + String.valueOf(errorCode));
+	        }
+	        
+	        public void onAdOpened() {
+	        	Log.v("ads", "ads opened");
+	        }
+	        
+	        @Override
+	        public void onAdLeftApplication() {
+	        	Log.v("ads", "ads left app");
 	        }
 
 	        @Override
 	        public void onAdClosed() {
 	            // Proceed to the next level.
 	        	startButton.setVisibility(View.VISIBLE);
+	        	interstitialAd.loadAd(adRequest);
 	        }
 		};
 		
+		/**
+		 * Show interstitial ads when it is ready. Interstitial ads could be null if it is not ready
+		 * 
+		 */
+		private void showInterstitialAds()
+		{
+			if(interstitialAd != null && interstitialAd.isLoaded())
+			{
+				interstitialAd.show();
+			}
+			else
+			{
+				startButton.setVisibility(View.VISIBLE);
+			}
+		}
+		
+		/**
+		 * Fly up animation listener. After finished, start drop down animation
+		 * 
+		 */
 		private Animator.AnimatorListener upListener = new Animator.AnimatorListener() {
 			@Override
 			public void onAnimationStart(Animator animation) {
@@ -162,6 +207,10 @@ public class MainActivity extends ActionBarActivity {
 			}
 		};
 		
+		/**
+		 * Drop down animation listener. After finished, show interstitial ads
+		 * 
+		 */
 		private Animator.AnimatorListener downListener = new Animator.AnimatorListener() {
 			
 			@Override
@@ -182,7 +231,7 @@ public class MainActivity extends ActionBarActivity {
 				if(!isDownEndByClick)
 				{
 					Log.v("debug", "down finished");
-					interstitialAd.loadAd(adRequest);
+					showInterstitialAds();
 				}
 			}
 			
