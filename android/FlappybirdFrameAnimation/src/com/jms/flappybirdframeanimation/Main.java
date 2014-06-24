@@ -1,6 +1,7 @@
 package com.jms.flappybirdframeanimation;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -74,7 +75,12 @@ public class Main extends ActionBarActivity {
 			flyAnimationDrawable.addFrame(getResources().getDrawable(R.drawable.f2), 200);
 			flyAnimationDrawable.addFrame(getResources().getDrawable(R.drawable.f3), 200);
 			flyAnimationDrawable.setOneShot(false);
-			bird.setBackground(flyAnimationDrawable);
+			
+			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+				bird.setBackground(flyAnimationDrawable);
+			} else {
+				bird.setBackgroundDrawable(flyAnimationDrawable);
+			}
 			
 			/*create frame animation from /res/drawable/fly.xml*/
 			//bird.setBackgroundResource(R.drawable.fly);

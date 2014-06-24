@@ -242,6 +242,7 @@ int drawable flappybird 0x7f02005b
 int drawable fly 0x7f02005c
 int drawable ic_launcher 0x7f02005d
 int drawable startbutton 0x7f02005e
+int drawable transparentmask 0x7f02005f
 int id action_bar 0x7f05001c
 int id action_bar_activity_content 0x7f050015
 int id action_bar_container 0x7f05001b

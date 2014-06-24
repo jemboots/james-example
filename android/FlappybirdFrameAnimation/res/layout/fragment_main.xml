@@ -34,6 +34,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="34dp"
         android:contentDescription="@string/image_desc"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:src="@drawable/transparentmask"/>
 
 </RelativeLayout>
