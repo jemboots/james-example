@@ -13,8 +13,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 import com.example.viewcanvasanimation.R;
 
@@ -105,6 +105,9 @@ public class MainActivity extends ActionBarActivity {
 			Button btn2 = (Button) rootView.findViewById(R.id.button2);
 			btn2.setOnClickListener(onClickStop);
 			
+			Button btn3 = (Button) rootView.findViewById(R.id.button3);
+			btn3.setOnClickListener(onClickPause);
+			
 			SeekBar seekbar = (SeekBar) rootView.findViewById(R.id.seekBar1);
 			seekbar.setProgress(frameRate - 1);
 			seekbar.setOnSeekBarChangeListener(onSeekBarChange);
@@ -133,9 +136,17 @@ public class MainActivity extends ActionBarActivity {
 			}
 		};
 		
+		private OnClickListener onClickPause = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				bird.pauseAnimation();
+			}
+		};
+		
 		private OnSeekBarChangeListener onSeekBarChange = new OnSeekBarChangeListener() {
 			private final int startFrom = 1;
-			private int progressChanged = 0;
 			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {

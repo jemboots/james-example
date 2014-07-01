@@ -37,7 +37,7 @@ public class FrameAnimationView extends SurfaceView implements Callback {
 		// TODO Auto-generated method stub
 		drawThread = new DrawThread(this.getHolder());
 		this.getHolder().setFormat(PixelFormat.TRANSPARENT);
-		gotoFrame(0);
+		gotoFrame(currentFrame);
 	}
 
 	@Override
@@ -49,8 +49,15 @@ public class FrameAnimationView extends SurfaceView implements Callback {
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
-		this.stopAnimation();
+		//release the thread
+		isPlaying = false;
+		
+		if(drawThread != null) {
+			drawThread.isWaiting = false;
+			drawThread.isRunning = false;
+			
+			drawThread.interrupt();	
+		}
 	}
 
 	public void prepareAnimation(Bitmap frameList[]) {
@@ -85,6 +92,19 @@ public class FrameAnimationView extends SurfaceView implements Callback {
 		}
 	}
 
+	/**
+	 * Lock the draw thread and reset the frame to 0
+	 * 
+	 * This function will be only invoked when drawFrame function is not running from thread.
+	 * That's because these two functions are marked as synchronized.
+	 * 
+	 * 
+	 * Reference: http://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html
+	 * 
+	 * it is not possible for two invocations of synchronized methods on the same object to interleave. 
+	 * When one thread is executing a synchronized method for an object, all other threads that invoke synchronized methods for the same object block (suspend execution) until the first thread is done with the object.
+	 * 
+	 */
 	public synchronized void stopAnimation() {
 		if (drawThread != null) {
 			drawThread.isWaiting = true;
@@ -137,34 +157,31 @@ public class FrameAnimationView extends SurfaceView implements Callback {
 			this.surfaceHolder = holder;
 		}
 
-		public void exitThread() {
-			this.isRunning = false;
-		}
-
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			super.run();
 
 			Canvas canvas = null;
 
 			while (isRunning) {
 				synchronized (surfaceHolder) {
-					// during the sleep, someone puased thread
+					//draw current frame
 					canvas = surfaceHolder.lockCanvas();
 					drawFrame(canvas);
 					surfaceHolder.unlockCanvasAndPost(canvas);
 				}
 
 				try {
+					//frame rate control
 					sleep(framerate);
+					
+					//pause the animation
 					if (isWaiting) {
 						synchronized (surfaceHolder) {
 							surfaceHolder.wait();
 						}
 					}
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
