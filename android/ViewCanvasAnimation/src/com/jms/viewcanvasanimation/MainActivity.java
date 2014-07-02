@@ -1,10 +1,12 @@
 package com.jms.viewcanvasanimation;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +19,9 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.example.viewcanvasanimation.R;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -24,10 +29,11 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		GameFragment gameFragment = new GameFragment();
+		gameFragment.initAds(this);
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new GameFragment()).commit();
+					.add(R.id.container, gameFragment).commit();
 		}
 	}
 
@@ -55,6 +61,9 @@ public class MainActivity extends ActionBarActivity {
 	 * A placeholder fragment containing a simple view.
 	 */
 	public static class GameFragment extends Fragment {
+		private InterstitialAd interstitialAd;
+		private AdRequest adRequest;
+		
 		private FrameAnimationView bird;
 		private TextView frameRateLabel;
 		private int frameRate = 30;
@@ -133,6 +142,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				bird.stopAnimation();
+				showInterstitialAds();
 			}
 		};
 		
@@ -169,6 +179,66 @@ public class MainActivity extends ActionBarActivity {
 				bird.setFrameRate(ft);
 			}
 		};
+		
+		//admob
+		/**
+		 * Initialize the interstitial ads
+		 * 
+		 * @param c
+		 */
+		public void initAds(Context c)
+		{
+			interstitialAd = new InterstitialAd(c);
+			interstitialAd.setAdUnitId("a15391920065568");
+			interstitialAd.setAdListener(adListener);
+			
+			AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+			adRequestBuilder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+			//adRequestBuilder.addTestDevice("D9B017A3983BD8CB8B38C927F7C5E330");
+			adRequest = adRequestBuilder.build();
+			interstitialAd.loadAd(adRequest);
+		}
+		
+		/**
+		 * Interstitial ads listener
+		 * 
+		 */
+		private AdListener adListener = new AdListener() {
+	        public void onAdLoaded() {
+	        	Log.v("ads", "ads loaded");
+	        }
+	        
+	        public void onAdFailedToLoad(int errorCode) {
+	        	Log.v("ads", "ads failed: " + String.valueOf(errorCode));
+	        }
+	        
+	        public void onAdOpened() {
+	        	Log.v("ads", "ads opened");
+	        }
+	        
+	        @Override
+	        public void onAdLeftApplication() {
+	        	Log.v("ads", "ads left app");
+	        }
+
+	        @Override
+	        public void onAdClosed() {
+	            // Proceed to the next level.
+	        	interstitialAd.loadAd(adRequest);
+	        }
+		};
+		
+		/**
+		 * Show interstitial ads when it is ready. Interstitial ads could be null if it is not ready
+		 * 
+		 */
+		private void showInterstitialAds()
+		{
+			if(interstitialAd != null && interstitialAd.isLoaded())
+			{
+				interstitialAd.show();
+			}
+		}
 	}
 
 }
