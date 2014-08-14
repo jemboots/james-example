@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">背英语之水果之王</string>
+    <string name="action_settings">设置</string>
+	<string name="button_learning">学习新单词</string>
+	<string name="button_memory">记忆力测试</string>
+	<string name="button_more">更多学习测试</string>
+	<string name="label_answer">输入英文单词:</string>
+	<string name="button_showAnswer">看答案</string>
+	<string name="button_nextWord">新单词</string>
+</resources>

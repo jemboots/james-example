@@ -1,29 +1,17 @@
 package com.jms.memoenglishwords;
 
-import java.io.InputStream;
-import java.util.Random;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.graphics.Color;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnKeyListener;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Button;
 
 public class MainActivity extends ActionBarActivity {
 	private PlaceholderFragment pFragment = null;
@@ -33,25 +21,15 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		pFragment = new PlaceholderFragment();
+		pFragment = new PlaceholderFragment(this);
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, pFragment).commit();
 		}
-		
-		
-		//pFragment.showWordPuzzle();
-
 	}
 	
-	@Override
-	protected void onStart() {
-		// TODO Auto-generated method stub
-		super.onStart();
-		
-		pFragment.showWordPuzzle();
-	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,123 +51,47 @@ public class MainActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
+	
 	public static class PlaceholderFragment extends Fragment {
+		private Context context;
 		
-		private JSONObject wordList = null;
-		private JSONArray englishWordList = null;
-		
-		private TextView explanationView = null;
-		private EditText answerField = null;
-		
-		private String currentWord = null;
-		
-		public PlaceholderFragment() {
-
+		public PlaceholderFragment(Context c) {
+			context = c;
 		}
-
+		
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
+			View rootView = inflater.inflate(R.layout.launchview, container,
 					false);
 			
-			explanationView = (TextView) rootView.findViewById(R.id.explanation);
-			answerField = (EditText) rootView.findViewById(R.id.answerBox);
-			answerField.setInputType(answerField.getInputType()
-			    | EditorInfo.TYPE_TEXT_FLAG_NO_SUGGESTIONS
-			    | EditorInfo.TYPE_TEXT_VARIATION_FILTER);
-			answerField.addTextChangedListener(textWatcher);
-			answerField.setOnKeyListener(onKeyListener);
+			Button learningButton = (Button) rootView.findViewById(R.id.learingButton);
+			learningButton.setOnClickListener(onLearningButtonClickListener);
 			
-			try {
-				InputStream wordListSteam = this.getResources().openRawResource(R.raw.words);
-				String wordListStr = Utils.readStringFromStream(wordListSteam);
-				wordList = new JSONObject(wordListStr);
-				englishWordList = wordList.names();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Button memorizeButton = (Button) rootView.findViewById(R.id.memoButton);
+			memorizeButton.setOnClickListener(onMemoButtonClickListener);
 			
 			return rootView;
 		}
 		
-		public void showWordPuzzle() {
-			Random randomGen = new Random();
-			int randomNumber = randomGen.nextInt(englishWordList.length());
-			
-			try {
-				currentWord = englishWordList.getString(randomNumber);
-				String explain = wordList.getString(currentWord);
-				explanationView.setText(explain);
-				
-				answerField.setTextColor(Color.parseColor("#000000"));
-				String firstCharacter = currentWord.substring(0, 1);
-				answerField.setText(firstCharacter);
-				answerField.setSelection(1);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		private OnKeyListener onKeyListener = new OnKeyListener() {
+		private OnClickListener onLearningButtonClickListener = new OnClickListener() {
 			
 			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
+			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
-				    showWordPuzzle();
-				}
-				return false;
+				Intent postviewIntent = new Intent(context, LearningListActivity.class);
+				startActivity(postviewIntent);
 			}
 		};
 		
-		private TextWatcher textWatcher = new TextWatcher() {
+		private OnClickListener onMemoButtonClickListener = new OnClickListener() {
 			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				Log.v("before text changle", s + " start: " + String.valueOf(start) + " count: " + String.valueOf(count) + " after: " + String.valueOf(after));
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if(answerField.length() == 0) {
-					String firstCharacter = currentWord.substring(0, 1);
-					answerField.setText(firstCharacter);
-					answerField.setSelection(1);
-				} else if(answerField.length() >  1) {
-					String pattern = '^' + s.toString();
-					if(s.length() < currentWord.length()) {
-						pattern += "[a-z]{"+(currentWord.length() - s.length())+"}";
-					}
-					
-					if(currentWord.matches(pattern)) {
-						if(s.length() == currentWord.length()) {
-							answerField.setTextColor(Color.parseColor("#007F00"));
-						} else {
-							answerField.setTextColor(Color.parseColor("#000000"));
-						}
-					} else {
-						if(s.length() >= currentWord.length()) {
-							answerField.setTextColor(Color.parseColor("#ff0000"));
-						}
-					}
-				}
+				Intent postviewIntent = new Intent(context, MemorizeActivity.class);
+				startActivity(postviewIntent);
 			}
 		};
 	}
-
 }

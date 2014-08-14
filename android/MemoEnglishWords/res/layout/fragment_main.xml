@@ -2,35 +2,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/sexteendp"
+    android:paddingLeft="@dimen/sexteendp"
+    android:paddingRight="@dimen/sexteendp"
+    android:paddingTop="@dimen/sexteendp"
     tools:context="com.jms.memoenglishwords.MainActivity$PlaceholderFragment" >
+
+    <TextView
+        android:id="@+id/answerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/label_answer"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/answerBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
+        android:layout_alignLeft="@+id/answerLabel"
+        android:layout_below="@+id/answerLabel"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/voiceButton"
         android:ems="10"
+        android:imeOptions="actionNext"
         android:inputType="text"
-        android:typeface="monospace"
-        android:imeOptions="actionNext">
+        android:typeface="monospace" >
 
         <requestFocus />
     </EditText>
-
+    
     <TextView
-        android:id="@+id/explanation"
+        android:id="@+id/translationTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/answerBox"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="34dp"
-        android:text="@string/hello_world" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/showAnswerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/translationTextView"
+        android:layout_below="@+id/translationTextView"
+        android:layout_marginTop="10dp"
+        android:text="@string/button_showAnswer" />
+
+    <Button
+        android:id="@+id/nextWordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/showAnswerButton"
+        android:layout_alignBottom="@+id/showAnswerButton"
+        android:layout_alignRight="@+id/translationTextView"
+        android:text="@string/button_nextWord" />
+
+    <Button
+        android:id="@+id/voiceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/answerBox"
+        android:layout_alignBottom="@+id/answerBox"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_action_volume_on"
+        />
 
 </RelativeLayout>
