@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="version">v1.0</string>
+    <string name="app_name">Nhớ tiếng Anh: trái cây Thạc sĩ</string>
+    <string name="action_settings">Cài đặt</string>
+	<string name="button_learning">Tìm hiểu từ mới</string>
+	<string name="button_memory">Kiểm tra ghi nhớ</string>
+	<string name="button_more">Nhận trò chơi</string>
+	<string name="label_answer">Gõ tiếng Anh Lời:</string>
+	<string name="button_showAnswer">Hiện trả lời</string>
+	<string name="button_nextWord">Lời Tiếp</string>
+	<string name="fruit_picture">Fruit Picture</string>
+	<string name="launchviewbackground">Launch View Background</string>
+</resources>

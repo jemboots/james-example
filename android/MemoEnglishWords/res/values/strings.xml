@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+	<string name="version">v1.0</string>
     <string name="app_name">Memorize English: Fruit Master</string>
     <string name="action_settings">Settings</string>
 	<string name="button_learning">Learn New Words</string>
@@ -9,4 +9,6 @@
 	<string name="label_answer">Type English Word:</string>
 	<string name="button_showAnswer">Show Answer</string>
 	<string name="button_nextWord">Next Word</string>
+	<string name="fruit_picture">Fruit Picture</string>
+	<string name="launchviewbackground">Launch View Background</string>
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="version">v1.0</string>
+    <string name="app_name">Memorice Inglés: Frutas Maestro</string>
+    <string name="action_settings">Ajustes</string>
+	<string name="button_learning">Aprende nuevas palabras</string>
+	<string name="button_memory">Prueba Memorización</string>
+	<string name="button_more">Obtener Más Juegos</string>
+	<string name="label_answer">Escriba Inglés Palabra:</string>
+	<string name="button_showAnswer">Mostrar respuesta</string>
+	<string name="button_nextWord">Siguiente Palabra</string>
+	<string name="fruit_picture">Fruit Picture</string>
+	<string name="launchviewbackground">Launch View Background</string>
+</resources>

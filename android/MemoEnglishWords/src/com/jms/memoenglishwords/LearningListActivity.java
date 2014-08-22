@@ -2,6 +2,8 @@ package com.jms.memoenglishwords;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,6 +12,7 @@ import org.json.JSONObject;
 import com.jms.memoenglishwords.adapter.WordListAdapter;
 import com.jms.memoenglishwords.vo.WordData;
 
+import android.R.string;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -57,6 +60,14 @@ public class LearningListActivity extends ActionBarActivity {
 				String wordListStr = Utils.readStringFromStream(wordListSteam);
 				JSONObject wordList = new JSONObject(wordListStr);
 				JSONArray keyArray = wordList.names();
+				
+				//sort json objects
+				List<String> jsonKey = new ArrayList<String>();
+				for(int i=0; i<keyArray.length(); i++) {
+					jsonKey.add(keyArray.getString(i));
+				}
+				Collections.sort(jsonKey);
+				keyArray = new JSONArray(jsonKey);
 				englishWordList = new ArrayList<WordData>();
 				
 				for (int i=0; i < keyArray.length(); i++) {

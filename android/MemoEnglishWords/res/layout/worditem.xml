@@ -7,12 +7,22 @@
     android:paddingRight="@dimen/fivedp"
     android:paddingTop="@dimen/fivedp">
     
+    <ImageView
+        android:id="@+id/fruitImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/apple"
+        android:contentDescription="@string/fruit_picture"/>
+    
     <TextView
         android:id="@+id/wordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/fruitImage"
+        android:layout_toLeftOf="@+id/voiceButton"
+        android:layout_toRightOf="@+id/fruitImage"
         android:maxLines="1"
         android:text="April 12, 2013"
         android:textSize="30sp" />
@@ -23,12 +33,14 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/wordTextView"
         android:layout_below="@+id/wordTextView"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/voiceButton"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="This is a good Post, I hope it will have 2 lines. Please give me 2 lines"
         android:textIsSelectable="false"
         android:textSize="16sp" />
-
+    
     <Button
         android:id="@+id/voiceButton"
         android:layout_width="wrap_content"
@@ -37,5 +49,4 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:background="@drawable/ic_action_volume_on" />
-
 </RelativeLayout>

@@ -5,33 +5,51 @@
     android:paddingBottom="@dimen/zerodp"
     android:paddingLeft="@dimen/zerodp"
     android:paddingRight="@dimen/zerodp"
-    android:paddingTop="@dimen/zerodp">
+    android:paddingTop="@dimen/zerodp" >
 
-	<Button
-	    android:id="@+id/getMoreButton"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:layout_centerHorizontal="true"
-	    android:layout_marginBottom="98dp"
-	    android:text="@string/button_more" />
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/launchviewbackground"
+        android:scaleType="fitXY"
+        android:src="@drawable/launchview" />
+    
+    <Button
+        android:id="@+id/learingButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/button_learning" />
+    
+    <Button
+        android:id="@+id/memoButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/learingButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/button_memory" />
+    
+    <Button
+        android:id="@+id/getMoreButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/memoButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/button_more" />
 
-	<Button
-	    android:id="@+id/memoButton"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/getMoreButton"
-	    android:layout_centerHorizontal="true"
-	    android:layout_marginBottom="58dp"
-	    android:text="@string/button_memory" />
-
-	<Button
-	    android:id="@+id/learingButton"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/memoButton"
-	    android:layout_centerHorizontal="true"
-	    android:layout_marginBottom="32dp"
-	    android:text="@string/button_learning" />
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="@string/version"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -40,6 +41,7 @@ public class WordListAdapter extends ArrayAdapter<WordData> {
 		TextView wordTextView;
 		TextView translationTextView;
 		Button voiceButton;
+		ImageView fruitImage;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -47,8 +49,8 @@ public class WordListAdapter extends ArrayAdapter<WordData> {
 
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.worditem, null);
-
 			viewHolder = new ViewHolder();
+			viewHolder.fruitImage = (ImageView) convertView.findViewById(R.id.fruitImage);
 			viewHolder.wordTextView = (TextView) convertView
 					.findViewById(R.id.wordTextView);
 			viewHolder.translationTextView = (TextView) convertView
@@ -60,7 +62,9 @@ public class WordListAdapter extends ArrayAdapter<WordData> {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-
+		
+		int resID = context.getResources().getIdentifier(datas.get(position).word , "drawable", context.getPackageName());
+		viewHolder.fruitImage.setImageResource(resID);
 		viewHolder.wordTextView.setText(datas.get(position).word);
 		viewHolder.translationTextView.setText(datas.get(position).translation);
 
@@ -74,11 +78,6 @@ public class WordListAdapter extends ArrayAdapter<WordData> {
 				View parentRow = (View) v.getParent();
 				ListView listView = (ListView) parentRow.getParent();
 				final int position = listView.getPositionForView(parentRow);
-
-				// int resID =
-				// context.getResources().getIdentifier(datas.get(position).word,
-				// "raw", context.getPackageName());
-				// MediaPlayer player = MediaPlayer.create(context, resID);
 
 				try {
 					Uri mp3 = Uri.parse("android.resource://"
