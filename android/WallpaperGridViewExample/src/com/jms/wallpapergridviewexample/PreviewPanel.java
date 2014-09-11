@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.WallpaperManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.RectF;
 import android.os.Build;
@@ -33,6 +34,8 @@ public class PreviewPanel extends Activity {
 	private Bitmap imageBitmap;
 	private CropImageView cropImageView;
 	private int scale = 1;
+	private int screenWidth = 1;
+	private int screenHeight = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +69,6 @@ public class PreviewPanel extends Activity {
 		imagePath = bundle.getString("localpath");
 
 		//get screen size
-		int screenWidth = 1;
-		int screenHeight = 1;
         if (Build.VERSION.SDK_INT < 13) {
     		DisplayMetrics metrics = getResources().getDisplayMetrics();
     		Display display = getWindowManager().getDefaultDisplay();
@@ -157,8 +158,14 @@ public class PreviewPanel extends Activity {
 				int cropy = (int) rect.top * scale;
 				int cropw = (int) rect.width() * scale;
 				int croph = (int) rect.height() * scale;
+				
 				Bitmap bitmapSource = BitmapFactory.decodeStream(fileInputStream);
-		        final Bitmap croppedBitmap = Bitmap.createBitmap(bitmapSource, cropx, cropy, cropw, croph);
+				
+				float scaleWidth = screenWidth*2 / (rect.width() * scale);
+				float scaleHeight = screenHeight / (rect.height() * scale);
+				Matrix matrix = new Matrix();
+				matrix.postScale(scaleWidth, scaleHeight);
+		        final Bitmap croppedBitmap = Bitmap.createBitmap(bitmapSource, cropx, cropy, cropw, croph, matrix, false);
 				
 				wallpaperManager.setBitmap(croppedBitmap);
 				Toast toast = Toast.makeText(this, "Set wallpaper successfully!", Toast.LENGTH_LONG);
