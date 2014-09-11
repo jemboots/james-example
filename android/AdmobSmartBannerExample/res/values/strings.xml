@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Admob v6.0 Example!</string>
-    <string name="app_name">Admob Example</string>
-    <string name="adfailed">Ad request successful, but no ad returned due to lack of ad inventory.</string>
-</resources>

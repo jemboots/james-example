@@ -1,9 +1,0 @@
-E:\work resource\PayPalExpressCheckoutCSharp\Example Site\bin\Example Site.dll
-E:\work resource\PayPalExpressCheckoutCSharp\Example Site\bin\Example Site.pdb
-E:\work resource\PayPalExpressCheckoutCSharp\Example Site\bin\EntityFramework.dll
-E:\work resource\PayPalExpressCheckoutCSharp\Example Site\bin\EntityFramework.xml
-E:\work resource\PayPalExpressCheckoutCSharp\Example Site\obj\Debug\Example Site.csprojResolveAssemblyReference.cache
-E:\work resource\PayPalExpressCheckoutCSharp\Example Site\obj\Debug\Example Site.dll
-E:\work resource\PayPalExpressCheckoutCSharp\Example Site\obj\Debug\Example Site.pdb
-E:\work resource\PayPalExpressCheckoutCSharp\Example Site\bin\PayPalExpressCheckoutLib.dll
-E:\work resource\PayPalExpressCheckoutCSharp\Example Site\bin\PayPalExpressCheckoutLib.pdb
