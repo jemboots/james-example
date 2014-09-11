@@ -8,8 +8,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.HashSet;
-import java.util.Set;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -27,24 +25,20 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends Activity {
 
-	private Integer[] wallpaperThumbIntegers = {
-			R.drawable.thumb1, R.drawable.thumb2,
-			R.drawable.thumb3, R.drawable.thumb4,
-			R.drawable.thumb5, R.drawable.thumb6,
-			R.drawable.thumb7, R.drawable.thumb8,
-			R.drawable.thumb9, R.drawable.thumb10,
-			R.drawable.thumb11, R.drawable.thumb12,
-			R.drawable.thumb13, R.drawable.thumb14,
-			R.drawable.thumb15, R.drawable.thumb16,
-			R.drawable.thumb17, R.drawable.thumb18
-	};
-	
+	private Integer[] wallpaperThumbIntegers = { R.drawable.thumb1,
+			R.drawable.thumb2, R.drawable.thumb3, R.drawable.thumb4,
+			R.drawable.thumb5, R.drawable.thumb6, R.drawable.thumb7,
+			R.drawable.thumb8, R.drawable.thumb9, R.drawable.thumb10,
+			R.drawable.thumb11, R.drawable.thumb12, R.drawable.thumb13,
+			R.drawable.thumb14, R.drawable.thumb15, R.drawable.thumb16,
+			R.drawable.thumb17, R.drawable.thumb18 };
+
 	private String[] imageURLArray = {
 			"http://farm8.staticflickr.com/7315/9046944633_881f24c4fa.jpg",
 			"http://farm4.staticflickr.com/3777/9049174610_bf51be8a07.jpg",
@@ -63,46 +57,45 @@ public class MainActivity extends Activity {
 			"http://farm4.staticflickr.com/3766/13418516014_132cbe58a1_h.jpg",
 			"http://farm8.staticflickr.com/7273/13418516194_5f35821106_h.jpg",
 			"http://farm4.staticflickr.com/3721/13418148685_d4465746c9_h.jpg",
-			"http://farm8.staticflickr.com/7238/13418516894_b98cf789fc_h.jpg"
-			};
-	
+			"http://farm8.staticflickr.com/7238/13418516894_b98cf789fc_h.jpg" };
+
 	private ProgressDialog downloadProgressDialog;
 	private AdView adView;
 	private Intent previewPanelIntent;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		// admob
-		adView = new AdView(this, AdSize.SMART_BANNER, "a152f84b0f4f9ed");
-		LinearLayout adContainer = (LinearLayout)this.findViewById(R.id.adsContainer);
+		adView = new AdView(this);
+		adView.setAdSize(AdSize.SMART_BANNER);
+		adView.setAdUnitId("ca-app-pub-4347579748027637/1011105061");
+
+		LinearLayout adContainer = (LinearLayout) this
+				.findViewById(R.id.adsContainer);
 		adContainer.addView(adView);
-		
-		AdRequest adRequest = new AdRequest();
-		Set<String> keywordsSet = new HashSet<String>();
-		keywordsSet.add("game");
-		keywordsSet.add("dating");
-		keywordsSet.add("money");
-		keywordsSet.add("girl");
-		adRequest.addKeywords(keywordsSet);
-		adRequest.addTestDevice("1B91DF7A13E674202332C251084C3ADA");
+
+		AdRequest adRequest = new AdRequest.Builder().addKeyword("game")
+				.addKeyword("girl").addKeyword("video")
+				.addTestDevice("1B91DF7A13E674202332C251084C3ADA").build();
 		adView.loadAd(adRequest);
-		
-		//grid view
+
+		// grid view
 		GridView gridView = (GridView) findViewById(R.id.gridView1);
 		gridView.setAdapter(new ImageAdapter(this));
 		gridView.setOnItemClickListener(gridViewImageClickListener);
-		
-		//progress bar
+
+		// progress bar
 		downloadProgressDialog = new ProgressDialog(MainActivity.this);
 		downloadProgressDialog.setTitle("Downloading Wallpaper");
 		downloadProgressDialog.setMessage("Downloading in progress...");
-		downloadProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		downloadProgressDialog
+				.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		downloadProgressDialog.setProgress(0);
 	}
-	
+
 	private OnItemClickListener gridViewImageClickListener = new OnItemClickListener() {
 
 		@Override
@@ -115,44 +108,48 @@ public class MainActivity extends Activity {
 			new DownloadWallpaperTask().execute(imageURLArray[arg2]);
 		}
 	};
-	
-	private class DownloadWallpaperTask extends AsyncTask<String, Integer, String> {
+
+	private class DownloadWallpaperTask extends
+			AsyncTask<String, Integer, String> {
 
 		@Override
 		protected String doInBackground(String... params) {
 			// TODO Auto-generated method stub
 			String wallpaperURLStr = params[0];
 			String localFileName = Integer.toString(wallpaperURLStr.hashCode());
-			
+
 			try {
-				File cacheDir = GlobalClass.instance().getCacheFolder(MainActivity.this);
+				File cacheDir = GlobalClass.instance().getCacheFolder(
+						MainActivity.this);
 				File cacheFile = new File(cacheDir, localFileName);
-				if(!cacheFile.exists()) {
+				if (!cacheFile.exists()) {
 					URL wallpaperURL = new URL(wallpaperURLStr);
 					URLConnection connection = wallpaperURL.openConnection();
-					
-					//get file length
+
+					// get file length
 					int filesize = connection.getContentLength();
-					if(filesize < 0) {
+					if (filesize < 0) {
 						downloadProgressDialog.setMax(1000000);
 					} else {
 						downloadProgressDialog.setMax(filesize);
 					}
-					
-					InputStream inputStream = new BufferedInputStream(wallpaperURL.openStream(), 10240);
 
-					FileOutputStream outputStream = new FileOutputStream(cacheFile);
-					
+					InputStream inputStream = new BufferedInputStream(
+							wallpaperURL.openStream(), 10240);
+
+					FileOutputStream outputStream = new FileOutputStream(
+							cacheFile);
+
 					byte buffer[] = new byte[1024];
 					int dataSize;
 					int loadedSize = 0;
-		            while ((dataSize = inputStream.read(buffer)) != -1) {
-		            	loadedSize += dataSize;
-		            	publishProgress(loadedSize);
-		            	outputStream.write(buffer, 0, dataSize);
-		            }
-		            
-		            outputStream.close();
+					while ((dataSize = inputStream.read(buffer)) != -1) {
+						loadedSize += dataSize;
+						publishProgress(loadedSize);
+						outputStream.write(buffer, 0, dataSize);
+					}
+
+					outputStream.close();
 				}
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
@@ -160,18 +157,18 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			return localFileName;
 		}
-		
+
 		protected void onProgressUpdate(Integer... progress) {
 			downloadProgressDialog.setProgress(progress[0]);
 		}
-		
+
 		protected void onPostExecute(String result) {
 			downloadProgressDialog.hide();
-			
-			//open preview activity
+
+			// open preview activity
 			Bundle postInfo = new Bundle();
 			postInfo.putString("localpath", result);
 
@@ -188,13 +185,13 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.main, menu);
+		// getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
 	protected class ImageAdapter extends BaseAdapter {
 		private Context mContext;
-		
+
 		public ImageAdapter(Context c) {
 			mContext = c;
 		}
@@ -221,15 +218,15 @@ public class MainActivity extends Activity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
 			ImageView imageView;
-			
-			if(convertView == null) {
+
+			if (convertView == null) {
 				imageView = new ImageView(mContext);
 				imageView.setLayoutParams(new GridView.LayoutParams(150, 150));
 				imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			} else {
 				imageView = (ImageView) convertView;
 			}
-			
+
 			imageView.setImageResource(wallpaperThumbIntegers[position]);
 			return imageView;
 		}

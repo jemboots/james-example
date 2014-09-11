@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"/>
-    
+    <!-- 
     <ImageView
         android:id="@+id/preview"
         android:layout_below="@+id/adsContainerInPreview"
@@ -16,6 +16,16 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:contentDescription="@string/previewImageView"/>
+     -->
+     
+    <com.edmodo.cropper.CropImageView
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/CropImageView"
+        android:layout_below="@+id/adsContainerInPreview"
+        android:layout_above="@+id/adsContainerInPreview2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"/>
     
 	<LinearLayout android:id="@+id/adsContainerInPreview2"
         android:orientation="vertical"
