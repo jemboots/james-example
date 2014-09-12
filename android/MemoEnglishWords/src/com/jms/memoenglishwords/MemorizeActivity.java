@@ -31,6 +31,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.jms.memoenglishwords.MainApplication.TrackerName;
+
 public class MemorizeActivity extends ActionBarActivity {
 	private MemorizeFragment mFragment = null;
 
@@ -44,6 +48,12 @@ public class MemorizeActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, mFragment).commit();
 		}
+		
+		//Google Analytics
+		MainApplication application = (MainApplication) getApplication();
+		Tracker t = application.getTracker(TrackerName.APP_TRACKER);
+		t.setScreenName(MainApplication.MEMORIZE_ACTIVITY);
+		t.send(new HitBuilders.AppViewBuilder().build());
 	}
 
 	@Override

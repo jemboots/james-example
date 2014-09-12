@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="version">v1.0</string>
+    <string name="app_name">Memo English: Fruit Master</string>
+    <string name="action_settings">조절</string>
+	<string name="button_learning">새로운 단어를 알아보기</string>
+	<string name="button_memory">암기 테스트</string>
+	<string name="button_more">더 많은 게임을 가져 오기</string>
+	<string name="label_answer">영어 단어를 입력:</string>
+	<string name="button_showAnswer">보기 답변</string>
+	<string name="button_nextWord">다음 단어</string>
+	<string name="fruit_picture">Fruit Picture</string>
+	<string name="launchviewbackground">Launch View Background</string>
+</resources>

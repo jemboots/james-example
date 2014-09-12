@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="version">v1.0</string>
-    <string name="app_name">Memorize English: Fruit Master</string>
+    <string name="app_name">Memo English: Fruit Master</string>
     <string name="action_settings">Settings</string>
 	<string name="button_learning">Learn New Words</string>
 	<string name="button_memory">Memorization Test</string>

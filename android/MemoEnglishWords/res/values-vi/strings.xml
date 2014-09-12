@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="version">v1.0</string>
-    <string name="app_name">Nhớ tiếng Anh: trái cây Thạc sĩ</string>
+    <string name="app_name">Memo English: Fruit Master</string>
     <string name="action_settings">Cài đặt</string>
 	<string name="button_learning">Tìm hiểu từ mới</string>
 	<string name="button_memory">Kiểm tra ghi nhớ</string>

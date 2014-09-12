@@ -84,7 +84,7 @@ public class WordListAdapter extends ArrayAdapter<WordData> {
 							+ context.getPackageName() + "/raw/"
 							+ datas.get(position).word);
 					mediaPlayer = new MediaPlayer();
-					mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+					mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 					mediaPlayer.setDataSource(context, mp3);
 					mediaPlayer.prepare(); // might take long! (for buffering, etc)
 					mediaPlayer.start();

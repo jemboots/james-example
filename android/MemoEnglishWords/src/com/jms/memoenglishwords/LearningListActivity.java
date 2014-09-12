@@ -9,11 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.jms.memoenglishwords.adapter.WordListAdapter;
-import com.jms.memoenglishwords.vo.WordData;
-
-import android.R.string;
 import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +18,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.jms.memoenglishwords.MainApplication.TrackerName;
+import com.jms.memoenglishwords.adapter.WordListAdapter;
+import com.jms.memoenglishwords.vo.WordData;
 
 public class LearningListActivity extends ActionBarActivity {
 	
@@ -36,7 +39,12 @@ public class LearningListActivity extends ActionBarActivity {
 		}
 		
 		
-
+		
+		//Google Analytics
+		MainApplication application = (MainApplication) getApplication();
+		Tracker t = application.getTracker(TrackerName.APP_TRACKER);
+		t.setScreenName(MainApplication.LEARNING_LIST_ACTIVITY);
+		t.send(new HitBuilders.AppViewBuilder().build());
 	}
 	
 	public static class WordListFragment extends Fragment {
