@@ -6,19 +6,31 @@
  */
 package com.jms.rssreader.adapter;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
-
-import com.jms.rssreader.R;
-import com.jms.rssreader.vo.PostData;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.jms.rssreader.GlobalClass;
+import com.jms.rssreader.R;
+import com.jms.rssreader.vo.PostData;
 
 public class PostItemAdapter extends ArrayAdapter<PostData> {
 	private LayoutInflater inflater;
@@ -36,6 +48,7 @@ public class PostItemAdapter extends ArrayAdapter<PostData> {
 		TextView postTitleView;
 		TextView postDateView;
 		ImageView postThumbView;
+		String postThumbViewURL;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -56,14 +69,92 @@ public class PostItemAdapter extends ArrayAdapter<PostData> {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		if (datas.get(position).postThumbUrl == null) {
-			viewHolder.postThumbView
-					.setImageResource(R.drawable.postthumb_loading);
+		viewHolder.postThumbView.setImageResource(R.drawable.postthumb_loading);
+		if (datas.get(position).postThumbUrl != null) {
+			viewHolder.postThumbViewURL = datas.get(position).postThumbUrl;
+			new DownloadImageTask().execute(viewHolder);
 		}
 
 		viewHolder.postTitleView.setText(datas.get(position).postTitle);
 		viewHolder.postDateView.setText(datas.get(position).postDate);
 
 		return convertView;
+	}
+
+	private class DownloadImageTask extends
+			AsyncTask<ViewHolder, Integer, ViewHolder> {
+
+		@Override
+		protected ViewHolder doInBackground(ViewHolder... params) {
+			// TODO Auto-generated method stub
+			ViewHolder viewHolder = params[0];
+			String urlStr = viewHolder.postThumbViewURL;
+			String localFileName = Integer.toString(urlStr.hashCode());
+
+			try {
+				File cacheDir = GlobalClass.instance().getCacheFolder(PostItemAdapter.this.getContext());
+				File cacheFile = new File(cacheDir, localFileName);
+				if (!cacheFile.exists()) {
+					URL url = new URL(urlStr);
+					//URLConnection connection = url.openConnection();
+					InputStream inputStream = new BufferedInputStream(
+							url.openStream(), 10240);
+					FileOutputStream outputStream = new FileOutputStream(
+							cacheFile);
+
+					byte buffer[] = new byte[1024];
+					int dataSize;
+					int loadedSize = 0;
+					while ((dataSize = inputStream.read(buffer)) != -1) {
+						loadedSize += dataSize;
+						publishProgress(loadedSize);
+						outputStream.write(buffer, 0, dataSize);
+					}
+
+					outputStream.close();
+				}
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return viewHolder;
+		}
+
+		protected void onProgressUpdate(Integer... progress) {
+
+		}
+
+		protected void onPostExecute(ViewHolder result) {
+			String urlStr = result.postThumbViewURL;
+			String imagePath = Integer.toString(urlStr.hashCode());
+			
+			//read file from local
+			InputStream fileInputStream;
+			try {
+				File cacheDir = GlobalClass.instance().getCacheFolder(PostItemAdapter.this.getContext());
+				File cacheFile = new File(cacheDir, imagePath);
+				fileInputStream = new FileInputStream(cacheFile);
+				BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+				bitmapOptions.inJustDecodeBounds = true;
+				BitmapFactory.decodeStream(fileInputStream, null, bitmapOptions);
+				
+				//Loading Large Bitmaps Efficiently
+				//int imageWidth = bitmapOptions.outWidth;
+				int imageHeight = bitmapOptions.outHeight;
+				
+				//decode the image with necessary size
+				int scale = imageHeight / R.dimen.thumbnail_size;
+				fileInputStream = new FileInputStream(cacheFile);
+				bitmapOptions.inSampleSize = scale;
+				bitmapOptions.inJustDecodeBounds = false;
+				result.postThumbView.setImageBitmap(BitmapFactory.decodeStream(fileInputStream, null, bitmapOptions));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

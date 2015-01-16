@@ -45,7 +45,7 @@ import com.jms.rssreader.vo.PostData;
 
 public class MainActivity extends Activity implements RefreshableInterface {
 	private enum RSSXMLTag {
-		TITLE, DATE, LINK, CONTENT, GUID, IGNORETAG;
+		TITLE, DATE, LINK, CONTENT, GUID, IGNORETAG, FEATURED_IMAGE;
 	}
 
 	private ArrayList<PostData> listData;
@@ -214,24 +214,29 @@ public class MainActivity extends Activity implements RefreshableInterface {
 				int eventType = xpp.getEventType();
 				PostData pdData = null;
 				SimpleDateFormat dateFormat = new SimpleDateFormat(
-						"EEE, DD MMM yyyy HH:mm:ss", Locale.US);
+						"EEE, d MMM yyyy HH:mm:ss", Locale.US);
 				while (eventType != XmlPullParser.END_DOCUMENT) {
 					if (eventType == XmlPullParser.START_DOCUMENT) {
 
-					} else if (eventType == XmlPullParser.START_TAG) {
+					} else if (eventType == XmlPullParser.START_TAG) { //find a start tag here, then check which tags
 						if (xpp.getName().equals("item")) {
 							pdData = new PostData();
 							currentTag = RSSXMLTag.IGNORETAG;
 						} else if (xpp.getName().equals("title")) {
+							//set current tag is "<title>", you can add more value in RSSXMLTAG enum
+							//later, you need to read the content between tag <title>...</title> when eventType is  XmlPullParser.TEXT
 							currentTag = RSSXMLTag.TITLE;
 						} else if (xpp.getName().equals("link")) {
-							currentTag = RSSXMLTag.LINK;
+							currentTag = RSSXMLTag.LINK; //set current tag is "<link>"
 						} else if (xpp.getName().equals("pubDate")) {
 							currentTag = RSSXMLTag.DATE;
 						} else if (xpp.getName().equals("encoded")) {
 							currentTag = RSSXMLTag.CONTENT;
 						} else if (xpp.getName().equals("guid")) {
 							currentTag = RSSXMLTag.GUID;
+						} else if (xpp.getName().equals("jms-featured-image")) {
+							currentTag = RSSXMLTag.FEATURED_IMAGE;
+							//pdData.postThumbUrl = xpp.getAttributeValue(null, "url"); //read attribute in tags
 						}
 					} else if (eventType == XmlPullParser.END_TAG) {
 						if (xpp.getName().equals("item")) {
@@ -290,6 +295,15 @@ public class MainActivity extends Activity implements RefreshableInterface {
 										pdData.postGuid += content;
 									} else {
 										pdData.postGuid = content;
+									}
+								}
+								break;
+							case FEATURED_IMAGE:
+								if (content.length() != 0) {
+									if (pdData.postThumbUrl != null) {
+										pdData.postThumbUrl += content;
+									} else {
+										pdData.postThumbUrl = content;
 									}
 								}
 								break;
@@ -395,7 +409,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 			 * new RssDataController().execute(urlString + 1);
 			 */
 			
-			new RssDataController().execute(urlString);
+			new RssDataController().execute(urlString + 1);
 		} else {
 			postListView.onRefreshComplete();
 		}
