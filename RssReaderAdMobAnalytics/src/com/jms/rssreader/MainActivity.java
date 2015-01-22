@@ -45,13 +45,15 @@ import com.jms.rssreader.vo.PostData;
 
 public class MainActivity extends Activity implements RefreshableInterface {
 	private enum RSSXMLTag {
-		TITLE, DATE, LINK, CONTENT, GUID, IGNORETAG, FEATURED_IMAGE;
+		TITLE, DATE, LINK, CONTENT, GUID, IGNORETAG, FEATURED_IMAGE, DESCRIPTION;
 	}
 
 	private ArrayList<PostData> listData;
 	private String urlString = "http://jmsliu.com/feed?paged=";
+	//private String urlString = "http://www.posta.com.tr/xml/rss/rss_1_0.xml";
 	private RefreshableListView postListView;
 	private PostItemAdapter postAdapter;
+	private boolean enablePagnation = true;
 	private int pagnation = 1; // start from 1
 	private boolean isRefreshLoading = true;
 	private boolean isLoading = false;
@@ -237,14 +239,21 @@ public class MainActivity extends Activity implements RefreshableInterface {
 						} else if (xpp.getName().equals("jms-featured-image")) {
 							currentTag = RSSXMLTag.FEATURED_IMAGE;
 							//pdData.postThumbUrl = xpp.getAttributeValue(null, "url"); //read attribute in tags
+						} else if (xpp.getName().equals("description")) {
+							currentTag = RSSXMLTag.DESCRIPTION;
 						}
 					} else if (eventType == XmlPullParser.END_TAG) {
 						if (xpp.getName().equals("item")) {
-							// format the data here, otherwise format data in
-							// Adapter
-							Date postDate = dateFormat.parse(pdData.postDate);
-							pdData.postDate = dateFormat.format(postDate);
-							postDataList.add(pdData);
+							try {
+								// format the data here, otherwise format data in Adapter
+								Date postDate = dateFormat.parse(pdData.postDate);
+								pdData.postDate = dateFormat.format(postDate);
+								postDataList.add(pdData);
+							} catch (ParseException e) {
+								googleTracker.sendEvent("debug", "ParseException",
+										e.toString(), null);
+								e.printStackTrace();
+							}
 						} else {
 							currentTag = RSSXMLTag.IGNORETAG;
 						}
@@ -307,6 +316,15 @@ public class MainActivity extends Activity implements RefreshableInterface {
 									}
 								}
 								break;
+							case DESCRIPTION:
+								if (content.length() != 0) {
+									if (pdData.postDesc != null) {
+										pdData.postDesc += content;
+									} else {
+										pdData.postDesc = content;
+									}
+								}
+								break;
 							default:
 								break;
 							}
@@ -332,12 +350,6 @@ public class MainActivity extends Activity implements RefreshableInterface {
 				// TODO Auto-generated catch block
 				// XmlPullParserFactory.newInstance()
 				googleTracker.sendEvent("debug", "XmlPullParserException",
-						e.toString(), null);
-				e.printStackTrace();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				// dateFormat.parse(pdData.postDate);
-				googleTracker.sendEvent("debug", "ParseException",
 						e.toString(), null);
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -408,8 +420,11 @@ public class MainActivity extends Activity implements RefreshableInterface {
 			 * 
 			 * new RssDataController().execute(urlString + 1);
 			 */
-			
-			new RssDataController().execute(urlString + 1);
+			if(enablePagnation) {
+				new RssDataController().execute(urlString + 1);
+			} else {
+				new RssDataController().execute(urlString);
+			}
 		} else {
 			postListView.onRefreshComplete();
 		}
@@ -434,7 +449,11 @@ public class MainActivity extends Activity implements RefreshableInterface {
 			 * 
 			 * new RssDataController().execute(urlString);
 			 */
-			new RssDataController().execute(urlString + (++pagnation));
+			if(enablePagnation)	{
+				new RssDataController().execute(urlString + (++pagnation));
+			} else {
+				new RssDataController().execute(urlString);
+			}
 		} else {
 			postListView.onLoadingMoreComplete();
 		}

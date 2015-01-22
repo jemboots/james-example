@@ -16,6 +16,8 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.content.Context;
@@ -69,14 +71,30 @@ public class PostItemAdapter extends ArrayAdapter<PostData> {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.postThumbView.setImageResource(R.drawable.postthumb_loading);
-		if (datas.get(position).postThumbUrl != null) {
-			viewHolder.postThumbViewURL = datas.get(position).postThumbUrl;
+		PostData post = datas.get(position);
+		if (post.postThumbUrl == null && post.postDesc != null) {
+			//get the image from post if there is
+			Pattern p = Pattern.compile("(<img (.*)/>).*", Pattern.DOTALL);
+			Matcher m = p.matcher(post.postDesc.toLowerCase());
+			if(m.matches()) {
+				String imgString = m.group(1);
+				Pattern sourcePattern = Pattern.compile(".*src=\"(http[^\"]*)\".*");
+				m = sourcePattern.matcher(imgString);
+				if(m.matches()) {
+					post.postThumbUrl = m.group(1);
+				}
+			}
+		}
+		
+		if (post.postThumbUrl != null) {
+			viewHolder.postThumbViewURL = post.postThumbUrl;
 			new DownloadImageTask().execute(viewHolder);
+		} else {
+			viewHolder.postThumbView.setImageResource(R.drawable.postthumb_loading);
 		}
 
-		viewHolder.postTitleView.setText(datas.get(position).postTitle);
-		viewHolder.postDateView.setText(datas.get(position).postDate);
+		viewHolder.postTitleView.setText(post.postTitle);
+		viewHolder.postDateView.setText(post.postDate);
 
 		return convertView;
 	}
