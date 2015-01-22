@@ -50,7 +50,6 @@ public class MainActivity extends Activity implements RefreshableInterface {
 
 	private ArrayList<PostData> listData;
 	private String urlString = "http://jmsliu.com/feed?paged=";
-	//private String urlString = "http://www.posta.com.tr/xml/rss/rss_1_0.xml";
 	private RefreshableListView postListView;
 	private PostItemAdapter postAdapter;
 	private boolean enablePagnation = true;
