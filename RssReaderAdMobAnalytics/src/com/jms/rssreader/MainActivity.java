@@ -45,14 +45,29 @@ import com.jms.rssreader.vo.PostData;
 
 public class MainActivity extends Activity implements RefreshableInterface {
 	private enum RSSXMLTag {
-		TITLE, DATE, LINK, CONTENT, GUID, IGNORETAG, FEATURED_IMAGE, DESCRIPTION;
+		//rss tag
+		TITLE, DATE, LINK, CONTENT,	GUID, DESCRIPTION,
+		//customized tag
+		IGNORETAG, FEATURED_IMAGE;
 	}
 
 	private ArrayList<PostData> listData;
-	private String urlString = "http://jmsliu.com/feed?paged=";
+	//private String urlString = "http://www.zaman.com.tr/manset.rss";
+	//private String urlString = "http://www.posta.com.tr/xml/rss/rss_1_0.xml";
+	//private String urlString = "http://www.milliyet.com.tr/D/rss/rss/Rss_24.xml";
+	//private String urlString = "http://www.radikal.com.tr/d/rss/RssSD.xml";
+	//private String urlString = "http://www.mynet.com/haber/rss/sondakika";
+	//private String urlString = "http://www.yeniakit.com.tr/haber/rss";
+	//private String urlString = "http://www.mackolik.com/Rss";
+	private String urlString = "http://rss.feedsportal.com/c/32892/f/530173/index.rss";
+	//private String urlString = "http://www.sporx.com/_xml/rss.php";
+	//private String urlString = "http://www.ligtv.com.tr/rss/ana-sayfa";
+	//private String urlString = "http://www.ensonhaber.com/rss/gundem.xml";
+	
+	//private String urlString = "http://jmsliu.com/feed?paged="; //please set enablePagnation = true
 	private RefreshableListView postListView;
 	private PostItemAdapter postAdapter;
-	private boolean enablePagnation = true;
+	private boolean enablePagnation = false;
 	private int pagnation = 1; // start from 1
 	private boolean isRefreshLoading = true;
 	private boolean isLoading = false;
@@ -235,9 +250,15 @@ public class MainActivity extends Activity implements RefreshableInterface {
 							currentTag = RSSXMLTag.CONTENT;
 						} else if (xpp.getName().equals("guid")) {
 							currentTag = RSSXMLTag.GUID;
-						} else if (xpp.getName().equals("jms-featured-image")) {
+						} else if (xpp.getName().equals("jms-featured-image")
+								|| xpp.getName().equals("ipimage")
+								|| xpp.getName().equals("img")) {
 							currentTag = RSSXMLTag.FEATURED_IMAGE;
-							//pdData.postThumbUrl = xpp.getAttributeValue(null, "url"); //read attribute in tags
+						} else if (xpp.getName().equals("content")
+								|| xpp.getName().equals("enclosure")) {
+							if(pdData.postThumbUrl == null) {
+								pdData.postThumbUrl = xpp.getAttributeValue(null, "url"); //read attribute in tags
+							}
 						} else if (xpp.getName().equals("description")) {
 							currentTag = RSSXMLTag.DESCRIPTION;
 						}
@@ -351,6 +372,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 				googleTracker.sendEvent("debug", "XmlPullParserException",
 						e.toString(), null);
 				e.printStackTrace();
+				Log.v("fuck", String.valueOf(e.getLineNumber()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				// openConnection()
@@ -369,17 +391,19 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		protected void onPostExecute(ArrayList<PostData> result) {
 			// TODO Auto-generated method stub
 			boolean isupdated = false;
+			int j = 0;
 			for (int i = 0; i < result.size(); i++) {
 				// check if the post is already in the list
-				if (guidList.contains(result.get(i).postGuid)) {
+				if (guidList.contains(result.get(i).postLink)) {
 					continue;
 				} else {
 					isupdated = true;
-					guidList.add(result.get(i).postGuid);
+					guidList.add(result.get(i).postLink);
 				}
 
 				if (isRefreshLoading) {
-					listData.add(i, result.get(i));
+					listData.add(j, result.get(i));
+					j++;
 				} else {
 					listData.add(result.get(i));
 				}

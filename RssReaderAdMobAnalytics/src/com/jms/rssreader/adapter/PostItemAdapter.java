@@ -74,11 +74,11 @@ public class PostItemAdapter extends ArrayAdapter<PostData> {
 		PostData post = datas.get(position);
 		if (post.postThumbUrl == null && post.postDesc != null) {
 			//get the image from post if there is
-			Pattern p = Pattern.compile("(<img (.*)/>).*", Pattern.DOTALL);
+			Pattern p = Pattern.compile(".*?(<img [^>]*/?>).*", Pattern.DOTALL);
 			Matcher m = p.matcher(post.postDesc.toLowerCase());
 			if(m.matches()) {
 				String imgString = m.group(1);
-				Pattern sourcePattern = Pattern.compile(".*src=\"(http[^\"]*)\".*");
+				Pattern sourcePattern = Pattern.compile(".*src=[\"']{1}(http[^\"]*)[\"']{1}.*");
 				m = sourcePattern.matcher(imgString);
 				if(m.matches()) {
 					post.postThumbUrl = m.group(1);
@@ -86,11 +86,10 @@ public class PostItemAdapter extends ArrayAdapter<PostData> {
 			}
 		}
 		
+		viewHolder.postThumbView.setImageResource(R.drawable.postthumb_loading);
 		if (post.postThumbUrl != null) {
 			viewHolder.postThumbViewURL = post.postThumbUrl;
 			new DownloadImageTask().execute(viewHolder);
-		} else {
-			viewHolder.postThumbView.setImageResource(R.drawable.postthumb_loading);
 		}
 
 		viewHolder.postTitleView.setText(post.postTitle);
