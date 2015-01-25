@@ -59,9 +59,9 @@ public class MainActivity extends Activity implements RefreshableInterface {
 	//private String urlString = "http://www.mynet.com/haber/rss/sondakika";
 	//private String urlString = "http://www.yeniakit.com.tr/haber/rss";
 	//private String urlString = "http://www.mackolik.com/Rss";
-	private String urlString = "http://rss.feedsportal.com/c/32892/f/530173/index.rss";
-	//private String urlString = "http://www.sporx.com/_xml/rss.php";
-	//private String urlString = "http://www.ligtv.com.tr/rss/ana-sayfa";
+	//private String urlString = "http://rss.feedsportal.com/c/32892/f/530173/index.rss";
+	private String urlString = "http://feeds.feedburner.com/sporx/zjor?format=xml";
+	//private String urlString = "http://feeds.feedburner.com/feedburner/RhjG?format=xml";
 	//private String urlString = "http://www.ensonhaber.com/rss/gundem.xml";
 	
 	//private String urlString = "http://jmsliu.com/feed?paged="; //please set enablePagnation = true
@@ -266,14 +266,17 @@ public class MainActivity extends Activity implements RefreshableInterface {
 						if (xpp.getName().equals("item")) {
 							try {
 								// format the data here, otherwise format data in Adapter
-								Date postDate = dateFormat.parse(pdData.postDate);
-								pdData.postDate = dateFormat.format(postDate);
-								postDataList.add(pdData);
+								if(pdData.postDate != null) {
+									Date postDate = dateFormat.parse(pdData.postDate);
+									pdData.postDate = dateFormat.format(postDate);
+								}
 							} catch (ParseException e) {
 								googleTracker.sendEvent("debug", "ParseException",
 										e.toString(), null);
 								e.printStackTrace();
 							}
+							
+							postDataList.add(pdData);
 						} else {
 							currentTag = RSSXMLTag.IGNORETAG;
 						}
