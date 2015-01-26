@@ -74,8 +74,8 @@ public class PostItemAdapter extends ArrayAdapter<PostData> {
 		PostData post = datas.get(position);
 		if (post.postThumbUrl == null && post.postDesc != null) {
 			//get the image from post if there is
-			Pattern p = Pattern.compile(".*?(<img [^>]*/?>).*", Pattern.DOTALL);
-			Matcher m = p.matcher(post.postDesc.toLowerCase());
+			Pattern p = Pattern.compile(".*?(<img [^>]*/?>).*", Pattern.DOTALL|Pattern.CASE_INSENSITIVE);
+			Matcher m = p.matcher(post.postDesc);
 			if(m.matches()) {
 				String imgString = m.group(1);
 				Pattern sourcePattern = Pattern.compile(".*src=[\"']{1}(http[^\"]*)[\"']{1}.*");

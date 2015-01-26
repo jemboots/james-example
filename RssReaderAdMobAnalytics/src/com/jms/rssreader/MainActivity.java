@@ -52,22 +52,10 @@ public class MainActivity extends Activity implements RefreshableInterface {
 	}
 
 	private ArrayList<PostData> listData;
-	//private String urlString = "http://www.zaman.com.tr/manset.rss";
-	//private String urlString = "http://www.posta.com.tr/xml/rss/rss_1_0.xml";
-	//private String urlString = "http://www.milliyet.com.tr/D/rss/rss/Rss_24.xml";
-	//private String urlString = "http://www.radikal.com.tr/d/rss/RssSD.xml";
-	//private String urlString = "http://www.mynet.com/haber/rss/sondakika";
-	//private String urlString = "http://www.yeniakit.com.tr/haber/rss";
-	//private String urlString = "http://www.mackolik.com/Rss";
-	//private String urlString = "http://rss.feedsportal.com/c/32892/f/530173/index.rss";
-	private String urlString = "http://feeds.feedburner.com/sporx/zjor?format=xml";
-	//private String urlString = "http://feeds.feedburner.com/feedburner/RhjG?format=xml";
-	//private String urlString = "http://www.ensonhaber.com/rss/gundem.xml";
-	
-	//private String urlString = "http://jmsliu.com/feed?paged="; //please set enablePagnation = true
+	private String urlString = "http://jmsliu.com/feed?paged="; //please set enablePagnation = true
 	private RefreshableListView postListView;
 	private PostItemAdapter postAdapter;
-	private boolean enablePagnation = false;
+	private boolean enablePagnation = true;
 	private int pagnation = 1; // start from 1
 	private boolean isRefreshLoading = true;
 	private boolean isLoading = false;
