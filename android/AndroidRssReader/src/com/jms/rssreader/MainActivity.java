@@ -16,6 +16,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,8 +26,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.jms.dragtorefresh.RefreshableInterface;
 import com.jms.dragtorefresh.RefreshableListView;
+import com.jms.rssreader.MainApplication.TrackerName;
 import com.jms.rssreader.adapter.PostItemAdapter;
 import com.jms.rssreader.vo.PostData;
 
@@ -44,6 +51,9 @@ public class MainActivity extends Activity implements RefreshableInterface {
 	private boolean isRefreshLoading = true;
 	private boolean isLoading = false;
 	private ArrayList<String> guidList;
+	
+	private InterstitialAd interstitialAd;
+	private AdRequest adRequest;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +70,12 @@ public class MainActivity extends Activity implements RefreshableInterface {
 			
 		}
 		*/
+		
+		//Google Analytics
+		MainApplication application = (MainApplication) getApplication();
+		Tracker t = application.getTracker(TrackerName.APP_TRACKER);
+		t.setScreenName(MainApplication.MAIN_ACTIVITY);
+		t.send(new HitBuilders.AppViewBuilder().build());
 
 		guidList = new ArrayList<String>();
 		listData = new ArrayList<PostData>();
@@ -69,6 +85,8 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		postListView.setOnRefresh(this);
 		postListView.onRefreshStart();
 		postListView.setOnItemClickListener(onItemClickListener);
+		
+		initAds(this);
 	}
 	
 	private OnItemClickListener onItemClickListener = new OnItemClickListener() {
@@ -93,6 +111,60 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	public void initAds(Context c)
+	{
+		interstitialAd = new InterstitialAd(c);
+		interstitialAd.setAdUnitId("ca-app-pub-4347579748027637/1642897863");
+		interstitialAd.setAdListener(adListener);
+		
+		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+		adRequestBuilder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+		//adRequestBuilder.addTestDevice("D9B017A3983BD8CB8B38C927F7C5E330");
+		adRequest = adRequestBuilder.build();
+		interstitialAd.loadAd(adRequest);
+	}
+	
+	/**
+	 * Interstitial ads listener
+	 * 
+	 */
+	private AdListener adListener = new AdListener() {
+        public void onAdLoaded() {
+        	Log.v("ads", "ads loaded");
+        	showInterstitialAds();
+        }
+        
+        public void onAdFailedToLoad(int errorCode) {
+        	Log.v("ads", "ads failed: " + String.valueOf(errorCode));
+        }
+        
+        public void onAdOpened() {
+        	Log.v("ads", "ads opened");
+        }
+        
+        @Override
+        public void onAdLeftApplication() {
+        	Log.v("ads", "ads left app");
+        }
+
+        @Override
+        public void onAdClosed() {
+            // Proceed to the next level.
+        }
+	};
+	
+	/**
+	 * Show interstitial ads when it is ready. Interstitial ads could be null if it is not ready
+	 * 
+	 */
+	private void showInterstitialAds()
+	{
+		if(interstitialAd != null && interstitialAd.isLoaded())
+		{
+			interstitialAd.show();
+		}
 	}
 
 	private class RssDataController extends
@@ -149,10 +221,17 @@ public class MainActivity extends Activity implements RefreshableInterface {
 						}
 					} else if (eventType == XmlPullParser.END_TAG) {
 						if (xpp.getName().equals("item")) {
-							// format the data here, otherwise format data in
-							// Adapter
-							Date postDate = dateFormat.parse(pdData.postDate);
-							pdData.postDate = dateFormat.format(postDate);
+							try {
+								// format the data here, otherwise format data in Adapter
+								if(pdData.postDate != null) {
+									Date postDate = dateFormat.parse(pdData.postDate);
+									pdData.postDate = dateFormat.format(postDate);
+								}
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
 							postDataList.add(pdData);
 						} else {
 							currentTag = RSSXMLTag.IGNORETAG;
@@ -223,9 +302,6 @@ public class MainActivity extends Activity implements RefreshableInterface {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (XmlPullParserException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
