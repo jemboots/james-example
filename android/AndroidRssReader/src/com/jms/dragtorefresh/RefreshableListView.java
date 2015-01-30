@@ -28,6 +28,8 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 	private final int STATE_PULL_TO_REFRESH = 0;
 	private final int STATE_RELEASE_TO_UPDATE = 1;
 	private int currentState;
+	private boolean showRefreshButton = false;
+	private int topRowIndex = 0;
 	private ImageView arrowImage;
 	private ProgressBar progressBar;
 	private TextView headerTextView;
@@ -62,7 +64,7 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
 		// TODO Auto-generated method stub
-		Log.d("debug", "debug");
+		topRowIndex = firstVisibleItem;
 	}
 
 	@Override
@@ -78,9 +80,14 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 		case MotionEvent.ACTION_DOWN:
 			//isDragging = true;
 			startY = ev.getY();
+            if(topRowIndex > 1) {
+                showRefreshButton = false;
+            } else {
+                showRefreshButton = true;
+            }
 			break;
 		case MotionEvent.ACTION_MOVE:
-			if (!isLoading) {
+			if (!isLoading && showRefreshButton) {
 				deltaY = ev.getY() - startY;
 
 				Log.d("debug", String.valueOf(deltaY));
@@ -107,7 +114,7 @@ public class RefreshableListView extends ListView implements OnScrollListener {
 		case MotionEvent.ACTION_UP:
 			//isDragging = false;
 			
-			if (!isLoading) {
+			if (!isLoading && showRefreshButton) {
 				if (headerRelativeLayout.getPaddingTop() < HEADER_HEIGHT) {
 					// come back
 					headerRelativeLayout.setPadding(

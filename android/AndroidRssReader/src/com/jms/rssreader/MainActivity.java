@@ -36,9 +36,10 @@ public class MainActivity extends Activity implements RefreshableInterface {
 	}
 
 	private ArrayList<PostData> listData;
-	private String urlString = "http://jmsliu.com/feed?paged=";
+	private String urlString = "http://jmsliu.com/feed?paged="; //please set enablePagnation = true
 	private RefreshableListView postListView;
 	private PostItemAdapter postAdapter;
+	private boolean enablePagnation = true;
 	private int pagnation = 1; //start from 1
 	private boolean isRefreshLoading = true;
 	private boolean isLoading = false;
@@ -127,7 +128,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 				int eventType = xpp.getEventType();
 				PostData pdData = null;
 				SimpleDateFormat dateFormat = new SimpleDateFormat(
-						"EEE, DD MMM yyyy HH:mm:ss", Locale.US);
+						"EEE, d MMM yyyy HH:mm:ss", Locale.US);
 				while (eventType != XmlPullParser.END_DOCUMENT) {
 					if (eventType == XmlPullParser.START_DOCUMENT) {
 
@@ -236,17 +237,19 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		protected void onPostExecute(ArrayList<PostData> result) {
 			// TODO Auto-generated method stub
 			boolean isupdated = false;
+			int j = 0;
 			for (int i = 0; i < result.size(); i++) {
 				//check if the post is already in the list
-				if (guidList.contains(result.get(i).postGuid)) {
+				if (guidList.contains(result.get(i).postLink)) {
 					continue;
 				} else {
 					isupdated = true;
-					guidList.add(result.get(i).postGuid);
+					guidList.add(result.get(i).postLink);
 				}
 				
 				if (isRefreshLoading) {
-					listData.add(i, result.get(i));
+					listData.add(j, result.get(i));
+					j++;
 				} else {
 					listData.add(result.get(i));
 				}
@@ -274,7 +277,22 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		if (!isLoading) {
 			isRefreshLoading = true;
 			isLoading = true;
-			new RssDataController().execute(urlString + 1);
+			/*
+			 * Pagination: 
+			 * 
+			 * If your rss feed looks like: 
+			 * 
+			 * "http://jmsliu.com/feed?paged="
+			 * 
+			 * You can try follow code for pagination. 
+			 * 
+			 * new RssDataController().execute(urlString + 1);
+			 */
+			if(enablePagnation) {
+				new RssDataController().execute(urlString + 1);
+			} else {
+				new RssDataController().execute(urlString);
+			}
 		} else {
 			postListView.onRefreshComplete();
 		}
@@ -286,7 +304,23 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		if (!isLoading) {
 			isRefreshLoading = false;
 			isLoading = true;
-			new RssDataController().execute(urlString + (++pagnation));
+			/*
+			 * Pagination: 
+			 * 
+			 * If your rss feed source looks like "http://jmsliu.com/feed?paged=", 
+			 * you can try follow code for pagination:
+			 * 
+			 * new RssDataController().execute(urlString + (++pagnation));
+			 * 
+			 * Otherwise, please use this:
+			 * 
+			 * new RssDataController().execute(urlString);
+			 */
+			if(enablePagnation)	{
+				new RssDataController().execute(urlString + (++pagnation));
+			} else {
+				new RssDataController().execute(urlString);
+			}
 		} else {
 			postListView.onLoadingMoreComplete();
 		}
