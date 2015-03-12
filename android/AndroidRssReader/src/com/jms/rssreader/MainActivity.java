@@ -148,7 +148,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		
 		AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
 		adRequestBuilder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
-		//adRequestBuilder.addTestDevice("D9B017A3983BD8CB8B38C927F7C5E330");
+		adRequestBuilder.addTestDevice("A1DFA9AF928AFFB8E3B1364AFBF44D7D");
 		adRequest = adRequestBuilder.build();
 		interstitialAd.loadAd(adRequest);
 	}

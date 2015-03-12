@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jms.rssreader"
     android:versionCode="2"
-    android:versionName="2.93" >
+    android:versionName="2.94" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -39,6 +39,7 @@
         </activity>
         
         <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:theme="@android:style/Theme.Translucent"
              android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
     </application>
 
