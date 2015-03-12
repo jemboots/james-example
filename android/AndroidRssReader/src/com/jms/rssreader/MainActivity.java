@@ -18,13 +18,17 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -99,6 +103,7 @@ public class MainActivity extends Activity implements RefreshableInterface {
 			
 			Bundle postInfo = new Bundle();
 			postInfo.putString("content", data.postContent);
+			postInfo.putString("link", data.postLink);
 			
 			Intent postviewIntent = new Intent(MainActivity.this, PostViewActivity.class);
 			postviewIntent.putExtras(postInfo);
@@ -111,6 +116,28 @@ public class MainActivity extends Activity implements RefreshableInterface {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		int id = item.getItemId();
+        // TODO Auto-generated method stub
+        switch (id) {
+            case R.id.action_about:
+				try {
+					PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+					Toast.makeText(this, "Version: " + pInfo.versionName, Toast.LENGTH_LONG).show();
+				} catch (NameNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					Toast.makeText(this, "Version: 2.9x", Toast.LENGTH_LONG).show();
+				}
+                
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 	}
 	
 	public void initAds(Context c)
